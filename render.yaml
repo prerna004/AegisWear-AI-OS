@@ -1,0 +1,23 @@
+# ============================================================================
+# AegisOS: Render Infrastructure as Code Blueprint
+# One-Click Cloud Deployment for WildCatter Live Demo
+# ============================================================================
+
+services:
+  - type: web
+    name: aegis-enterprise-os
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/agents/swarm-status
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: AEGIS_TENANT
+        value: WildCatter Evaluation Enterprise
+      - key: LITELLM_ROUTER_MODE
+        value: hybrid

@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  aegis-os:
+    build: .
+    container_name: aegis_enterprise_os
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - AEGIS_TENANT=WildCatter Ventures
+    restart: unless-stopped
