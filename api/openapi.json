@@ -1,0 +1,254 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "AegisOS Enterprise Operating System REST & Agentic API",
+    "description": "Production-grade enterprise API replicating Zoho One breadth with autonomous AI agents, Model Context Protocol (MCP), Level 3 HITL approval guardrails, and unified data fabric.",
+    "version": "3.0.0",
+    "contact": {
+      "name": "Prerna Chotwani (Chief AI Architect)",
+      "email": "prerna@aegis-os.internal"
+    },
+    "license": {
+      "name": "Proprietary - WildCatter Ventures Evaluation"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local Development / Standalone Server"
+    },
+    {
+      "url": "https://aegis-enterprise-os.onrender.com",
+      "description": "Live Cloud Production Node (Render / Kubernetes)"
+    }
+  ],
+  "tags": [
+    { "name": "Agentic Orchestration", "description": "Autonomous AI Agent execution, Swarm monitoring & HITL workflows" },
+    { "name": "Model Context Protocol", "description": "Standardized MCP Tool exposure and invocation" },
+    { "name": "Module A: Sales & CRM", "description": "Leads, Accounts, Deals, CPQ Quotes & Documenso Signatures" },
+    { "name": "Module B: Marketing & CX", "description": "Omnichannel Campaigns, Social Inbox & Funnel CRO" },
+    { "name": "Module C: Support & Service", "description": "Omnichannel Helpdesk Tickets, Live Chat & Knowledge Base RAG" },
+    { "name": "Module D: Finance & ERP", "description": "General Ledger Invoices, Multi-Warehouse Inventory & Expense OCR" },
+    { "name": "Module E: HR & Workplace", "description": "Employee Directory, Attendance PTO, ATS Recruitment Pipeline" },
+    { "name": "Module F: Collaboration", "description": "Enterprise Mail, Cliq Channels, Notes & Meeting Scribe" },
+    { "name": "Module G: Project Management", "description": "Agile Sprints, Interactive Gantt WBS & Bug Tracking" },
+    { "name": "Module H: ITSM & MDM", "description": "ITIL Service Desk, CMDB Assets & Remote Endpoint Telemetry" },
+    { "name": "Module I: BI & iPaaS", "description": "Cross-module Dashboards, NL-to-SQL Studio & n8n Workflows" },
+    { "name": "Governance & Audit", "description": "Immutable Agent Audit Ledger & 3-Tier Memory Explorer" }
+  ],
+  "paths": {
+    "/api/agents/registry": {
+      "get": {
+        "tags": ["Agentic Orchestration"],
+        "summary": "List all 26 Autonomous AI Agents",
+        "description": "Returns full agent registry matching the Zoho One replacement matrix with risk levels, tools, and models.",
+        "responses": {
+          "200": { "description": "Successful retrieval of all 26 agents" }
+        }
+      }
+    },
+    "/api/agents/invoke": {
+      "post": {
+        "tags": ["Agentic Orchestration"],
+        "summary": "Invoke an Autonomous Agent with Governance Guardrails",
+        "description": "Executes an agent with Level 1 (Autonomous), Level 2 (Autonomous + Undo), or Level 3 (Mandatory HITL) enforcement.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "agentId": { "type": "string", "example": "agent-lead-enrichment" },
+                  "prompt": { "type": "string", "example": "Enrich Elena Dynamics Robotics and calculate ICP fit score" },
+                  "context": { "type": "object" }
+                },
+                "required": ["agentId", "prompt"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Agent execution result with reasoning trace and audit record" }
+        }
+      }
+    },
+    "/api/agents/swarm-status": {
+      "get": {
+        "tags": ["Agentic Orchestration"],
+        "summary": "Real-time Swarm Telemetry",
+        "description": "Live state of all 26 agents across execution nodes.",
+        "responses": {
+          "200": { "description": "Real-time swarm status array" }
+        }
+      }
+    },
+    "/api/hitl/pending": {
+      "get": {
+        "tags": ["Agentic Orchestration"],
+        "summary": "Get pending Level 3 HITL Approval Cards",
+        "responses": {
+          "200": { "description": "List of pending human approvals" }
+        }
+      }
+    },
+    "/api/hitl/resolve": {
+      "post": {
+        "tags": ["Agentic Orchestration"],
+        "summary": "Approve or Reject a Level 3 Action",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "hitlId": { "type": "string", "example": "hitl-01" },
+                  "decision": { "type": "string", "enum": ["approved", "rejected"] },
+                  "reviewer": { "type": "string", "example": "usr_admin" }
+                },
+                "required": ["hitlId", "decision"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Resolution recorded and agent execution completed" }
+        }
+      }
+    },
+    "/api/mcp/tools": {
+      "tags": ["Model Context Protocol"],
+      "get": {
+        "summary": "List Standardized MCP Tools",
+        "description": "Returns JSON-RPC 2.0 / MCP compliant tool definitions.",
+        "responses": {
+          "200": { "description": "List of exposed tools" }
+        }
+      }
+    },
+    "/api/mcp/call": {
+      "tags": ["Model Context Protocol"],
+      "post": {
+        "summary": "Call a specific MCP Tool directly",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "toolName": { "type": "string", "example": "mcp::enrich_lead" },
+                  "arguments": { "type": "object" }
+                },
+                "required": ["toolName", "arguments"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Direct MCP tool execution output" }
+        }
+      }
+    },
+    "/api/crm/leads": {
+      "tags": ["Module A: Sales & CRM"],
+      "get": {
+        "summary": "List all Leads",
+        "responses": { "200": { "description": "Array of CRM leads" } }
+      },
+      "post": {
+        "summary": "Create a new Lead",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object", "properties": { "name": { "type": "string" }, "company": { "type": "string" }, "email": { "type": "string" } } } } }
+        },
+        "responses": { "201": { "description": "Lead created" } }
+      }
+    },
+    "/api/crm/deals": {
+      "tags": ["Module A: Sales & CRM"],
+      "get": {
+        "summary": "List all Deals across Pipelines",
+        "responses": { "200": { "description": "Deals pipeline data" } }
+      }
+    },
+    "/api/crm/quotes": {
+      "tags": ["Module A: Sales & CRM"],
+      "get": {
+        "summary": "List CPQ Quotes",
+        "responses": { "200": { "description": "Quotes array" } }
+      }
+    },
+    "/api/marketing/campaigns": {
+      "tags": ["Module B: Marketing & CX"],
+      "get": {
+        "summary": "List Omnichannel Campaigns",
+        "responses": { "200": { "description": "Campaign metrics" } }
+      }
+    },
+    "/api/support/tickets": {
+      "tags": ["Module C: Support & Service"],
+      "get": {
+        "summary": "List Support Tickets",
+        "responses": { "200": { "description": "Ticketing queue" } }
+      }
+    },
+    "/api/finance/invoices": {
+      "tags": ["Module D: Finance & ERP"],
+      "get": {
+        "summary": "List General Ledger Invoices",
+        "responses": { "200": { "description": "Invoices array" } }
+      }
+    },
+    "/api/finance/inventory": {
+      "tags": ["Module D: Finance & ERP"],
+      "get": {
+        "summary": "Multi-Warehouse Inventory Stock",
+        "responses": { "200": { "description": "Inventory SKU list" } }
+      }
+    },
+    "/api/hr/employees": {
+      "tags": ["Module E: HR & Workplace"],
+      "get": {
+        "summary": "Employee Directory",
+        "responses": { "200": { "description": "Employee list" } }
+      }
+    },
+    "/api/projects/tasks": {
+      "tags": ["Module G: Project Management"],
+      "get": {
+        "summary": "Agile Sprint Tasks & Gantt Dependencies",
+        "responses": { "200": { "description": "Task list" } }
+      }
+    },
+    "/api/itsm/assets": {
+      "tags": ["Module H: ITSM & MDM"],
+      "get": {
+        "summary": "Managed IT Fleet Endpoint Telemetry",
+        "responses": { "200": { "description": "Fleet assets" } }
+      }
+    },
+    "/api/audit/logs": {
+      "tags": ["Governance & Audit"],
+      "get": {
+        "summary": "Immutable Agent Audit Ledger",
+        "responses": { "200": { "description": "Immutable log entries" } }
+      }
+    },
+    "/api/audit/stats": {
+      "tags": ["Governance & Audit"],
+      "get": {
+        "summary": "Audit & Telemetry Metrics",
+        "responses": { "200": { "description": "Audit metrics" } }
+      }
+    },
+    "/api/memory/stats": {
+      "tags": ["Governance & Audit"],
+      "get": {
+        "summary": "Three-Tier Memory Architecture Status",
+        "responses": { "200": { "description": "Memory tier counts & context" } }
+      }
+    }
+  }
+}
