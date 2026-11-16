@@ -1,0 +1,35 @@
+{
+  "name": "AegisOS: Enterprise AI Operating System",
+  "short_name": "AegisOS",
+  "description": "Unified AI-Native Enterprise OS replicating Zoho One via Composable Open-Source Cores & Autonomous AI Agents",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080c14",
+  "theme_color": "#6366f1",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Command Palette",
+      "url": "/#cmd",
+      "description": "Open Aegis Cmd+K Palette"
+    },
+    {
+      "name": "AI Copilot",
+      "url": "/#copilot",
+      "description": "Open Persistent Copilot Drawer"
+    },
+    {
+      "name": "API Docs",
+      "url": "/docs",
+      "description": "Interactive OpenAPI 3.1 Explorer"
+    }
+  ]
+}
