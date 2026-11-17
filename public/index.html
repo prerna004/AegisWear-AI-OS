@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>AegisWear | AI-Native Fashion & E-Commerce Operating System</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="manifest" href="/manifest.json?v=14.0">
+    <link rel="stylesheet" href="/css/app.css?v=14.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        // Force light pastel theme default and purge any stale browser service worker caches
+        try {
+            const savedTheme = localStorage.getItem('aegis-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(regs) {
+                    for (var i = 0; i < regs.length; i++) {
+                        regs[i].unregister();
+                    }
+                });
+            }
+            if ('caches' in window) {
+                caches.keys().then(function(keys) {
+                    for (var j = 0; j < keys.length; j++) {
+                        caches.delete(keys[j]);
+                    }
+                });
+            }
+        } catch (e) {}
+    </script>
+</head>
+<body>
+    <!-- 0. Desktop Window Frame (When Desktop App Mode is active) -->
+    <div id="desktop-titlebar">
+        <div class="window-controls">
+            <span class="window-dot dot-close" onclick="HitlManager.showToast('Managed by desktop host window', 'coral')"></span>
+            <span class="window-dot dot-min" onclick="HitlManager.showToast('Minimized to tray', 'mint')"></span>
+            <span class="window-dot dot-max" onclick="AegisApp.toggleDesktopMode()"></span>
+        </div>
+        <div style="font-weight:700; letter-spacing:0.02em;">AegisWear Fashion Desktop — Pastel Claymorphic Edition</div>
+        <div>v3.0.0 (Cloud &amp; Local Synced)</div>
+    </div>
+
+    <!-- 1. Unified App Shell Layout -->
+    <div id="app-root-shell" style="display:flex; height: 100vh; width: 100vw; overflow: hidden; position: relative; background: var(--clay-bg);">
+        
+        <!-- Mobile Sidebar Backdrop -->
+        <div id="sidebar-backdrop" onclick="AegisApp.closeMobileMenu()"></div>
+
+        <!-- Left Sidebar Navigation (Squishy Pastel 3D Clay Badges & Contextual Chips) -->
+        <aside id="sidebar-drawer" class="sidebar-aside">
+            <div>
+                <!-- Brand Header (Puffy Clay Mint Pill + Studio Indicator) -->
+                <div class="brand-header" onclick="AegisApp.switchModule('overview')">
+                    <div class="brand-pill">
+                        <span>AegisWear</span>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; font-weight: 800; color: var(--text-primary); letter-spacing:-0.01em;">Fashion &amp; E-Com</div>
+                        <div style="font-size: 10px; color: var(--text-muted); font-weight: 600;">Summer '26 Drop</div>
+                    </div>
+                </div>
+
+                <!-- Navigation List (Zero Emojis, 3D Squishy Clay Badges & Live Status Chips) -->
+                <nav id="sidebar-nav" style="padding: 6px 12px; display: flex; flex-direction: column; gap: 6px; max-height: calc(100vh - 170px); overflow-y: auto;">
+                    <div style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; padding: 4px 10px; letter-spacing: 0.06em;">STORE NAVIGATION</div>
+                    
+                    <button class="nav-item clay-nav-btn" data-module="overview">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-lilac">
+                                <span id="nav-icon-overview"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Store Overview</div>
+                                <div class="nav-subtitle">Sales, Stock &amp; Performance</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-lilac">Live</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="agents">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-mint">
+                                <span id="nav-icon-agents"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Automations &amp; Team</div>
+                                <div class="nav-subtitle">24/7 Store Operations</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-mint">26 Live</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="developer">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-sky">
+                                <span id="nav-icon-developer"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Developer &amp; APIs</div>
+                                <div class="nav-subtitle">Shopify, Stripe &amp; Webhooks</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-sky">v3.0</span>
+                    </button>
+
+                    <div style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; padding: 12px 10px 4px; letter-spacing: 0.06em;">STORE DEPARTMENTS</div>
+
+                    <button class="nav-item clay-nav-btn" data-module="crm">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-coral">
+                                <span id="nav-icon-crm"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Wholesale &amp; Boutiques</div>
+                                <div class="nav-subtitle">Bulk Orders &amp; Retail Deals</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-coral">$65k Deal</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="marketing">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-butter">
+                                <span id="nav-icon-marketing"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Marketing &amp; Campaigns</div>
+                                <div class="nav-subtitle">Summer Drops &amp; Social Ads</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-butter">Drop Live</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="support">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-lilac">
+                                <span id="nav-icon-support"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Returns &amp; Customer Care</div>
+                                <div class="nav-subtitle">Size Exchanges &amp; Order Help</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-lilac">1 Swap</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="finance">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-mint">
+                                <span id="nav-icon-finance"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Warehouse &amp; Inventory</div>
+                                <div class="nav-subtitle">Hoodies, Sneakers &amp; Stock</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-mint">Low Stock</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="hr">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-peach">
+                                <span id="nav-icon-hr"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Design Team &amp; Staff</div>
+                                <div class="nav-subtitle">Employee Shifts &amp; Directory</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-coral">12 Staff</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="collab">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-sky">
+                                <span id="nav-icon-collab"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Design Studio &amp; Chat</div>
+                                <div class="nav-subtitle">Lookbooks &amp; Fabric Messages</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-sky">3 New</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="projects">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-periwinkle">
+                                <span id="nav-icon-projects"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Collection Launches</div>
+                                <div class="nav-subtitle">Production Sprints &amp; Deadlines</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-lilac">Sprint 4</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="itsm">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-mint">
+                                <span id="nav-icon-itsm"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Store Registers &amp; POS</div>
+                                <div class="nav-subtitle">Checkout iPads &amp; Scanners</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-mint">Online</span>
+                    </button>
+
+                    <button class="nav-item clay-nav-btn" data-module="analytics">
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                            <div class="nav-icon-badge badge-rose">
+                                <span id="nav-icon-analytics"></span>
+                            </div>
+                            <div style="text-align:left; overflow:hidden;">
+                                <div class="nav-title">Sales Trends &amp; Insights</div>
+                                <div class="nav-subtitle">Best Sellers &amp; Reports</div>
+                            </div>
+                        </div>
+                        <span class="nav-chip chip-coral">+28%</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- User Status Footer (Founder Profile Card) -->
+            <div class="founder-card">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="founder-avatar">
+                        PC
+                    </div>
+                    <div>
+                        <div style="font-size:12px; font-weight:800; color:var(--text-primary);">Prerna Chotwani</div>
+                        <div style="font-size:10px; color:#10B981; font-weight:700; display:flex; align-items:center; gap:4px;">
+                            <span class="pulse-dot online" style="width:6px; height:6px;"></span>
+                            <span>Creative Director</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="clay-btn-soft-circle" style="width:34px; height:34px;" title="Inspect 3-Tier AI Memory" onclick="MemoryViewer.openModal()">
+                    <span id="user-memory-icon"></span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main id="main-workspace" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--clay-bg); transition: margin-right 0.3s cubic-bezier(0.16,1,0.3,1);">
+            
+            <!-- Global Top Header Bar (Pastel Lilac Clay Bar with Live Dynamic Ticker) -->
+            <div class="header-container-pad">
+                <header class="clay-header-bar">
+                    <!-- Mobile Hamburger Button & Brand Pill -->
+                    <div class="mobile-header-left">
+                        <button class="clay-btn-soft-circle mobile-hamburger-btn" onclick="AegisApp.toggleMobileMenu()" title="Open Navigation Menu">
+                            <span id="mobile-hamburger-icon"></span>
+                        </button>
+                        <div class="mobile-brand-pill" onclick="AegisApp.switchModule('overview')">
+                            <span>AegisWear</span>
+                        </div>
+                    </div>
+
+                    <!-- Left: Inset Pill Search Bar with Coral Button + Live Dynamic Ticker -->
+                    <div class="header-left-desktop" style="display:flex; align-items:center; gap:14px;">
+                        <div class="clay-search-bar" onclick="AegisApp.toggleCommandPalette()">
+                            <span style="font-size:12px; color:var(--text-muted); font-weight:600;">Search orders, sneakers, hoodies, boutiques...</span>
+                            <div class="search-btn-circle">
+                                <span id="header-search-icon"></span>
+                            </div>
+                        </div>
+
+                        <!-- Store Status & Live Activity Ticker (Fun Live Updates!) -->
+                        <div id="store-ticker-pill" class="store-ticker-pill" onclick="HitlManager.showToast('All channels synced across Shopify, Stripe & Warehouses', 'mint')">
+                            <span class="pulse-dot online"></span>
+                            <span id="ticker-text" style="font-size:11px; font-weight:700; transition: opacity 0.25s ease, transform 0.25s ease;">Summer Drop: 38 pairs of Puffy Runners shipped today</span>
+                            <span style="opacity:0.4;">•</span>
+                            <span style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--clay-coral);">LIVE</span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Puffy Circular Buttons & Copilot CTA -->
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <!-- Theme Toggle Button -->
+                        <button class="clay-btn-soft-circle" onclick="AegisApp.toggleTheme()" title="Toggle Light / Dark Mode">
+                            <span id="theme-btn-icon"></span>
+                        </button>
+
+                        <!-- Pending Review Bell -->
+                        <button class="clay-btn-soft-circle" style="position:relative;" onclick="AegisApp.switchModule('agents')" title="Orders Needing Review">
+                            <span id="header-bell-icon"></span>
+                            <span id="hitl-badge" class="clay-badge clay-badge-coral" style="display:none; position:absolute; top:-4px; right:-4px; padding:2px 6px; font-size:9px;">0</span>
+                        </button>
+
+                        <!-- Desktop Mode Toggle -->
+                        <button class="clay-btn-soft-circle" onclick="AegisApp.toggleDesktopMode()" title="Toggle Desktop App Mode">
+                            <span id="header-desktop-icon"></span>
+                        </button>
+
+                        <!-- Store Assistant CTA Button (Coral Pill) -->
+                        <button class="clay-btn clay-btn-coral" style="padding:10px 22px; gap:8px;" onclick="Copilot.toggle()">
+                            <span id="header-copilot-icon"></span>
+                            <span>Store Assistant</span>
+                        </button>
+                    </div>
+                </header>
+            </div>
+
+            <!-- Dynamic Module Content Area -->
+            <div id="module-content-area" style="flex: 1; padding: 20px 28px 24px; overflow-y: auto;">
+                <!-- Module views render here -->
+            </div>
+
+            <!-- Mobile Bottom Navigation Dock (Thumb-friendly pastel clay dock for phones) -->
+            <nav class="mobile-bottom-dock">
+                <button class="mobile-dock-btn active" data-tab="overview" onclick="AegisApp.switchModule('overview')">
+                    <span class="dock-icon-box" id="dock-icon-overview"></span>
+                    <span class="dock-label">Store</span>
+                </button>
+                <button class="mobile-dock-btn" data-tab="rooms" onclick="AegisApp.toggleMobileMenu()">
+                    <span class="dock-icon-box" id="dock-icon-rooms"></span>
+                    <span class="dock-label">Rooms</span>
+                </button>
+                <button class="mobile-dock-btn" data-tab="agents" onclick="AegisApp.switchModule('agents')">
+                    <span class="dock-icon-box" id="dock-icon-approvals" style="position:relative;">
+                        <span id="dock-hitl-badge" class="clay-badge clay-badge-coral" style="display:none; position:absolute; top:-4px; right:-6px; font-size:9px; padding:1px 5px;">0</span>
+                    </span>
+                    <span class="dock-label">Approvals</span>
+                </button>
+                <button class="mobile-dock-btn" data-tab="copilot" onclick="Copilot.toggle()">
+                    <span class="dock-icon-box dock-icon-coral" id="dock-icon-copilot"></span>
+                    <span class="dock-label">Assistant</span>
+                </button>
+            </nav>
+        </main>
+
+        <!-- Persistent Store Assistant Copilot Drawer (Right Panel) -->
+        <aside id="copilot-drawer" class="copilot-drawer"></aside>
+    </div>
+
+    <!-- 2. Global Command Palette Modal (Pastel Clay) -->
+    <div id="command-palette-backdrop" onclick="if(event.target === this) AegisApp.closeCommandPalette()">
+        <div class="command-box">
+            <div style="padding: 18px 24px; display:flex; align-items:center; gap:14px; border-bottom:1px solid #E2E8F0;">
+                <span id="cmd-search-icon"></span>
+                <input id="cmd-input" type="text" placeholder="Where do you want to go? (Type 'wholesale', 'warehouse', 'support', 'agents')..." 
+                    style="flex:1; background:transparent; border:none; outline:none; font-size:15px; color:#1E2538; font-family:inherit; font-weight:700;" />
+                <span class="clay-badge clay-badge-lilac" style="font-size:10px;">ESC</span>
+            </div>
+            <div style="max-height:360px; overflow-y:auto; padding:16px;">
+                <div style="font-size:10px; color:#7E8DA3; text-transform:uppercase; padding:6px 10px; font-weight:800; letter-spacing:0.06em;">QUICK ROOM NAVIGATION</div>
+                
+                <div class="clay-card clay-card-interactive" onclick="AegisApp.handleCommandSelect('nav:crm')" style="padding:12px 16px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--clay-surface);">
+                    <span style="font-weight:700; font-size:13px;">Room A: Wholesale Orders & Boutiques</span>
+                    <span class="clay-badge clay-badge-coral">Wholesale Room</span>
+                </div>
+                <div class="clay-card clay-card-interactive" onclick="AegisApp.handleCommandSelect('nav:finance')" style="padding:12px 16px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--clay-surface);">
+                    <span style="font-weight:700; font-size:13px;">Room D: Warehouse Stock & Invoicing</span>
+                    <span class="clay-badge clay-badge-mint">Stock Room</span>
+                </div>
+                <div class="clay-card clay-card-interactive" onclick="AegisApp.handleCommandSelect('nav:projects')" style="padding:12px 16px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--clay-surface);">
+                    <span style="font-weight:700; font-size:13px;">Room G: Collection Drops & Launches</span>
+                    <span class="clay-badge clay-badge-sky">Drop Room</span>
+                </div>
+                <div class="clay-card clay-card-interactive" onclick="AegisApp.handleCommandSelect('nav:developer')" style="padding:12px 16px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--clay-surface);">
+                    <span style="font-weight:700; font-size:13px;">Developer APIs & MCP Playground</span>
+                    <span class="clay-badge clay-badge-butter">Developer Room</span>
+                </div>
+
+                <div style="font-size:10px; color:#7E8DA3; text-transform:uppercase; padding:12px 10px 6px; font-weight:800; letter-spacing:0.06em;">DIRECT AGENT ACTIONS</div>
+                <div class="clay-card clay-card-interactive" onclick="AegisApp.handleCommandSelect('agent:agent-deal-desk:Review 15% bulk discount for Soho Fashion House on 500 Puffy Runners')" style="padding:12px 16px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--clay-surface);">
+                    <span style="font-weight:700; font-size:13px;">Review Bulk Discount (Soho Fashion House - Boss Approval)</span>
+                    <span class="clay-badge clay-badge-coral">Boss Check</span>
+                </div>
+                <div class="clay-card clay-card-interactive" onclick="AegisApp.handleCommandSelect('agent:agent-data-scientist:Show revenue breakdown by apparel category')" style="padding:12px 16px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--clay-surface);">
+                    <span style="font-weight:700; font-size:13px;">Draw Best-Sellers Chart (Hoodies, Sneakers, Caps)</span>
+                    <span class="clay-badge clay-badge-mint">Instant</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Frontend Application Scripts with Cache-Busters -->
+    <script src="/js/icons.js?v=14.0"></script>
+    <script src="/js/hitlManager.js?v=14.0"></script>
+    <script src="/js/memoryViewer.js?v=14.0"></script>
+    <script src="/js/copilot.js?v=14.0"></script>
+    <script src="/js/modules/crm.js?v=14.0"></script>
+    <script src="/js/modules/marketing.js?v=14.0"></script>
+    <script src="/js/modules/support.js?v=14.0"></script>
+    <script src="/js/modules/finance.js?v=14.0"></script>
+    <script src="/js/modules/hr.js?v=14.0"></script>
+    <script src="/js/modules/collab.js?v=14.0"></script>
+    <script src="/js/modules/projects.js?v=14.0"></script>
+    <script src="/js/modules/itsm.js?v=14.0"></script>
+    <script src="/js/modules/analytics.js?v=14.0"></script>
+    <script src="/js/modules/agentsView.js?v=14.0"></script>
+    <script src="/js/modules/developer.js?v=14.0"></script>
+    <script src="/js/app.js?v=14.0"></script>
+</body>
+</html>

@@ -1,0 +1,1693 @@
+/* ==========================================================================
+   AegisOS Claymorphic Design System
+   Authentic Pastel 3D Clay Aesthetic (Inspired by Setproduct Clayshop)
+   Zero Emojis - Crisp Vector SVG Iconography
+   ========================================================================== */
+
+:root {
+    /* Setproduct Clayshop Authentic Pastel Palette */
+    --clay-bg: #EAEFF8;
+    --clay-sidebar: #E8EDF7;
+    --clay-surface: #F2F5FB;
+    --clay-surface-recessed: #DCE3F0;
+    --clay-header-bg: #C5B8F9;
+    --clay-header-text: #2F1A61;
+    --clay-search-bg: #EDF1FA;
+    --clay-nav-bg: #FFFFFF;
+    --clay-nav-border: rgba(255, 255, 255, 0.6);
+    --clay-nav-text: #1E2538;
+    --clay-nav-subtext: #7E8DA3;
+    
+    /* Authentic Pastel Hues from Screenshot */
+    --clay-lilac: #C5B8F9;
+    --clay-lilac-subtle: #DDD5FF;
+    --clay-lilac-dark: #2F1A61;
+
+    --clay-coral: #FF7C63;
+    --clay-coral-subtle: #FFD1C5;
+    --clay-coral-dark: #4A150D;
+
+    --clay-mint: #7AE8C2;
+    --clay-mint-subtle: #C8F7E7;
+    --clay-mint-dark: #0E4337;
+
+    --clay-butter: #FFE88D;
+    --clay-butter-subtle: #FFF4C2;
+    --clay-butter-dark: #544000;
+
+    --clay-sky: #AEE4FF;
+    --clay-sky-subtle: #DDF3FF;
+    --clay-sky-dark: #0B4261;
+
+    --clay-peach: #FFBFA9;
+    --clay-peach-dark: #581C0C;
+
+    --clay-periwinkle: #CDC3FB;
+    --clay-periwinkle-dark: #2B1863;
+
+    --clay-rose: #FFCCD5;
+    --clay-rose-dark: #5E1225;
+
+    --clay-navy: #1F2438;
+    --clay-navy-light: #2A314B;
+
+    /* Text Colors */
+    --text-primary: #1E2538;
+    --text-secondary: #4E5971;
+    --text-muted: #7E8DA3;
+    --text-on-coral: #FFFFFF;
+    --text-on-mint: #0E4337;
+    --text-on-lilac: #2B1863;
+    --text-on-butter: #544000;
+    --text-on-sky: #0B4261;
+
+    /* Authentic Clay Shadows (Outer Ambient + Dual Inset Clay Highlights) */
+    --clay-shadow: 
+        10px 16px 28px rgba(155, 168, 195, 0.45),
+        -6px -6px 18px rgba(255, 255, 255, 0.95),
+        inset 4px 4px 7px rgba(255, 255, 255, 0.8),
+        inset -4px -4px 7px rgba(160, 172, 198, 0.25);
+
+    --clay-shadow-sm: 
+        5px 8px 16px rgba(155, 168, 195, 0.38),
+        -3px -3px 10px rgba(255, 255, 255, 0.9),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+        inset -2px -2px 4px rgba(160, 172, 198, 0.2);
+
+    --clay-shadow-hover: 
+        12px 20px 34px rgba(145, 158, 188, 0.52),
+        -8px -8px 22px rgba(255, 255, 255, 1),
+        inset 4px 4px 7px rgba(255, 255, 255, 0.9),
+        inset -4px -4px 7px rgba(160, 172, 198, 0.2);
+
+    --clay-shadow-inset: 
+        inset 3px 3px 6px rgba(150, 165, 190, 0.35),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.95),
+        0 4px 10px rgba(150, 165, 190, 0.14);
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Dark Theme Support (Midnight Luxury Clay Aesthetics) */
+[data-theme="dark"] {
+    --clay-bg: #0C101D;
+    --clay-sidebar: #12182B;
+    --clay-surface: #182037;
+    --clay-surface-recessed: #0A0D17;
+    --clay-header-bg: #21193D;
+    --clay-header-text: #EDE8FF;
+    --clay-search-bg: #151C30;
+    --clay-nav-bg: #161D31;
+    --clay-nav-border: rgba(255, 255, 255, 0.08);
+    --clay-nav-text: #F8FAFC;
+    --clay-nav-subtext: #8E9DB5;
+
+    --clay-shadow: 
+        10px 16px 28px rgba(0, 0, 0, 0.6),
+        -4px -4px 12px rgba(255, 255, 255, 0.02),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.08),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+
+    --clay-shadow-sm: 
+        5px 8px 16px rgba(0, 0, 0, 0.5),
+        inset 1px 1px 3px rgba(255, 255, 255, 0.06),
+        inset -1px -1px 3px rgba(0, 0, 0, 0.4);
+
+    --clay-shadow-hover: 
+        12px 22px 36px rgba(0, 0, 0, 0.7),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.12),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+
+    --clay-shadow-inset: 
+        inset 3px 3px 6px rgba(0, 0, 0, 0.65),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.04);
+
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-muted: #8492A6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.svg-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.svg-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+body {
+    background-color: var(--clay-bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #2A334E;
+}
+
+/* ==========================================================================
+   1. Claymorphic Cards & Containers
+   ========================================================================== */
+
+/* Standard White Clay Card */
+.clay-card {
+    background: var(--clay-surface);
+    border-radius: 24px;
+    box-shadow: var(--clay-shadow);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clay-card-interactive {
+    cursor: pointer;
+}
+.clay-card-interactive:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: var(--clay-shadow-hover);
+}
+.clay-card-interactive:active {
+    transform: translateY(1px) scale(0.99);
+}
+
+/* Authentic Coral Hero Card */
+.clay-card-coral {
+    background: var(--clay-coral) !important;
+    color: #FFFFFF !important;
+    border-radius: 26px;
+    box-shadow: 
+        10px 18px 32px rgba(255, 124, 99, 0.42),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.48),
+        inset -4px -4px 8px rgba(180, 50, 30, 0.3) !important;
+}
+
+/* Pastel Mint Card */
+.clay-card-mint {
+    background: var(--clay-mint) !important;
+    color: var(--text-on-mint) !important;
+    border-radius: 24px;
+    box-shadow: 
+        10px 18px 30px rgba(122, 232, 194, 0.42),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.7),
+        inset -4px -4px 8px rgba(30, 150, 120, 0.25) !important;
+}
+
+/* Pastel Lilac Card */
+.clay-card-lilac {
+    background: var(--clay-lilac) !important;
+    color: var(--text-on-lilac) !important;
+    border-radius: 24px;
+    box-shadow: 
+        10px 18px 30px rgba(197, 184, 249, 0.45),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.72),
+        inset -4px -4px 8px rgba(110, 85, 200, 0.25) !important;
+}
+
+/* Pastel Butter Yellow Card */
+.clay-card-butter {
+    background: var(--clay-butter) !important;
+    color: var(--text-on-butter) !important;
+    border-radius: 24px;
+    box-shadow: 
+        10px 18px 30px rgba(255, 232, 141, 0.42),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.8),
+        inset -4px -4px 8px rgba(190, 150, 30, 0.25) !important;
+}
+
+/* Pastel Sky Blue Card */
+.clay-card-sky {
+    background: var(--clay-sky) !important;
+    color: var(--text-on-sky) !important;
+    border-radius: 24px;
+    box-shadow: 
+        10px 18px 30px rgba(174, 228, 255, 0.42),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.8),
+        inset -4px -4px 8px rgba(50, 140, 190, 0.25) !important;
+}
+
+/* Pastel Peach Card */
+.clay-card-peach {
+    background: var(--clay-peach) !important;
+    color: var(--clay-peach-dark) !important;
+    border-radius: 24px;
+    box-shadow: 
+        10px 18px 30px rgba(255, 191, 169, 0.45),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.75),
+        inset -4px -4px 8px rgba(190, 80, 50, 0.22) !important;
+}
+
+/* Pastel Periwinkle Card */
+.clay-card-periwinkle {
+    background: var(--clay-periwinkle) !important;
+    color: var(--clay-periwinkle-dark) !important;
+    border-radius: 24px;
+    box-shadow: 
+        10px 18px 30px rgba(205, 195, 251, 0.45),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.72),
+        inset -4px -4px 8px rgba(110, 85, 200, 0.25) !important;
+}
+
+/* Navy Header Container (For Filters Card in screenshot) */
+.clay-card-navy {
+    background: var(--clay-navy) !important;
+    color: #FFFFFF !important;
+    border-radius: 24px;
+    box-shadow: 
+        10px 18px 30px rgba(31, 36, 56, 0.45),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.2),
+        inset -3px -3px 6px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ==========================================================================
+   Tactile Pastel Tint Clay Cards (Direct Clayshop Colors — Zero Harsh White)
+   ========================================================================== */
+
+.clay-card-tint-peach {
+    background: #FFEFE8 !important;
+    color: #4A150D !important;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 124, 99, 0.18);
+    box-shadow: 
+        8px 14px 26px rgba(255, 124, 99, 0.16),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(220, 100, 75, 0.12) !important;
+}
+.clay-card-tint-peach:hover {
+    box-shadow: 10px 18px 32px rgba(255, 124, 99, 0.26), inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+.clay-card-tint-butter {
+    background: #FFF9DB !important;
+    color: #544000 !important;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 232, 141, 0.3);
+    box-shadow: 
+        8px 14px 26px rgba(230, 190, 40, 0.16),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(200, 150, 20, 0.12) !important;
+}
+.clay-card-tint-butter:hover {
+    box-shadow: 10px 18px 32px rgba(230, 190, 40, 0.26), inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+.clay-card-tint-lilac {
+    background: #F0EBFE !important;
+    color: #2B1863 !important;
+    border-radius: 24px;
+    border: 1px solid rgba(197, 184, 249, 0.3);
+    box-shadow: 
+        8px 14px 26px rgba(160, 140, 240, 0.18),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(130, 100, 210, 0.12) !important;
+}
+.clay-card-tint-lilac:hover {
+    box-shadow: 10px 18px 32px rgba(160, 140, 240, 0.28), inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+.clay-card-tint-mint {
+    background: #E4FAF1 !important;
+    color: #0E4337 !important;
+    border-radius: 24px;
+    border: 1px solid rgba(122, 232, 194, 0.3);
+    box-shadow: 
+        8px 14px 26px rgba(80, 200, 160, 0.18),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(40, 160, 120, 0.12) !important;
+}
+.clay-card-tint-mint:hover {
+    box-shadow: 10px 18px 32px rgba(80, 200, 160, 0.28), inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+.clay-card-tint-sky {
+    background: #E8F7FE !important;
+    color: #0B4261 !important;
+    border-radius: 24px;
+    border: 1px solid rgba(174, 228, 255, 0.3);
+    box-shadow: 
+        8px 14px 26px rgba(100, 180, 230, 0.18),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(50, 130, 180, 0.12) !important;
+}
+.clay-card-tint-sky:hover {
+    box-shadow: 10px 18px 32px rgba(100, 180, 230, 0.28), inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+.clay-card-tint-rose {
+    background: #FFEBF0 !important;
+    color: #5E1225 !important;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 180, 195, 0.3);
+    box-shadow: 
+        8px 14px 26px rgba(240, 130, 155, 0.18),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(200, 80, 110, 0.12) !important;
+}
+.clay-card-tint-rose:hover {
+    box-shadow: 10px 18px 32px rgba(240, 130, 155, 0.28), inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+.clay-card-tint-periwinkle {
+    background: #EBE7FE !important;
+    color: #2F1A61 !important;
+    border-radius: 24px;
+    border: 1px solid rgba(205, 195, 251, 0.3);
+    box-shadow: 
+        8px 14px 26px rgba(140, 125, 230, 0.18),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(100, 85, 190, 0.12) !important;
+}
+.clay-card-tint-periwinkle:hover {
+    box-shadow: 10px 18px 32px rgba(140, 125, 230, 0.28), inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Dark Mode Overrides for Cards & Header Bar
+   ========================================================================== */
+
+[data-theme="dark"] .clay-header-bar {
+    background: #231C3D !important;
+    box-shadow: 
+        10px 16px 28px rgba(0, 0, 0, 0.65),
+        inset 3px 3px 6px rgba(197, 184, 249, 0.2),
+        inset -3px -3px 6px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="dark"] .clay-card-mint {
+    background: #0D2821 !important;
+    color: #A7F3D0 !important;
+    border: 1px solid rgba(122, 232, 194, 0.25) !important;
+    box-shadow: 10px 16px 28px rgba(0, 0, 0, 0.5), inset 2px 2px 4px rgba(122, 232, 194, 0.2), inset -2px -2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+[data-theme="dark"] .clay-card-mint svg {
+    color: #A7F3D0 !important;
+    stroke: #A7F3D0 !important;
+}
+
+[data-theme="dark"] .clay-card-lilac {
+    background: #211838 !important;
+    color: #DDD6FE !important;
+    border: 1px solid rgba(197, 184, 249, 0.25) !important;
+    box-shadow: 10px 16px 28px rgba(0, 0, 0, 0.5), inset 2px 2px 4px rgba(197, 184, 249, 0.2), inset -2px -2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+[data-theme="dark"] .clay-card-lilac svg {
+    color: #DDD6FE !important;
+    stroke: #DDD6FE !important;
+}
+
+[data-theme="dark"] .clay-card-butter {
+    background: #2D230C !important;
+    color: #FEF08A !important;
+    border: 1px solid rgba(255, 232, 141, 0.25) !important;
+    box-shadow: 10px 16px 28px rgba(0, 0, 0, 0.5), inset 2px 2px 4px rgba(255, 232, 141, 0.2), inset -2px -2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+[data-theme="dark"] .clay-card-butter svg {
+    color: #FEF08A !important;
+    stroke: #FEF08A !important;
+}
+
+[data-theme="dark"] .clay-card-sky {
+    background: #0F2334 !important;
+    color: #BAE6FD !important;
+    border: 1px solid rgba(174, 228, 255, 0.25) !important;
+    box-shadow: 10px 16px 28px rgba(0, 0, 0, 0.5), inset 2px 2px 4px rgba(174, 228, 255, 0.2), inset -2px -2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+[data-theme="dark"] .clay-card-sky svg {
+    color: #BAE6FD !important;
+    stroke: #BAE6FD !important;
+}
+
+[data-theme="dark"] .clay-card-tint-peach {
+    background: #25161A !important;
+    border: 1px solid rgba(255, 124, 99, 0.25) !important;
+    color: #FEE7E1 !important;
+    box-shadow: 8px 14px 26px rgba(0,0,0,0.5), inset 2px 2px 4px rgba(255, 124, 99, 0.15), inset -2px -2px 4px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .clay-card-tint-peach p,
+[data-theme="dark"] .clay-card-tint-peach div {
+    color: inherit;
+}
+[data-theme="dark"] .clay-card-tint-peach p {
+    color: #E2CAD0 !important;
+}
+
+[data-theme="dark"] .clay-card-tint-butter {
+    background: #241F10 !important;
+    border: 1px solid rgba(255, 232, 141, 0.25) !important;
+    color: #FEF9D9 !important;
+    box-shadow: 8px 14px 26px rgba(0,0,0,0.5), inset 2px 2px 4px rgba(255, 232, 141, 0.15), inset -2px -2px 4px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .clay-card-tint-butter p,
+[data-theme="dark"] .clay-card-tint-butter div {
+    color: inherit;
+}
+[data-theme="dark"] .clay-card-tint-butter p {
+    color: #DCD8C2 !important;
+}
+
+[data-theme="dark"] .clay-card-tint-lilac {
+    background: #1C162E !important;
+    border: 1px solid rgba(197, 184, 249, 0.25) !important;
+    color: #EFEAFF !important;
+    box-shadow: 8px 14px 26px rgba(0,0,0,0.5), inset 2px 2px 4px rgba(197, 184, 249, 0.15), inset -2px -2px 4px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .clay-card-tint-lilac p,
+[data-theme="dark"] .clay-card-tint-lilac div {
+    color: inherit;
+}
+[data-theme="dark"] .clay-card-tint-lilac p {
+    color: #D1CCE6 !important;
+}
+
+[data-theme="dark"] .clay-card-tint-mint {
+    background: #0E221D !important;
+    border: 1px solid rgba(122, 232, 194, 0.25) !important;
+    color: #DDFBF2 !important;
+    box-shadow: 8px 14px 26px rgba(0,0,0,0.5), inset 2px 2px 4px rgba(122, 232, 194, 0.15), inset -2px -2px 4px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .clay-card-tint-mint p,
+[data-theme="dark"] .clay-card-tint-mint div {
+    color: inherit;
+}
+[data-theme="dark"] .clay-card-tint-mint p {
+    color: #C5E5DC !important;
+}
+
+[data-theme="dark"] .clay-card-tint-sky {
+    background: #0E1F2C !important;
+    border: 1px solid rgba(174, 228, 255, 0.25) !important;
+    color: #E0F5FF !important;
+    box-shadow: 8px 14px 26px rgba(0,0,0,0.5), inset 2px 2px 4px rgba(174, 228, 255, 0.15), inset -2px -2px 4px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .clay-card-tint-sky p,
+[data-theme="dark"] .clay-card-tint-sky div {
+    color: inherit;
+}
+[data-theme="dark"] .clay-card-tint-sky p {
+    color: #C3DFEE !important;
+}
+
+[data-theme="dark"] .clay-card-tint-rose {
+    background: #27141E !important;
+    border: 1px solid rgba(255, 180, 195, 0.25) !important;
+    color: #FFE8F0 !important;
+    box-shadow: 8px 14px 26px rgba(0,0,0,0.5), inset 2px 2px 4px rgba(255, 180, 195, 0.15), inset -2px -2px 4px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .clay-card-tint-rose p,
+[data-theme="dark"] .clay-card-tint-rose div {
+    color: inherit;
+}
+[data-theme="dark"] .clay-card-tint-rose p {
+    color: #DEC8D2 !important;
+}
+
+[data-theme="dark"] .clay-card-tint-periwinkle {
+    background: #19162D !important;
+    border: 1px solid rgba(205, 195, 251, 0.25) !important;
+    color: #EDE8FF !important;
+    box-shadow: 8px 14px 26px rgba(0,0,0,0.5), inset 2px 2px 4px rgba(205, 195, 251, 0.15), inset -2px -2px 4px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .clay-card-tint-periwinkle p,
+[data-theme="dark"] .clay-card-tint-periwinkle div {
+    color: inherit;
+}
+[data-theme="dark"] .clay-card-tint-periwinkle p {
+    color: #CFCAE6 !important;
+}
+
+/* Top Header Bar Container (Lilac from Clayshop screenshot) */
+.clay-header-bar {
+    background: var(--clay-lilac);
+    border-radius: 24px;
+    padding: 10px 20px;
+    box-shadow: 
+        10px 16px 28px rgba(197, 184, 249, 0.42),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.7),
+        inset -4px -4px 8px rgba(120, 95, 210, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Bottom Notification / Free Shipping Bar (Mint Green from screenshot) */
+.clay-banner-mint {
+    background: var(--clay-mint);
+    color: var(--text-on-mint);
+    border-radius: 9999px;
+    padding: 12px 24px;
+    box-shadow: 
+        6px 12px 24px rgba(122, 232, 194, 0.4),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.7),
+        inset -3px -3px 6px rgba(30, 150, 120, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   2. Claymorphic Puffy Buttons
+   ========================================================================== */
+
+.clay-btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+}
+.clay-btn:hover {
+    transform: translateY(-2px);
+}
+.clay-btn:active {
+    transform: translateY(2px) scale(0.97);
+}
+
+/* Coral Pill Button */
+.clay-btn-coral {
+    background: var(--clay-coral);
+    color: #FFFFFF;
+    box-shadow: 
+        5px 8px 18px rgba(255, 124, 99, 0.42),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.55),
+        inset -2px -2px 4px rgba(180, 50, 30, 0.3);
+}
+.clay-btn-coral:hover {
+    box-shadow: 
+        6px 10px 22px rgba(255, 124, 99, 0.55),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.65),
+        inset -2px -2px 4px rgba(180, 50, 30, 0.35);
+}
+
+/* Mint Pill Button */
+.clay-btn-mint {
+    background: var(--clay-mint);
+    color: var(--text-on-mint);
+    box-shadow: 
+        5px 8px 18px rgba(122, 232, 194, 0.42),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.75),
+        inset -2px -2px 4px rgba(30, 150, 120, 0.25);
+}
+
+/* Lilac Pill Button */
+.clay-btn-lilac {
+    background: var(--clay-lilac);
+    color: var(--text-on-lilac);
+    box-shadow: 
+        5px 8px 18px rgba(197, 184, 249, 0.42),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.75),
+        inset -2px -2px 4px rgba(120, 95, 210, 0.25);
+}
+
+/* Tactile Porcelain Clay Button (Zero Harsh Stark White) */
+.clay-btn-white {
+    background: #EBF0F9;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        4px 7px 15px rgba(155, 168, 195, 0.35),
+        -2px -2px 6px rgba(255, 255, 255, 0.9),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.85),
+        inset -2px -2px 4px rgba(160, 172, 198, 0.2);
+}
+.clay-btn-white:hover {
+    background: #F2F5FB;
+    box-shadow: 
+        5px 9px 18px rgba(145, 160, 190, 0.42),
+        -3px -3px 8px rgba(255, 255, 255, 1),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.95);
+}
+
+/* Translucent Clay Hero Pills (Matching Setproduct Clayshop Filter Chips) */
+.clay-btn-hero-pill {
+    background: rgba(255, 255, 255, 0.28) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    box-shadow: 
+        3px 5px 12px rgba(180, 50, 30, 0.25),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+        inset -2px -2px 4px rgba(150, 30, 15, 0.2) !important;
+    backdrop-filter: blur(8px);
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.clay-btn-hero-pill:hover {
+    background: rgba(255, 255, 255, 0.42) !important;
+    transform: translateY(-2px);
+    box-shadow: 
+        4px 8px 16px rgba(180, 50, 30, 0.35),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.7) !important;
+}
+.clay-btn-hero-pill:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+/* Sidebar Clay Navigation Buttons (Overhauled with Squishy Tactile 3D Depth) */
+.clay-nav-btn {
+    background: var(--clay-nav-bg);
+    color: var(--clay-nav-text);
+    border-radius: 18px;
+    border: 1px solid var(--clay-nav-border);
+    box-shadow: 
+        4px 6px 12px rgba(155, 170, 195, 0.28),
+        -2px -2px 6px rgba(255, 255, 255, 0.9),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+        inset -2px -2px 4px rgba(160, 175, 200, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+.clay-nav-btn:hover {
+    background: #FFFFFF;
+    transform: translateX(4px);
+    box-shadow: 
+        6px 10px 18px rgba(145, 160, 190, 0.35),
+        -3px -3px 8px rgba(255, 255, 255, 1),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.9);
+}
+.clay-nav-btn:active {
+    transform: translateX(2px) scale(0.98);
+}
+.clay-nav-btn.active {
+    background: var(--clay-coral) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 
+        6px 12px 22px rgba(255, 124, 99, 0.45),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.6),
+        inset -3px -3px 6px rgba(180, 50, 30, 0.3) !important;
+}
+.clay-nav-btn.active .nav-title {
+    color: #FFFFFF !important;
+}
+.clay-nav-btn.active .nav-subtitle {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+.clay-nav-btn.active .nav-icon-badge {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: #FFFFFF !important;
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.6) !important;
+}
+.clay-nav-btn.active .nav-icon-badge svg {
+    color: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+}
+.clay-nav-btn.active .nav-chip {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Nav Icon 3D Clay Badges */
+.nav-icon-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.clay-nav-btn:hover .nav-icon-badge {
+    transform: scale(1.12) rotate(-4deg);
+}
+
+.badge-lilac {
+    background: #C5B8F9;
+    color: #2F1A61;
+    box-shadow: 2px 3px 6px rgba(197, 184, 249, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+.badge-mint {
+    background: #7AE8C2;
+    color: #0E4337;
+    box-shadow: 2px 3px 6px rgba(122, 232, 194, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+.badge-coral {
+    background: #FF7C63;
+    color: #FFFFFF;
+    box-shadow: 2px 3px 6px rgba(255, 124, 99, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+.badge-butter {
+    background: #FFE88D;
+    color: #544000;
+    box-shadow: 2px 3px 6px rgba(255, 232, 141, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+.badge-sky {
+    background: #AEE4FF;
+    color: #0B4261;
+    box-shadow: 2px 3px 6px rgba(174, 228, 255, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+.badge-peach {
+    background: #FFBFA9;
+    color: #4A150D;
+    box-shadow: 2px 3px 6px rgba(255, 191, 169, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+.badge-periwinkle {
+    background: #CDC3FB;
+    color: #2F1A61;
+    box-shadow: 2px 3px 6px rgba(205, 195, 251, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+.badge-rose {
+    background: #FFCCD8;
+    color: #5B1828;
+    box-shadow: 2px 3px 6px rgba(255, 204, 216, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+
+/* Nav Micro Chips */
+.nav-chip {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+}
+.chip-coral {
+    background: #FFEFE8;
+    color: #D9482D;
+    border-color: #FFC5B8;
+}
+.chip-mint {
+    background: #E4FAF1;
+    color: #0E6B56;
+    border-color: #A3F3D8;
+}
+.chip-butter {
+    background: #FFF9DB;
+    color: #8C6D00;
+    border-color: #FFE680;
+}
+.chip-lilac {
+    background: #F1EDFD;
+    color: #5533A8;
+    border-color: #D4C9FB;
+}
+.chip-sky {
+    background: #EDF8FF;
+    color: #0E618C;
+    border-color: #BEE5FF;
+}
+
+/* Nav Typography */
+.nav-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+}
+.nav-subtitle {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 1px;
+}
+
+/* Brand Header & Founder Card */
+.brand-header {
+    padding: 18px 20px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.brand-header:hover {
+    transform: scale(1.02);
+}
+.brand-pill {
+    padding: 8px 18px;
+    border-radius: 9999px;
+    background: #7AE8C2;
+    color: #0E4337;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+    box-shadow: 3px 5px 12px rgba(122,232,194,0.45), inset 2px 2px 4px rgba(255,255,255,0.7), inset -2px -2px 4px rgba(30,150,120,0.25);
+}
+
+.founder-card {
+    padding: 12px 14px;
+    margin: 10px 14px 14px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: var(--clay-shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgba(255,255,255,0.7);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.founder-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--clay-shadow);
+}
+.founder-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: var(--clay-coral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #FFFFFF;
+    box-shadow: 2px 3px 6px rgba(255,124,99,0.35), inset 1px 1px 2px rgba(255,255,255,0.6);
+}
+
+/* Inset Search Bar & Animated Live Ticker */
+.clay-search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--clay-search-bg);
+    border-radius: 9999px;
+    padding: 4px 6px 4px 18px;
+    box-shadow: var(--clay-shadow-inset);
+    width: 330px;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.clay-search-bar:hover {
+    transform: scale(1.015);
+}
+.search-btn-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--clay-coral);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 4px 8px rgba(255,124,99,0.4), inset 1px 1px 2px rgba(255,255,255,0.6);
+}
+
+.store-ticker-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--clay-header-text);
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px 16px;
+    border-radius: 9999px;
+    box-shadow: 2px 4px 10px rgba(197,184,249,0.35);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
+    user-select: none;
+}
+.store-ticker-pill:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Dark Theme Overrides for Nav, Brand, Founder, Search, Ticker */
+[data-theme="dark"] .clay-nav-btn {
+    background: #161D31;
+    color: #F8FAFC;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 
+        4px 6px 14px rgba(0, 0, 0, 0.45),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.06),
+        inset -1px -1px 3px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .clay-nav-btn:hover {
+    background: #1E2742;
+    transform: translateX(4px);
+    box-shadow: 
+        6px 10px 20px rgba(0, 0, 0, 0.55),
+        inset 1px 1px 3px rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .clay-nav-btn.active {
+    background: var(--clay-coral) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="dark"] .founder-card {
+    background: #161D31;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--clay-shadow-sm);
+}
+
+[data-theme="dark"] .chip-coral {
+    background: rgba(255, 124, 99, 0.2);
+    color: #FFB09F;
+    border-color: rgba(255, 124, 99, 0.35);
+}
+[data-theme="dark"] .chip-mint {
+    background: rgba(122, 232, 194, 0.2);
+    color: #A7F3D0;
+    border-color: rgba(122, 232, 194, 0.35);
+}
+[data-theme="dark"] .chip-butter {
+    background: rgba(255, 232, 141, 0.2);
+    color: #FEF08A;
+    border-color: rgba(255, 232, 141, 0.35);
+}
+[data-theme="dark"] .chip-lilac {
+    background: rgba(197, 184, 249, 0.2);
+    color: #DDD6FE;
+    border-color: rgba(197, 184, 249, 0.35);
+}
+[data-theme="dark"] .chip-sky {
+    background: rgba(174, 228, 255, 0.2);
+    color: #BAE6FD;
+    border-color: rgba(174, 228, 255, 0.35);
+}
+
+[data-theme="dark"] .store-ticker-pill {
+    background: rgba(24, 32, 55, 0.85);
+    color: #EDE8FF;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(197, 184, 249, 0.15);
+}
+[data-theme="dark"] .store-ticker-pill:hover {
+    background: rgba(30, 40, 68, 0.95);
+}
+
+[data-theme="dark"] .clay-btn-soft-circle {
+    background: #182035;
+    color: #F1F5F9;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.5), inset 1px 1px 2px rgba(255, 255, 255, 0.08), inset -1px -1px 3px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .clay-btn-soft-circle:hover {
+    background: #202A44;
+}
+
+[data-theme="dark"] .clay-btn-white {
+    background: #1F2844 !important;
+    color: #F8FAFC !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.4), inset 1px 1px 2px rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="dark"] .clay-btn-white:hover {
+    background: #283354 !important;
+}
+
+/* Tactile Squishy Clay Physics */
+.clay-btn, .clay-nav-btn, .clay-btn-soft-circle, .clay-card-interactive {
+    user-select: none;
+    -webkit-user-select: none;
+}
+.clay-btn:active, .clay-btn-soft-circle:active {
+    transform: scale(0.95) translateY(2px) !important;
+}
+.clay-card-interactive:active {
+    transform: scale(0.98) translateY(1px) !important;
+}
+
+/* Header Soft Circular Action Buttons */
+.clay-btn-soft-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EBF0F9;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        4px 6px 12px rgba(155, 168, 195, 0.32),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.85),
+        inset -2px -2px 4px rgba(160, 172, 198, 0.2);
+    cursor: pointer;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.clay-btn-soft-circle:hover {
+    background: #F2F6FC;
+    transform: translateY(-2px);
+    box-shadow: 
+        5px 9px 16px rgba(145, 160, 190, 0.4),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.95);
+}
+
+/* Navy Pill Button */
+.clay-btn-navy {
+    background: var(--clay-navy);
+    color: #FFFFFF;
+    box-shadow: 
+        5px 8px 18px rgba(31, 36, 56, 0.42),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.25),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Secondary Neutral Clay Button */
+.clay-btn-secondary {
+    background: var(--clay-surface);
+    color: var(--text-primary);
+    box-shadow: var(--clay-shadow-sm);
+}
+.clay-btn-secondary:hover {
+    box-shadow: var(--clay-shadow-hover);
+}
+
+/* Circular Action Button (e.g. Heart, Cart, User in header) */
+.clay-btn-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3. Claymorphic Badges & Pills
+   ========================================================================== */
+
+.clay-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    user-select: none;
+}
+
+.clay-badge-coral {
+    background: var(--clay-coral);
+    color: #FFFFFF;
+    box-shadow: 2px 3px 8px rgba(255, 124, 99, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.5), inset -1px -1px 2px rgba(180, 50, 30, 0.3);
+}
+
+.clay-badge-mint {
+    background: var(--clay-mint);
+    color: var(--text-on-mint);
+    box-shadow: 2px 3px 8px rgba(122, 232, 194, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.7), inset -1px -1px 2px rgba(30, 150, 120, 0.25);
+}
+
+.clay-badge-lilac {
+    background: var(--clay-lilac);
+    color: var(--text-on-lilac);
+    box-shadow: 2px 3px 8px rgba(197, 184, 249, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.7), inset -1px -1px 2px rgba(120, 95, 210, 0.25);
+}
+
+.clay-badge-butter {
+    background: var(--clay-butter);
+    color: var(--text-on-butter);
+    box-shadow: 2px 3px 8px rgba(255, 232, 141, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.8), inset -1px -1px 2px rgba(190, 150, 30, 0.25);
+}
+
+.clay-badge-sky {
+    background: var(--clay-sky);
+    color: var(--text-on-sky);
+    box-shadow: 2px 3px 8px rgba(174, 228, 255, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.8), inset -1px -1px 2px rgba(50, 140, 190, 0.25);
+}
+
+.clay-badge-navy {
+    background: var(--clay-navy);
+    color: #FFFFFF;
+    box-shadow: 2px 3px 8px rgba(31, 36, 56, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.clay-badge-white {
+    background: #FFFFFF;
+    color: var(--text-primary);
+    box-shadow: 2px 3px 8px rgba(165, 175, 200, 0.3), inset 1px 1px 2px rgba(255, 255, 255, 0.95), inset -1px -1px 2px rgba(170, 180, 205, 0.25);
+}
+
+/* Legacy alias mappings for components */
+.clay-badge-emerald { background: var(--clay-mint); color: var(--text-on-mint); }
+.clay-badge-indigo { background: var(--clay-lilac); color: var(--text-on-lilac); }
+.clay-badge-amber { background: var(--clay-butter); color: var(--text-on-butter); }
+.clay-badge-rose { background: var(--clay-coral); color: #FFFFFF; }
+.clay-badge-cyan { background: var(--clay-sky); color: var(--text-on-sky); }
+.clay-btn-primary { background: var(--clay-coral); color: #FFFFFF; }
+
+/* ==========================================================================
+   4. Clay Inputs & Recessed Search Bar
+   ========================================================================== */
+
+.clay-input {
+    background: #FFFFFF;
+    box-shadow: var(--clay-shadow-inset);
+    border: none;
+    border-radius: 9999px;
+    padding: 12px 20px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.clay-input:focus {
+    box-shadow: var(--clay-shadow-inset), 0 0 0 3px rgba(197, 184, 249, 0.5);
+}
+
+/* ==========================================================================
+   5. Clean Explainer Banner (Zero Emojis)
+   ========================================================================== */
+
+.simple-guide-banner {
+    background: var(--clay-surface);
+    border-radius: 24px;
+    padding: 18px 24px;
+    box-shadow: var(--clay-shadow);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+.simple-guide-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 18px;
+    background: var(--clay-lilac);
+    color: var(--text-on-lilac);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        4px 6px 14px rgba(197, 184, 249, 0.45),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 4px rgba(120, 95, 210, 0.25);
+    flex-shrink: 0;
+}
+
+/* Pulse Dot */
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.pulse-dot.online {
+    background: #10B981;
+    box-shadow: 0 0 8px #10B981;
+}
+.pulse-dot.thinking {
+    background: var(--clay-coral);
+    box-shadow: 0 0 8px var(--clay-coral);
+    animation: pulseClay 1.2s infinite ease-in-out;
+}
+.pulse-dot.awaiting {
+    background: var(--clay-butter-dark);
+    box-shadow: 0 0 8px var(--clay-butter);
+    animation: pulseClay 0.9s infinite ease-in-out;
+}
+
+@keyframes pulseClay {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+/* ==========================================================================
+   6. Level 3 HITL Card & Toasts
+   ========================================================================== */
+
+.hitl-approval-card {
+    background: var(--clay-surface);
+    border-radius: 22px;
+    padding: 20px;
+    margin: 14px 0;
+    box-shadow: var(--clay-shadow);
+    border: 2px solid var(--clay-coral);
+}
+
+.level2-undo-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--clay-navy);
+    color: #FFFFFF;
+    box-shadow: 10px 16px 36px rgba(0, 0, 0, 0.45);
+    padding: 12px 24px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 9998;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from { transform: translate(-50%, 30px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Desktop Frame */
+#desktop-titlebar {
+    display: none;
+    height: 36px;
+    background: var(--clay-navy);
+    color: #FFFFFF;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 11px;
+    user-select: none;
+}
+#desktop-titlebar.active {
+    display: flex;
+}
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+.window-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+.dot-close { background: #FF7C63; }
+.dot-min { background: #FFE88D; }
+.dot-max { background: #7AE8C2; }
+
+/* Command Palette Modal */
+#command-palette-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 36, 56, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 12vh;
+}
+#command-palette-backdrop.active {
+    display: flex;
+}
+.command-box {
+    width: 660px;
+    max-width: 92vw;
+    background: var(--clay-surface);
+    border-radius: 28px;
+    box-shadow: 
+        16px 28px 56px rgba(165, 175, 200, 0.6),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+}
+
+/* Copilot Drawer (Store Assistant) - Desktop Core Styles */
+#copilot-drawer,
+.copilot-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 390px;
+    background: var(--clay-sidebar);
+    box-shadow: -8px 0 32px rgba(150, 165, 190, 0.28);
+    border-left: 1px solid var(--clay-nav-border);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Mode Overrides for Drawer, Input, Command Palette & Tables */
+[data-theme="dark"] #copilot-drawer {
+    background: #111626 !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: -10px 0 36px rgba(0, 0, 0, 0.7) !important;
+}
+[data-theme="dark"] #copilot-drawer > div:first-child {
+    background: #21193D !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+[data-theme="dark"] #copilot-input {
+    background: #161D31 !important;
+    color: #F8FAFC !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="dark"] .clay-input {
+    background: #161D31 !important;
+    color: #F8FAFC !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="dark"] .command-box {
+    background: #161D31 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8) !important;
+}
+[data-theme="dark"] .command-box input {
+    color: #F8FAFC !important;
+}
+[data-theme="dark"] .command-item:hover {
+    background: #1E2742 !important;
+}
+[data-theme="dark"] table th {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+    color: #8E9DB5 !important;
+}
+[data-theme="dark"] table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+[data-theme="dark"] .hitl-approval-card {
+    background: #182037 !important;
+    border-color: var(--clay-coral) !important;
+}
+[data-theme="dark"] .simple-guide-banner {
+    background: #161D31 !important;
+    box-shadow: var(--clay-shadow) !important;
+}
+
+/* ============================================================================
+   AegisWear: Full Responsive Mobile & Phone Optimization
+   Touch-Friendly Pastel Clay Navigation & Layout Engine
+   ============================================================================ */
+
+/* Desktop defaults for structural containers */
+.sidebar-aside {
+    width: 270px;
+    background: var(--clay-sidebar);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+    flex-shrink: 0;
+    box-shadow: 6px 0 24px rgba(150, 165, 190, 0.28);
+    border-right: 1px solid var(--clay-nav-border);
+}
+
+#sidebar-backdrop {
+    display: none;
+}
+
+.mobile-header-left {
+    display: none !important;
+}
+
+.mobile-bottom-dock {
+    display: none !important;
+}
+
+.header-container-pad {
+    padding: 16px 28px 0;
+}
+
+.stat-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.department-rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* Tablet Layout (<= 1024px) */
+@media (max-width: 1024px) {
+    .stat-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+    .department-rooms-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+}
+
+/* Mobile Phone Layout (<= 768px) */
+@media (max-width: 768px) {
+    /* Hide desktop window chrome */
+    #desktop-titlebar {
+        display: none !important;
+    }
+
+    /* Off-canvas mobile sidebar drawer */
+    .sidebar-aside {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 285px !important;
+        max-width: 86vw !important;
+        z-index: 1500 !important;
+        transform: translateX(-105%) !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        box-shadow: 10px 0 32px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    .sidebar-aside.open {
+        transform: translateX(0) !important;
+    }
+
+    /* Backdrop for mobile drawer */
+    #sidebar-backdrop {
+        display: block !important;
+        position: fixed !important;
+        inset: 0 !important;
+        background: rgba(15, 23, 42, 0.6) !important;
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        z-index: 1400 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: opacity 0.25s ease !important;
+    }
+
+    #sidebar-backdrop.open {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Main Workspace takes full width with bottom dock clearance */
+    #main-workspace {
+        width: 100vw !important;
+        min-width: 100vw !important;
+        margin-right: 0 !important;
+        padding-bottom: 70px !important;
+    }
+
+    #module-content-area {
+        padding: 12px 14px 28px !important;
+    }
+
+    /* Mobile Header */
+    .header-container-pad {
+        padding: 8px 12px 0 !important;
+    }
+
+    .clay-header-bar {
+        padding: 8px 12px !important;
+        min-height: 52px !important;
+    }
+
+    .mobile-header-left {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .mobile-hamburger-btn {
+        width: 36px !important;
+        height: 36px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .mobile-brand-pill {
+        padding: 6px 14px !important;
+        border-radius: 9999px !important;
+        background: #7AE8C2 !important;
+        color: #0E4337 !important;
+        font-weight: 800 !important;
+        font-size: 13px !important;
+        box-shadow: 2px 4px 10px rgba(122, 232, 194, 0.4), inset 1px 1px 2px rgba(255, 255, 255, 0.7) !important;
+        cursor: pointer !important;
+        user-select: none !important;
+    }
+
+    .header-left-desktop {
+        display: none !important;
+    }
+
+    #header-desktop-icon {
+        display: none !important;
+    }
+
+    /* Full width Copilot Drawer on Phone */
+    #copilot-drawer {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        border-radius: 20px 20px 0 0 !important;
+        z-index: 2000 !important;
+    }
+
+    /* Mobile Bottom Navigation Dock */
+    .mobile-bottom-dock {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 60px !important;
+        background: var(--clay-sidebar) !important;
+        border-top: 1px solid var(--clay-nav-border) !important;
+        box-shadow: 0 -4px 20px rgba(150, 165, 190, 0.3) !important;
+        z-index: 1100 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 4px 6px max(6px, env(safe-area-inset-bottom)) !important;
+    }
+
+    .mobile-dock-btn {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 3px !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 4px !important;
+        color: var(--text-muted) !important;
+        cursor: pointer !important;
+        font-family: inherit !important;
+        touch-action: manipulation !important;
+        transition: transform 0.15s ease !important;
+    }
+
+    .mobile-dock-btn:active {
+        transform: scale(0.92) !important;
+    }
+
+    .dock-icon-box {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 9px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+
+    .dock-label {
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.01em !important;
+    }
+
+    .mobile-dock-btn.active {
+        color: var(--clay-coral) !important;
+    }
+
+    .mobile-dock-btn.active .dock-icon-box {
+        background: var(--clay-coral) !important;
+        color: #FFFFFF !important;
+        box-shadow: 2px 4px 10px rgba(255, 124, 99, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.6) !important;
+        transform: translateY(-2px) scale(1.08) !important;
+    }
+
+    .mobile-dock-btn.active .dock-icon-box svg {
+        stroke: #FFFFFF !important;
+        color: #FFFFFF !important;
+    }
+
+    .dock-icon-coral {
+        background: var(--clay-coral) !important;
+        color: #FFFFFF !important;
+        box-shadow: 2px 3px 8px rgba(255, 124, 99, 0.35) !important;
+    }
+
+    /* Responsive Cards */
+    .stat-cards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .department-rooms-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .hero-overview-card {
+        padding: 18px 16px !important;
+        border-radius: 22px !important;
+    }
+
+    .hero-overview-title {
+        font-size: 20px !important;
+        line-height: 1.25 !important;
+    }
+
+    .department-container-card {
+        padding: 16px !important;
+        border-radius: 20px !important;
+    }
+}
+
+/* Extra small mobile screens (<= 380px) */
+@media (max-width: 380px) {
+    .stat-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
