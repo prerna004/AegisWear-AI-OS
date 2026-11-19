@@ -7,13 +7,38 @@ const ProjectsModule = {
     viewMode: 'kanban',
 
     async render(container) {
-        const [projRes, tasksRes] = await Promise.all([
-            fetch('/api/projects').then(r => r.json()),
-            fetch('/api/projects/tasks').then(r => r.json())
-        ]);
+        let projects = [
+            { id: 'proj-01', name: 'Summer 2026 Drop Launch', type: 'Fashion Drop', progress_percent: 85 },
+            { id: 'proj-02', name: 'Paris & Tokyo Fashion Week Capsule', type: 'Runway', progress_percent: 40 }
+        ];
+        let tasks = [
+            { id: 'tsk-01', title: 'Approve Lab Dips for French Terry Lilac', priority: 'High', status: 'Done', assignee_name: 'Ananya Mehta', story_points: 3 },
+            { id: 'tsk-02', title: 'Review Soho Wholesale Digital Contract', priority: 'Urgent', status: 'In Review', assignee_name: 'Rahul Sharma', story_points: 5 },
+            { id: 'tsk-03', title: 'Finalize Paris Lookbook Studio Bookings', priority: 'Medium', status: 'Todo', assignee_name: 'Prerna Chotwani', story_points: 2 }
+        ];
 
-        const projects = projRes || [];
-        const tasks = tasksRes || [];
+        if (window.AegisStore && window.AegisStore.getState) {
+            const st = window.AegisStore.getState();
+            if (st.projects && st.projects.length > 0) {
+                projects = st.projects.map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    type: p.lead ? `Lead: ${p.lead}` : 'Drop Milestone',
+                    progress_percent: p.progress !== undefined ? p.progress : 75
+                }));
+            }
+        }
+
+        try {
+            const [projRes, tasksRes] = await Promise.all([
+                fetch('/api/projects').then(r => r.json()).catch(() => null),
+                fetch('/api/projects/tasks').then(r => r.json()).catch(() => null)
+            ]);
+            if (Array.isArray(projRes) && projRes.length > 0) projects = projRes;
+            if (Array.isArray(tasksRes) && tasksRes.length > 0) tasks = tasksRes;
+        } catch (e) {
+            console.warn('ProjectsModule fetch failed, using fallback:', e);
+        }
 
         container.innerHTML = `
             <div style="display:flex; flex-direction:column; gap:20px;">

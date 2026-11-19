@@ -5,15 +5,29 @@
 
 const CrmModule = {
     async render(container) {
-        const [leadsRes, dealsRes, quotesRes] = await Promise.all([
-            fetch('/api/crm/leads').then(r => r.json()),
-            fetch('/api/crm/deals').then(r => r.json()),
-            fetch('/api/crm/quotes').then(r => r.json())
-        ]);
+        let leads = [];
+        let deals = [];
+        let quotes = [];
 
-        const leads = leadsRes || [];
-        const deals = dealsRes || [];
-        const quotes = quotesRes || [];
+        if (window.AegisStore) {
+            leads = window.AegisStore.getLeads() || [];
+            deals = window.AegisStore.getDeals() || [];
+            quotes = window.AegisStore.getQuotes() || [];
+        }
+
+        try {
+            const [leadsRes, dealsRes, quotesRes] = await Promise.all([
+                fetch('/api/crm/leads').then(r => r.json()).catch(() => null),
+                fetch('/api/crm/deals').then(r => r.json()).catch(() => null),
+                fetch('/api/crm/quotes').then(r => r.json()).catch(() => null)
+            ]);
+
+            if (leadsRes && Array.isArray(leadsRes)) leads = leadsRes;
+            if (dealsRes && Array.isArray(dealsRes)) deals = dealsRes;
+            if (quotesRes && Array.isArray(quotesRes)) quotes = quotesRes;
+        } catch (e) {
+            console.warn('[CRM] Network fetch notice:', e);
+        }
 
         const totalPipeline = deals.reduce((sum, d) => sum + (d.amount || d.value || 0), 0);
         const wonRevenue = deals.filter(d => (d.stage || '').toLowerCase().replace(/[\s_-]+/g, '') === 'closedwon').reduce((sum, d) => sum + (d.amount || d.value || 0), 0);
@@ -193,9 +207,10 @@ const CrmModule = {
 
     openRouteIQModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.65); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:10000; display:flex; align-items:center; justify-content:center; padding:16px;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:760px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+            <div class="clay-card clay-modal-box" style="width:760px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
                 <!-- Modal Header -->
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
@@ -207,7 +222,7 @@ const CrmModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">AI waypoint clustering & GPS delivery route for partner fashion boutiques</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:36px; height:36px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:36px; height:36px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -311,6 +326,7 @@ const CrmModule = {
                         <span>Assigned Rep: <strong>Rahul Sharma (Field Accounts Lead)</strong></span>
                     </div>
                     <div style="display:flex; gap:10px;">
+                        <button class="clay-btn clay-btn-white" onclick="closeModal(this)">Cancel</button>
                         <button class="clay-btn clay-btn-white" onclick="CrmModule.copyItineraryToClipboard()">
                             ${Icons.get('fileText', 14, 'currentColor')}
                             <span>Copy GPS Route</span>
@@ -362,9 +378,10 @@ const CrmModule = {
 
     openDocumensoSignModal(quoteId = 'quote-801') {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:660px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:660px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-coral); color:#FFFFFF; display:flex; align-items:center; justify-content:center;">
@@ -375,7 +392,7 @@ const CrmModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Cryptographic e-signature package with SHA-256 tamper-evident seal</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -386,8 +403,8 @@ const CrmModule = {
                     <div style="margin-top:8px; color:#10B981; font-weight:700;">Cryptographic SHA-256 certificate verification complete</div>
                 </div>
                 <div style="margin-top:18px; display:flex; justify-content:flex-end; gap:10px;">
-                    <button class="clay-btn clay-btn-white" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Cancel</button>
-                    <button class="clay-btn clay-btn-coral" onclick="HitlManager.showToast('Contract dispatched for signature via Documenso', 'mint'); this.closest('div[style*=\\'position:fixed\\']').remove();">
+                    <button class="clay-btn clay-btn-white" onclick="closeModal(this)">Cancel</button>
+                    <button class="clay-btn clay-btn-coral" onclick="HitlManager.showToast('Contract dispatched for signature via Documenso', 'mint'); closeModal(this);">
                         Dispatch Envelope
                     </button>
                 </div>

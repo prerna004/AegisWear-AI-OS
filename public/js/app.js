@@ -3,6 +3,39 @@
 // Authentic Setproduct Claymorphism - Zero Emojis - Vector SVG Iconography
 // ============================================================================
 
+// Global resilient modal close handler
+window.closeModal = function(elem) {
+    if (!elem) {
+        document.querySelectorAll('.clay-modal-backdrop, .myntra-login-backdrop, [id$="-modal"], div[style*="position:fixed"], div[style*="position: fixed"]').forEach(m => m.remove());
+        return;
+    }
+    if (elem.nodeType === 1 && (elem.classList.contains('clay-modal-backdrop') || elem.classList.contains('myntra-login-backdrop') || elem.style.position === 'fixed')) {
+        elem.remove();
+        return;
+    }
+    const modal = elem.closest('.clay-modal-backdrop, .myntra-login-backdrop, [id$="-modal"], div[style*="position:fixed"], div[style*="position: fixed"]');
+    if (modal) {
+        modal.remove();
+        return;
+    }
+    let cur = elem.parentElement;
+    while (cur && cur !== document.body) {
+        const pos = window.getComputedStyle(cur).position;
+        if (pos === 'fixed' || (pos === 'absolute' && Number(cur.style.zIndex || 0) > 100)) {
+            cur.remove();
+            return;
+        }
+        cur = cur.parentElement;
+    }
+    document.querySelectorAll('.clay-modal-backdrop, div[style*="position: fixed"], div[style*="position:fixed"]').forEach(m => m.remove());
+};
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        window.closeModal();
+    }
+});
+
 const AegisApp = {
     currentModule: 'overview',
     isDesktopMode: false,
@@ -213,48 +246,54 @@ const AegisApp = {
         if (!container) return;
         container.innerHTML = `<div style="text-align:center; padding:50px; color:var(--text-muted); font-size:14px; font-weight:700;">Opening ${moduleName}...</div>`;
 
-        switch (moduleName) {
-            case 'overview':
-                this.renderOverview(container).catch(err => {
-                    console.error('[Overview render failed]', err);
-                });
-                break;
-            case 'crm':
-                CrmModule.render(container);
-                break;
-            case 'marketing':
-                MarketingModule.render(container);
-                break;
-            case 'support':
-                SupportModule.render(container);
-                break;
-            case 'finance':
-                FinanceModule.render(container);
-                break;
-            case 'hr':
-                HrModule.render(container);
-                break;
-            case 'collab':
-                CollabModule.render(container);
-                break;
-            case 'projects':
-                ProjectsModule.render(container);
-                break;
-            case 'itsm':
-                ItsmModule.render(container);
-                break;
-            case 'analytics':
-                AnalyticsModule.render(container);
-                break;
-            case 'agents':
-                AgentsViewModule.render(container);
-                break;
-            case 'developer':
-                DeveloperModule.render(container);
-                break;
-            default:
-                this.renderOverview(container);
-        }
+        const runModuleRender = async () => {
+            switch (moduleName) {
+                case 'overview':
+                    return this.renderOverview(container);
+                case 'crm':
+                    return CrmModule.render(container);
+                case 'marketing':
+                    return MarketingModule.render(container);
+                case 'support':
+                    return SupportModule.render(container);
+                case 'finance':
+                    return FinanceModule.render(container);
+                case 'hr':
+                    return HrModule.render(container);
+                case 'collab':
+                    return CollabModule.render(container);
+                case 'projects':
+                    return ProjectsModule.render(container);
+                case 'itsm':
+                    return ItsmModule.render(container);
+                case 'analytics':
+                    return AnalyticsModule.render(container);
+                case 'agents':
+                    return AgentsViewModule.render(container);
+                case 'developer':
+                    return DeveloperModule.render(container);
+                default:
+                    return this.renderOverview(container);
+            }
+        };
+
+        runModuleRender().catch(err => {
+            console.error(`[AegisApp] Error rendering module ${moduleName}:`, err);
+            // Auto fallback: If CrmModule fails, ensure container still renders from store
+            if (moduleName === 'crm' && window.CrmModule) {
+                try {
+                    CrmModule.render(container);
+                    return;
+                } catch(e) {}
+            }
+            container.innerHTML = `
+                <div class="clay-card" style="padding:32px; text-align:center; max-width:540px; margin:40px auto; background:var(--clay-surface);">
+                    <div style="font-size:18px; font-weight:800; color:var(--clay-coral);">Room Loading Fallback</div>
+                    <p style="font-size:13px; color:var(--text-secondary); margin:10px 0 20px;">Could not connect to live server. Displaying cached store data.</p>
+                    <button class="clay-btn clay-btn-coral" onclick="AegisApp.switchModule('${moduleName}')">Retry Room Load</button>
+                </div>
+            `;
+        });
     },
 
     refreshCurrentView() {

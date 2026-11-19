@@ -210,9 +210,10 @@ const CollabModule = {
 
     openLiveMeetingModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:760px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:760px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-coral); color:#FFFFFF; display:flex; align-items:center; justify-content:center;">
@@ -223,7 +224,7 @@ const CollabModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Live audio stream transcription with automated task synthesis</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -240,7 +241,7 @@ const CollabModule = {
                     </div>
                 </div>
                 <div style="margin-top:18px; text-align:right;">
-                    <button class="clay-btn clay-btn-coral" onclick="Copilot.sendQuickPrompt('Extract action items from meeting transcript and auto-create tasks in Collection Launches module', 'agent-meeting-scribe'); this.closest('div[style*=\\'position:fixed\\']').remove();">
+                    <button class="clay-btn clay-btn-coral" onclick="Copilot.sendQuickPrompt('Extract action items from meeting transcript and auto-create tasks in Collection Launches module', 'agent-meeting-scribe'); closeModal(this);">
                         Extract Action Items &amp; Save to Launches
                     </button>
                 </div>
@@ -251,9 +252,10 @@ const CollabModule = {
 
     openPasswordVaultModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.65); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:10000; display:flex; align-items:center; justify-content:center; padding:16px;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:720px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+            <div class="clay-card clay-modal-box" style="width:720px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:42px; height:42px; border-radius:14px; background:var(--clay-coral); color:#FFFFFF; display:flex; align-items:center; justify-content:center; box-shadow:2px 4px 10px rgba(255,124,99,0.4);">
@@ -264,7 +266,7 @@ const CollabModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Encrypted API secrets for Shopify, Milan Textile Mill, Couriers &amp; Payment Gateway</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:36px; height:36px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:36px; height:36px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>

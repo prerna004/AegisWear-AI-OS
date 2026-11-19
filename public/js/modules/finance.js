@@ -5,18 +5,32 @@
 
 const FinanceModule = {
     async render(container) {
-        const [invRes, stockRes, expRes] = await Promise.all([
-            fetch('/api/finance/invoices').then(r => r.json()),
-            fetch('/api/finance/inventory').then(r => r.json()),
-            fetch('/api/finance/expenses').then(r => r.json())
-        ]);
+        let invoices = [];
+        let inventory = [];
+        let expenses = [];
 
-        const invoices = invRes || [];
-        const inventory = stockRes || [];
-        const expenses = expRes || [];
+        if (window.AegisStore) {
+            invoices = window.AegisStore.getInvoices() || [];
+            inventory = window.AegisStore.getInventory() || [];
+            expenses = window.AegisStore.getExpenses() || [];
+        }
+
+        try {
+            const [invRes, stockRes, expRes] = await Promise.all([
+                fetch('/api/finance/invoices').then(r => r.json()).catch(() => null),
+                fetch('/api/finance/inventory').then(r => r.json()).catch(() => null),
+                fetch('/api/finance/expenses').then(r => r.json()).catch(() => null)
+            ]);
+
+            if (invRes && Array.isArray(invRes)) invoices = invRes;
+            if (stockRes && Array.isArray(stockRes)) inventory = stockRes;
+            if (expRes && Array.isArray(expRes)) expenses = expRes;
+        } catch (e) {
+            console.warn('[Finance] Network fetch notice:', e);
+        }
 
         const totalInvoiced = invoices.reduce((s, i) => s + (i.amount || 0), 0);
-        const lowStockCount = inventory.filter(i => i.status === 'Low Stock' || i.stock_on_hand <= i.reorder_point).length;
+        const lowStockCount = inventory.filter(i => i.status === 'Low Stock' || (i.stock || i.stock_on_hand || 0) <= (i.reorder_level || i.reorder_point || 0)).length;
 
         container.innerHTML = `
             <div style="display:flex; flex-direction:column; gap:20px;">
@@ -176,9 +190,10 @@ const FinanceModule = {
     openOcrModal() {
         const modal = document.createElement('div');
         modal.id = 'ocr-scanner-modal';
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.65); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:10000; display:flex; align-items:center; justify-content:center; padding:16px;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:680px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+            <div class="clay-card clay-modal-box" style="width:680px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
                 <!-- Modal Header -->
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
@@ -190,7 +205,7 @@ const FinanceModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Capture supplier bills, fabric roll invoices & courier receipts</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('#ocr-scanner-modal').remove()" style="width:36px; height:36px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:36px; height:36px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -222,6 +237,12 @@ const FinanceModule = {
                         <button class="clay-btn clay-btn-white" style="font-size:11px; padding:6px 14px;" onclick="FinanceModule.loadSampleReceipt()">
                             ${Icons.get('sparkles', 14, 'var(--clay-coral)')}
                             <span>Try Sample Fabric Invoice</span>
+                        </button>
+                    </div>
+
+                    <div style="margin-top:16px; text-align:center;">
+                        <button class="clay-btn clay-btn-white" onclick="closeModal(this)" style="font-size:12px; padding:6px 18px;">
+                            Cancel
                         </button>
                     </div>
                 </div>

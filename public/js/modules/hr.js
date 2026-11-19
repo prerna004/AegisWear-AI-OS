@@ -5,13 +5,40 @@
 
 const HrModule = {
     async render(container) {
-        const [empRes, candRes] = await Promise.all([
-            fetch('/api/hr/employees').then(r => r.json()),
-            fetch('/api/hr/candidates').then(r => r.json())
-        ]);
+        let employees = [
+            { id: 'emp-01', name: 'Prerna Chotwani', title: 'Creative Director & Founder', department: 'Design', pto_balance: 18, email: 'prerna@aegiswear.com' },
+            { id: 'emp-02', name: 'Rahul Sharma', title: 'Head of Wholesale Accounts', department: 'Sales', pto_balance: 14, email: 'rahul@aegiswear.com' },
+            { id: 'emp-03', name: 'Ananya Mehta', title: 'Lead Apparel Designer', department: 'Design', pto_balance: 21, email: 'ananya@aegiswear.com' }
+        ];
+        let candidates = [
+            { id: 'cand-01', name: 'Tanvi Parekh', applied_role: 'Sustainable Textile Specialist', match_score: 96, status: 'Interview', resume_summary: 'Expert in GOTS certified organic cotton and zero-chemical dyes with 6 years experience.' }
+        ];
 
-        const employees = empRes || [];
-        const candidates = candRes || [];
+        if (window.AegisStore && window.AegisStore.getState) {
+            const st = window.AegisStore.getState();
+            if (st.employees && st.employees.length > 0) {
+                employees = st.employees.map(e => ({
+                    id: e.id,
+                    name: e.name,
+                    title: e.role || e.title || 'Team Member',
+                    department: e.department || 'Operations',
+                    pto_balance: e.pto_balance !== undefined ? e.pto_balance : 15,
+                    email: e.email || `${e.name.toLowerCase().replace(/\s+/g, '.')}@aegiswear.com`
+                }));
+            }
+            if (st.candidates && st.candidates.length > 0) candidates = st.candidates;
+        }
+
+        try {
+            const [empRes, candRes] = await Promise.all([
+                fetch('/api/hr/employees').then(r => r.json()).catch(() => null),
+                fetch('/api/hr/candidates').then(r => r.json()).catch(() => null)
+            ]);
+            if (Array.isArray(empRes) && empRes.length > 0) employees = empRes;
+            if (Array.isArray(candRes) && candRes.length > 0) candidates = candRes;
+        } catch (e) {
+            console.warn('HrModule fetch failed, using fallback:', e);
+        }
 
         container.innerHTML = `
             <div style="display:flex; flex-direction:column; gap:20px;">

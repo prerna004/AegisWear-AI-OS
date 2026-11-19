@@ -5,13 +5,27 @@
 
 const AnalyticsModule = {
     async render(container) {
-        const [metricsRes, workflowsRes] = await Promise.all([
-            fetch('/api/bi/metrics').then(r => r.json()),
-            fetch('/api/bi/workflows').then(r => r.json())
-        ]);
+        let metrics = { closedWonRevenue: 145000, activeDeals: 12, ordersFulfilled: 1420, satisfactionRate: 99.4, pendingReviews: 1 };
+        let workflows = [
+            { id: 'wf-01', name: 'Order Sync & Inventory Auto-Reserve', status: 'Running', health: 99.8, last_run: '1 min ago' },
+            { id: 'wf-02', name: 'Stripe Wholesale Webhook Settlement', status: 'Running', health: 100, last_run: '3 mins ago' }
+        ];
 
-        const metrics = metricsRes || {};
-        const workflows = workflowsRes || [];
+        if (window.AegisStore && window.AegisStore.getState) {
+            const st = window.AegisStore.getState();
+            if (st.metrics) metrics = st.metrics;
+        }
+
+        try {
+            const [metricsRes, workflowsRes] = await Promise.all([
+                fetch('/api/bi/metrics').then(r => r.json()).catch(() => null),
+                fetch('/api/bi/workflows').then(r => r.json()).catch(() => null)
+            ]);
+            if (metricsRes && typeof metricsRes === 'object') metrics = metricsRes;
+            if (Array.isArray(workflowsRes)) workflows = workflowsRes;
+        } catch (e) {
+            console.warn('Analytics fetch error, using store fallback:', e);
+        }
 
         container.innerHTML = `
             <div style="display:flex; flex-direction:column; gap:20px;">
@@ -150,7 +164,7 @@ const AnalyticsModule = {
 
     openN8nCanvasModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
         modal.innerHTML = `
             <div class="clay-card" style="width:840px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
@@ -163,7 +177,7 @@ const AnalyticsModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Event-driven cross-suite cascade upon deal signature</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -190,12 +204,16 @@ const AnalyticsModule = {
                 </div>
                 <div style="margin-top:18px; display:flex; justify-content:space-between; align-items:center;">
                     <span style="font-size:12px; color:var(--text-muted); font-weight:600;">Real-time event cascade duration: &lt; 100 milliseconds</span>
-                    <button class="clay-btn clay-btn-coral" onclick="HitlManager.showToast('Test pipeline completed successfully', 'mint'); this.closest('div[style*=\\'position:fixed\\']').remove();">
-                        Test Pipeline Execution
-                    </button>
+                    <div style="display:flex; gap:10px;">
+                        <button class="clay-btn clay-btn-white" onclick="closeModal(this)">Cancel</button>
+                        <button class="clay-btn clay-btn-coral" onclick="HitlManager.showToast('Test pipeline completed successfully', 'mint'); closeModal(this);">
+                            Test Pipeline Execution
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
         document.body.appendChild(modal);
     }
 };

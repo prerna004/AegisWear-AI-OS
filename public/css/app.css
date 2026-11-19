@@ -1959,6 +1959,34 @@ body {
 
 
 /* ==========================================================================
+   Global Clay Modal Backdrop (Resilient modal container with backdrop blur)
+   ========================================================================== */
+.clay-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(18, 22, 38, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 11000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: clayModalFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes clayModalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================================================
    Myntra High-Fashion Fuchsia Pink Scheme & Eye-Catchy Shopping Aesthetic
    ========================================================================== */
 [data-accent="fuchsia"], :root {
@@ -1977,6 +2005,7 @@ body {
     --text-on-coral: #FFFFFF;
 }
 
+/* 1. Hero Overview Banner */
 [data-accent="fuchsia"] .hero-overview-card {
     background: linear-gradient(135deg, #FF3F6C 0%, #E0185A 45%, #8B00FF 100%) !important;
     box-shadow: 
@@ -1985,14 +2014,150 @@ body {
         inset -4px -4px 10px rgba(120, 0, 50, 0.35) !important;
 }
 
-[data-accent="fuchsia"] .clay-card-coral {
-    background: linear-gradient(135deg, #FF3F6C 0%, #E6004C 100%) !important;
-    box-shadow: 
-        10px 18px 32px rgba(255, 63, 108, 0.42),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.65),
-        inset -4px -4px 8px rgba(160, 0, 50, 0.3) !important;
+[data-accent="fuchsia"] .hero-assistant-btn {
+    background: #FFFFFF !important;
+    color: #FF3F6C !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+}
+[data-accent="fuchsia"] .hero-assistant-btn svg {
+    stroke: #FF3F6C !important;
 }
 
+/* 2. Four Quick Stat Cards: Harmonized Luxury White with Hot Pink Highlights */
+[data-accent="fuchsia"] .clay-card-mint,
+[data-accent="fuchsia"] .clay-card-lilac,
+[data-accent="fuchsia"] .clay-card-butter,
+[data-accent="fuchsia"] .clay-card-sky,
+[data-accent="fuchsia"] .clay-card-peach,
+[data-accent="fuchsia"] .clay-card-periwinkle,
+[data-accent="fuchsia"] .clay-card-rose {
+    background: #FFFFFF !important;
+    color: #1E293B !important;
+    border: 1.5px solid rgba(255, 63, 108, 0.16) !important;
+    box-shadow: 
+        10px 18px 30px rgba(255, 63, 108, 0.08),
+        inset 3px 3px 6px rgba(255, 255, 255, 1),
+        inset -3px -3px 6px rgba(255, 63, 108, 0.04) !important;
+}
+
+[data-accent="fuchsia"] .stat-card-label {
+    color: #64748B !important;
+    font-weight: 800 !important;
+}
+
+[data-accent="fuchsia"] .stat-card-value {
+    color: #0F172A !important;
+    font-weight: 800 !important;
+}
+
+[data-accent="fuchsia"] .stat-card-sub {
+    color: #FF3F6C !important;
+    font-weight: 700 !important;
+}
+
+[data-accent="fuchsia"] .stat-card-icon-badge {
+    background: #FFF0F4 !important;
+    color: #FF3F6C !important;
+    border: 1px solid rgba(255, 63, 108, 0.22) !important;
+}
+[data-accent="fuchsia"] .stat-card-icon-badge svg {
+    stroke: #FF3F6C !important;
+}
+
+/* 3. Department Cards: Luxury White with Fuchsia Glow & Borders */
+[data-accent="fuchsia"] .clay-card-tint-peach,
+[data-accent="fuchsia"] .clay-card-tint-butter,
+[data-accent="fuchsia"] .clay-card-tint-lilac,
+[data-accent="fuchsia"] .clay-card-tint-mint,
+[data-accent="fuchsia"] .clay-card-tint-sky,
+[data-accent="fuchsia"] .clay-card-tint-rose,
+[data-accent="fuchsia"] .clay-card-tint-periwinkle {
+    background: #FFFFFF !important;
+    color: #1E293B !important;
+    border: 1.5px solid rgba(255, 63, 108, 0.14) !important;
+    box-shadow: 
+        8px 16px 28px rgba(255, 63, 108, 0.06),
+        inset 2px 2px 5px rgba(255, 255, 255, 1),
+        inset -2px -2px 5px rgba(255, 63, 108, 0.03) !important;
+}
+
+[data-accent="fuchsia"] .clay-card-tint-peach:hover,
+[data-accent="fuchsia"] .clay-card-tint-butter:hover,
+[data-accent="fuchsia"] .clay-card-tint-lilac:hover,
+[data-accent="fuchsia"] .clay-card-tint-mint:hover,
+[data-accent="fuchsia"] .clay-card-tint-sky:hover,
+[data-accent="fuchsia"] .clay-card-tint-rose:hover,
+[data-accent="fuchsia"] .clay-card-tint-periwinkle:hover {
+    border-color: #FF3F6C !important;
+    box-shadow: 
+        12px 22px 36px rgba(255, 63, 108, 0.18),
+        inset 3px 3px 6px rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px);
+}
+
+[data-accent="fuchsia"] .clay-card-tint-peach p,
+[data-accent="fuchsia"] .clay-card-tint-butter p,
+[data-accent="fuchsia"] .clay-card-tint-lilac p,
+[data-accent="fuchsia"] .clay-card-tint-mint p,
+[data-accent="fuchsia"] .clay-card-tint-sky p,
+[data-accent="fuchsia"] .clay-card-tint-rose p,
+[data-accent="fuchsia"] .clay-card-tint-periwinkle p {
+    color: #64748B !important;
+}
+
+/* 4. All Badges in Fuchsia Theme */
+[data-accent="fuchsia"] .clay-badge-mint,
+[data-accent="fuchsia"] .clay-badge-butter,
+[data-accent="fuchsia"] .clay-badge-lilac,
+[data-accent="fuchsia"] .clay-badge-sky,
+[data-accent="fuchsia"] .clay-badge-peach,
+[data-accent="fuchsia"] .clay-badge-periwinkle,
+[data-accent="fuchsia"] .clay-badge-rose,
+[data-accent="fuchsia"] .clay-badge-coral {
+    background: #FFF0F4 !important;
+    color: #FF3F6C !important;
+    border: 1px solid rgba(255, 63, 108, 0.25) !important;
+    font-weight: 800 !important;
+}
+
+/* 5. Left Sidebar Navigation in Fuchsia Theme */
+[data-accent="fuchsia"] .nav-chip {
+    background: #FFF0F4 !important;
+    color: #D80064 !important;
+    border: 1px solid rgba(255, 63, 108, 0.25) !important;
+    font-weight: 800 !important;
+}
+
+[data-accent="fuchsia"] .nav-icon-badge {
+    background: #FFF0F4 !important;
+    color: #FF3F6C !important;
+}
+
+[data-accent="fuchsia"] .clay-nav-btn.active {
+    background: linear-gradient(135deg, #FF3F6C 0%, #D80064 100%) !important;
+    color: #FFFFFF !important;
+    box-shadow: 
+        6px 12px 22px rgba(255, 63, 108, 0.45),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.6),
+        inset -3px -3px 6px rgba(140, 0, 50, 0.35) !important;
+}
+[data-accent="fuchsia"] .clay-nav-btn.active .nav-icon-badge {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: #FFFFFF !important;
+}
+[data-accent="fuchsia"] .clay-nav-btn.active .nav-chip {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+[data-accent="fuchsia"] .clay-nav-btn:hover:not(.active) {
+    background: #FFF0F4 !important;
+    color: #FF3F6C !important;
+}
+
+/* 6. Action Buttons in Fuchsia Theme */
 [data-accent="fuchsia"] .clay-btn-coral {
     background: linear-gradient(135deg, #FF3F6C, #D80064) !important;
     color: #FFFFFF !important;
@@ -2008,23 +2173,32 @@ body {
         inset 2px 2px 4px rgba(255, 255, 255, 0.7) !important;
 }
 
-[data-accent="fuchsia"] .clay-nav-btn.active {
-    background: linear-gradient(135deg, #FF3F6C, #D80064) !important;
-    box-shadow: 
-        6px 12px 22px rgba(255, 63, 108, 0.45),
-        inset 3px 3px 6px rgba(255, 255, 255, 0.6),
-        inset -3px -3px 6px rgba(140, 0, 50, 0.35) !important;
-}
-
-[data-accent="fuchsia"] .clay-badge-coral {
-    background: #FFF0F4 !important;
-    color: #FF3F6C !important;
-    border: 1px solid rgba(255, 63, 108, 0.3) !important;
-}
-
 [data-accent="fuchsia"] .dock-icon-coral {
     background: linear-gradient(135deg, #FF3F6C, #D80064) !important;
     box-shadow: 2px 4px 10px rgba(255, 63, 108, 0.4) !important;
+}
+
+/* 7. Copilot Assistant Suggestions in Fuchsia Theme */
+[data-accent="fuchsia"] .copilot-suggestion-item {
+    border-left: 4px solid #FF3F6C !important;
+    background: #FFFFFF !important;
+}
+[data-accent="fuchsia"] .copilot-suggestion-item:hover {
+    background: #FFF0F4 !important;
+    border-color: #FF3F6C !important;
+}
+
+/* 8. Simple Guide Banners in Modules */
+[data-accent="fuchsia"] .simple-guide-banner {
+    background: #FFFFFF !important;
+    border: 1.5px solid rgba(255, 63, 108, 0.16) !important;
+}
+[data-accent="fuchsia"] .simple-guide-icon {
+    background: linear-gradient(135deg, #FF3F6C, #D80064) !important;
+    color: #FFFFFF !important;
+}
+[data-accent="fuchsia"] .simple-guide-icon svg {
+    stroke: #FFFFFF !important;
 }
 
 /* Myntra Login Modal Styles */

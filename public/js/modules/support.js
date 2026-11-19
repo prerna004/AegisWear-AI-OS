@@ -144,9 +144,10 @@ const SupportModule = {
 
     openSizeExchangeModal(ticketId) {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:680px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:680px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-coral); color:#FFFFFF; display:flex; align-items:center; justify-content:center;">
@@ -157,7 +158,7 @@ const SupportModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Automated Delhivery courier pickup &amp; replacement dispatch</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -199,7 +200,7 @@ const SupportModule = {
                 </div>
 
                 <div id="exchange-modal-actions" style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;">
-                    <button class="clay-btn clay-btn-white" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Cancel</button>
+                    <button class="clay-btn clay-btn-white" onclick="closeModal(this)">Cancel</button>
                     <button class="clay-btn clay-btn-coral" onclick="SupportModule.confirmSizeExchange('${ticketId}', this)">
                         ${Icons.get('check', 14, '#FFFFFF')}
                         <span>Approve &amp; Dispatch Swap Label</span>
@@ -228,8 +229,7 @@ const SupportModule = {
         HitlManager.showToast('Delhivery doorstep replacement dispatched! Waybill DEL-9948218-IN SMS sent to customer.', 'mint');
         
         setTimeout(() => {
-            const modal = btn.closest('div[style*="position:fixed"]');
-            if (modal) modal.remove();
+            closeModal(btn);
             const container = document.getElementById('module-content-area');
             if (container) this.render(container);
         }, 1200);
@@ -237,9 +237,10 @@ const SupportModule = {
 
     openNewTicketModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:640px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:640px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-lilac); color:var(--text-on-lilac); display:flex; align-items:center; justify-content:center;">
@@ -250,7 +251,7 @@ const SupportModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Omnichannel ticket entry for size swaps, inquiries &amp; returns</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -284,7 +285,7 @@ const SupportModule = {
                 </div>
 
                 <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;">
-                    <button class="clay-btn clay-btn-white" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Cancel</button>
+                    <button class="clay-btn clay-btn-white" onclick="closeModal(this)">Cancel</button>
                     <button class="clay-btn clay-btn-coral" onclick="SupportModule.submitNewTicket(this)">
                         Create Ticket
                     </button>
@@ -315,7 +316,7 @@ const SupportModule = {
             });
         }
 
-        btn.closest('div[style*="position:fixed"]').remove();
+        closeModal(btn);
         HitlManager.showToast(`Ticket for ${customer_name} created successfully!`, 'mint');
 
         const container = document.getElementById('module-content-area');
@@ -324,9 +325,10 @@ const SupportModule = {
 
     openCourierTrackingModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:720px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:720px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-coral); color:#FFFFFF; display:flex; align-items:center; justify-content:center;">
@@ -337,7 +339,7 @@ const SupportModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Real-time GPS courier tracking for size exchanges and customer orders</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -370,9 +372,9 @@ const SupportModule = {
                     </div>
                 </div>
 
-                <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
                     <button class="clay-btn clay-btn-white" onclick="HitlManager.showToast('Courier SMS alert triggered to customer', 'mint')">Send ETA to Customer</button>
-                    <button class="clay-btn clay-btn-coral" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Close Tracking</button>
+                    <button class="clay-btn clay-btn-coral" onclick="closeModal(this)">Close Tracking</button>
                 </div>
             </div>
         `;

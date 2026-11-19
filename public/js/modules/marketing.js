@@ -149,9 +149,10 @@ const MarketingModule = {
 
     openCreateCampaignModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:680px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:680px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-coral); color:#FFFFFF; display:flex; align-items:center; justify-content:center;">
@@ -162,7 +163,7 @@ const MarketingModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Automate cross-platform fashion drops on Instagram, TikTok, and WhatsApp</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -201,7 +202,7 @@ const MarketingModule = {
                 </div>
 
                 <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;">
-                    <button class="clay-btn clay-btn-white" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Cancel</button>
+                    <button class="clay-btn clay-btn-white" onclick="closeModal(this)">Cancel</button>
                     <button class="clay-btn clay-btn-coral" onclick="MarketingModule.submitNewCampaign(this)">
                         ${Icons.get('sparkles', 14, '#FFFFFF')}
                         <span>Launch Campaign Now</span>
@@ -234,7 +235,7 @@ const MarketingModule = {
             });
         }
 
-        btn.closest('div[style*="position:fixed"]').remove();
+        closeModal(btn);
         HitlManager.showToast(`Campaign "${name}" launched successfully across all channels!`, 'mint');
 
         // Re-render
@@ -245,15 +246,16 @@ const MarketingModule = {
     openFunnelModal(campId, campName) {
         const name = unescape(campName);
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:680px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:680px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div>
                         <h3 style="font-size:17px; font-weight:800; color:var(--text-primary);">${name}</h3>
                         <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Real-time conversion telemetry &amp; channel analytics</p>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -301,7 +303,7 @@ const MarketingModule = {
                 </div>
 
                 <div style="margin-top:18px; text-align:right;">
-                    <button class="clay-btn clay-btn-coral" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Close Analytics</button>
+                    <button class="clay-btn clay-btn-coral" onclick="closeModal(this)">Close Analytics</button>
                 </div>
             </div>
         `;
@@ -310,9 +312,10 @@ const MarketingModule = {
 
     openCroModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.className = 'clay-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
         modal.innerHTML = `
-            <div class="clay-card" style="width:720px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card clay-modal-box" style="width:720px; max-width:92vw; padding:28px; background:var(--clay-surface);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-peach); color:var(--clay-peach-dark); display:flex; align-items:center; justify-content:center;">
@@ -323,7 +326,7 @@ const MarketingModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Step-by-step visitor progression and bounce telemetry</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:34px; height:34px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -349,7 +352,7 @@ const MarketingModule = {
                     </div>
                 </div>
                 <div style="margin-top:18px; text-align:right;">
-                    <button class="clay-btn clay-btn-coral" onclick="HitlManager.showToast('Automated A/B experiment launched for checkout', 'mint'); this.closest('div[style*=\\'position:fixed\\']').remove()">
+                    <button class="clay-btn clay-btn-coral" onclick="HitlManager.showToast('Automated A/B experiment launched for checkout', 'mint'); closeModal(this);">
                         Deploy A/B Experiment
                     </button>
                 </div>

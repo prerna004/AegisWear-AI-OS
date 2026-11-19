@@ -5,13 +5,32 @@
 
 const ItsmModule = {
     async render(container) {
-        const [assetsRes, incRes] = await Promise.all([
-            fetch('/api/itsm/assets').then(r => r.json()),
-            fetch('/api/itsm/incidents').then(r => r.json())
-        ]);
+        let assets = [
+            { id: 'ast-01', hostname: 'store-pos-ipad-01', ip_address: '192.168.10.42', os: 'iPadOS 18.2', health_status: 'Healthy', disk_usage_percent: 42, ram_usage_percent: 38 },
+            { id: 'ast-02', hostname: 'warehouse-scanner-04', ip_address: '192.168.20.15', os: 'Android 14 (Zebra)', health_status: 'Healthy', disk_usage_percent: 28, ram_usage_percent: 45 },
+            { id: 'ast-03', hostname: 'design-macbook-pro', ip_address: '192.168.10.88', os: 'macOS Sequoia 15.1', health_status: 'Warning', disk_usage_percent: 94, ram_usage_percent: 82 }
+        ];
+        let incidents = [
+            { id: 'inc-01', title: 'High disk pressure on design-macbook-pro (Photoshoot RAW files)', severity: 'Medium', status: 'Open', assigned_agent: 'agent-it-helpdesk' }
+        ];
 
-        const assets = assetsRes || [];
-        const incidents = incRes || [];
+        if (window.AegisStore && window.AegisStore.getState) {
+            const st = window.AegisStore.getState();
+            if (st.itAssets) assets = st.itAssets;
+            if (st.itIncidents) incidents = st.itIncidents;
+        }
+
+        try {
+            const [assetsRes, incRes] = await Promise.all([
+                fetch('/api/itsm/assets').then(r => r.json()).catch(() => null),
+                fetch('/api/itsm/incidents').then(r => r.json()).catch(() => null)
+            ]);
+            if (Array.isArray(assetsRes) && assetsRes.length > 0) assets = assetsRes;
+            if (Array.isArray(incRes) && incRes.length > 0) incidents = incRes;
+        } catch (e) {
+            console.warn('ITSM fetch failed, using AegisStore fallback:', e);
+        }
+
         const healthyCount = assets.filter(a => a.health_status === 'Healthy').length;
 
         container.innerHTML = `
@@ -148,7 +167,7 @@ const ItsmModule = {
 
     openCmdbModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.65); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:10000; display:flex; align-items:center; justify-content:center; padding:16px;`;
+        modal.className = 'clay-modal-backdrop';
         modal.innerHTML = `
             <div class="clay-card" style="width:780px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
                 <!-- Modal Header -->
@@ -162,7 +181,7 @@ const ItsmModule = {
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Live visual dependency graph connecting storefront, AI agents, cloud DB &amp; store hardware</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:36px; height:36px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="closeModal(this)" style="width:36px; height:36px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
@@ -226,11 +245,12 @@ const ItsmModule = {
                     </div>
                 </div>
 
-                <div style="display:flex; justify-content:flex-end;">
-                    <button class="clay-btn clay-btn-coral" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Close Topology View</button>
+                <div style="display:flex; justify-content:flex-end; gap:10px;">
+                    <button class="clay-btn clay-btn-coral" onclick="closeModal(this)">Close Topology View</button>
                 </div>
             </div>
         `;
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
         document.body.appendChild(modal);
     }
 };

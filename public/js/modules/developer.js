@@ -5,13 +5,28 @@
 
 const DeveloperModule = {
     async render(container) {
-        const [mcpToolsRes, openApiRes] = await Promise.all([
-            fetch('/api/mcp/tools').then(r => r.json()),
-            fetch('/api/openapi.json').then(r => r.json())
-        ]);
+        let tools = [
+            { name: 'mcp::enrich_lead', riskLevel: 1, description: 'Enriches prospective boutique details' },
+            { name: 'mcp::calculate_cpq_margin', riskLevel: 3, description: 'Calculates bulk margin floor (>35%)' },
+            { name: 'mcp::ocr_receipt_image', riskLevel: 2, description: 'Extracts line items from supplier bills' }
+        ];
+        let spec = {};
 
-        const tools = mcpToolsRes.tools || [];
-        const spec = openApiRes || {};
+        try {
+            const [mcpToolsRes, openApiRes] = await Promise.all([
+                fetch('/api/mcp/tools').then(r => r.json()).catch(() => null),
+                fetch('/api/openapi.json').then(r => r.json()).catch(() => null)
+            ]);
+
+            if (mcpToolsRes && Array.isArray(mcpToolsRes.tools) && mcpToolsRes.tools.length > 0) {
+                tools = mcpToolsRes.tools;
+            }
+            if (openApiRes && typeof openApiRes === 'object') {
+                spec = openApiRes;
+            }
+        } catch (e) {
+            console.warn('DeveloperModule fetch failed, using fallback:', e);
+        }
 
         container.innerHTML = `
             <div style="display:flex; flex-direction:column; gap:20px;">
