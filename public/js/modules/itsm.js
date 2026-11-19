@@ -148,31 +148,85 @@ const ItsmModule = {
 
     openCmdbModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.6); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center;`;
+        modal.style.cssText = `position:fixed; inset:0; background:rgba(31,36,56,0.65); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:10000; display:flex; align-items:center; justify-content:center; padding:16px;`;
         modal.innerHTML = `
-            <div class="clay-card" style="width:720px; max-width:92vw; padding:28px; background:var(--clay-surface);">
+            <div class="clay-card" style="width:780px; max-width:94vw; max-height:92vh; overflow-y:auto; padding:24px; background:var(--clay-surface); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+                <!-- Modal Header -->
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:12px;">
-                        <div style="width:40px; height:40px; border-radius:12px; background:var(--clay-mint); color:#0E4337; display:flex; align-items:center; justify-content:center;">
-                            ${Icons.get('shield', 20, '#0E4337')}
+                        <div style="width:42px; height:42px; border-radius:14px; background:var(--clay-mint); color:#0E4337; display:flex; align-items:center; justify-content:center; box-shadow:2px 4px 10px rgba(122,232,194,0.4);">
+                            ${Icons.get('shield', 22, '#0E4337')}
                         </div>
                         <div>
-                            <h3 style="font-size:17px; font-weight:800; color:var(--text-primary);">Infrastructure Topology Map</h3>
-                            <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Relational dependency graph between database, AI gateway, and devices</p>
+                            <h3 style="font-size:18px; font-weight:800; color:var(--text-primary); letter-spacing:-0.01em;">Store Architecture &amp; System Topology</h3>
+                            <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Live visual dependency graph connecting storefront, AI agents, cloud DB &amp; store hardware</p>
                         </div>
                     </div>
-                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:34px; height:34px;">
+                    <button class="clay-btn clay-btn-white clay-btn-circle" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()" style="width:36px; height:36px;">
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
-                <div style="background:#0F172A; border-radius:16px; padding:22px; font-size:12px; font-family:var(--font-mono); line-height:2.4; color:#A5B4FC;">
-                    [Kubernetes K3s Cluster] ──> [PostgreSQL 17 Database] ──> [pgvector Knowledge Store]<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;└──> [NATS JetStream Event Bus] ──> [Debezium Real-time Consumer]<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──> [LiteLLM Multi-Model Gateway] ──> [Ollama Llama 3.3 / Claude 3.5]<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──> [Keycloak SSO Identity Security] ──> [FleetDM Laptops & Endpoints]
+
+                <!-- Visual Graphical SVG Architecture Diagram -->
+                <div class="clay-card" style="background:#0F172A; border-radius:18px; padding:20px; margin-bottom:16px; position:relative; overflow:hidden;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:#7AE8C2;">LIVE SYSTEM FABRIC • 5 SYNCHRONIZED LAYERS</span>
+                        <span class="clay-badge clay-badge-mint" style="font-size:10px;">Zero Latency Drift (38ms)</span>
+                    </div>
+
+                    <svg viewBox="0 0 700 240" style="width:100%; height:auto; display:block; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));">
+                        <!-- Connection Links -->
+                        <line x1="100" y1="60" x2="260" y2="120" stroke="#334155" stroke-width="2" stroke-dasharray="4 4" />
+                        <line x1="100" y1="180" x2="260" y2="120" stroke="#334155" stroke-width="2" stroke-dasharray="4 4" />
+                        <line x1="260" y1="120" x2="440" y2="120" stroke="#FF7C63" stroke-width="3" />
+                        <line x1="440" y1="120" x2="600" y2="60" stroke="#7AE8C2" stroke-width="2" />
+                        <line x1="440" y1="120" x2="600" y2="180" stroke="#C5B8F9" stroke-width="2" />
+
+                        <!-- Node 1: Storefront / PWA (Top Left) -->
+                        <rect x="20" y="30" width="160" height="60" rx="12" fill="#1E293B" stroke="#AEE4FF" stroke-width="1.5" />
+                        <circle cx="40" cy="50" r="5" fill="#40C4FF" />
+                        <text x="52" y="54" fill="#FFFFFF" font-size="12" font-weight="700">PWA Storefront</text>
+                        <text x="40" y="74" fill="#94A3B8" font-size="10">Vercel Edge / iOS PWA</text>
+
+                        <!-- Node 2: Warehouse Scanners & POS (Bottom Left) -->
+                        <rect x="20" y="150" width="160" height="60" rx="12" fill="#1E293B" stroke="#FFE88D" stroke-width="1.5" />
+                        <circle cx="40" cy="170" r="5" fill="#FFE88D" />
+                        <text x="52" y="174" fill="#FFFFFF" font-size="12" font-weight="700">Hardware Fleet</text>
+                        <text x="40" y="194" fill="#94A3B8" font-size="10">Bandra POS &amp; Scanners</text>
+
+                        <!-- Node 3: Core Event Bus & Relational DB (Center) -->
+                        <rect x="210" y="90" width="180" height="66" rx="14" fill="#1E293B" stroke="#FF7C63" stroke-width="2" />
+                        <circle cx="230" cy="112" r="6" fill="#FF7C63" />
+                        <text x="244" y="116" fill="#FFFFFF" font-size="13" font-weight="800">Unified Data Fabric</text>
+                        <text x="230" y="136" fill="#CBD5E1" font-size="10">SQLite3 &amp; pgvector Store</text>
+
+                        <!-- Node 4: 26 AI Agents Gateway (Right Center) -->
+                        <rect x="420" y="90" width="180" height="66" rx="14" fill="#1E293B" stroke="#7AE8C2" stroke-width="2" />
+                        <circle cx="440" cy="112" r="6" fill="#7AE8C2" />
+                        <text x="454" y="116" fill="#FFFFFF" font-size="13" font-weight="800">26 AI Agent Brain</text>
+                        <text x="440" y="136" fill="#CBD5E1" font-size="10">LiteLLM / Gemini 2.0</text>
+
+                        <!-- Node 5: Third Party API Sync (Top Right) -->
+                        <rect x="520" y="30" width="160" height="60" rx="12" fill="#1E293B" stroke="#FFBFA9" stroke-width="1.5" />
+                        <circle cx="540" cy="50" r="5" fill="#FF7C63" />
+                        <text x="552" y="54" fill="#FFFFFF" font-size="12" font-weight="700">Retail APIs</text>
+                        <text x="540" y="74" fill="#94A3B8" font-size="10">Shopify &amp; Stripe Sync</text>
+
+                        <!-- Node 6: Courier Logistics (Bottom Right) -->
+                        <rect x="520" y="150" width="160" height="60" rx="12" fill="#1E293B" stroke="#C5B8F9" stroke-width="1.5" />
+                        <circle cx="540" cy="170" r="5" fill="#C5B8F9" />
+                        <text x="552" y="174" fill="#FFFFFF" font-size="12" font-weight="700">Logistics &amp; Docu</text>
+                        <text x="540" y="194" fill="#94A3B8" font-size="10">Delhivery &amp; Documenso</text>
+                    </svg>
+
+                    <!-- Status indicators -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:12px; border-top:1px solid #1E293B; font-size:11px; color:#94A3B8;">
+                        <span style="color:#7AE8C2; font-weight:700;">✓ All 5 Infrastructure Layers Operational</span>
+                        <span>Zero-knowledge Encryption • Bitwarden &amp; TLS 1.3</span>
+                    </div>
                 </div>
-                <div style="margin-top:18px; display:flex; justify-content:space-between; align-items:center;">
-                    <span style="font-size:11px; color:#10B981; font-weight:700;">All 5 infrastructure layers verified & connected</span>
+
+                <div style="display:flex; justify-content:flex-end;">
                     <button class="clay-btn clay-btn-coral" onclick="this.closest('div[style*=\\'position:fixed\\']').remove()">Close Topology View</button>
                 </div>
             </div>

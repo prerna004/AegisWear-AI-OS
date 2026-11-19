@@ -1,11 +1,11 @@
 {
-  "name": "AegisOS: Enterprise AI Operating System",
-  "short_name": "AegisOS",
-  "description": "Unified AI-Native Enterprise OS replicating Zoho One via Composable Open-Source Cores & Autonomous AI Agents",
+  "name": "AegisWear: Fashion & E-Commerce AI Operating System",
+  "short_name": "AegisWear",
+  "description": "AI-Native Operating System for Fashion Brands, Wholesale Boutiques & Streetwear E-Commerce",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#080c14",
-  "theme_color": "#6366f1",
+  "background_color": "#EAEFF8",
+  "theme_color": "#FF3F6C",
   "orientation": "any",
   "icons": [
     {

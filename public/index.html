@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>AegisWear | AI-Native Fashion & E-Commerce Operating System</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="manifest" href="/manifest.json?v=14.0">
-    <link rel="stylesheet" href="/css/app.css?v=14.0">
+    <link rel="manifest" href="/manifest.json?v=17.0">
+    <link rel="stylesheet" href="/css/app.css?v=17.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -228,8 +228,8 @@
                 </nav>
             </div>
 
-            <!-- User Status Footer (Founder Profile Card) -->
-            <div class="founder-card">
+            <!-- User Status Footer (Founder Profile Card - Click to Switch Persona or Login) -->
+            <div class="founder-card" style="cursor:pointer;" onclick="AegisApp.openLoginModal()" title="Myntra Login & Account Switcher">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div class="founder-avatar">
                         PC
@@ -242,7 +242,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="clay-btn-soft-circle" style="width:34px; height:34px;" title="Inspect 3-Tier AI Memory" onclick="MemoryViewer.openModal()">
+                <button class="clay-btn-soft-circle" style="width:34px; height:34px;" title="Inspect 3-Tier AI Memory" onclick="event.stopPropagation(); MemoryViewer.openModal();">
                     <span id="user-memory-icon"></span>
                 </button>
             </div>
@@ -283,10 +283,25 @@
                     </div>
 
                     <!-- Right: Puffy Circular Buttons & Copilot CTA -->
-                    <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="header-right-actions" style="display:flex; align-items:center; gap:8px;">
+                        <!-- Mobile Search Button (Shows on mobile phones only) -->
+                        <button class="clay-btn-soft-circle mobile-search-btn" onclick="AegisApp.toggleCommandPalette()" title="Search Everything">
+                            <span id="mobile-search-icon"></span>
+                        </button>
+
                         <!-- Theme Toggle Button -->
                         <button class="clay-btn-soft-circle" onclick="AegisApp.toggleTheme()" title="Toggle Light / Dark Mode">
                             <span id="theme-btn-icon"></span>
+                        </button>
+
+                        <!-- Fuchsia Pink / Pastel Accent Toggle -->
+                        <button class="clay-btn-soft-circle" onclick="AegisApp.toggleAccentMode()" title="Toggle Myntra Fuchsia Pink / Pastel Palette">
+                            <span id="palette-btn-icon"></span>
+                        </button>
+
+                        <!-- User Profile / Myntra Login Button -->
+                        <button class="clay-btn-soft-circle" onclick="AegisApp.openLoginModal()" title="Myntra Login & Account Switcher" style="border:2px solid var(--clay-coral); font-weight:800; font-size:11px;">
+                            <span id="header-user-avatar">PC</span>
                         </button>
 
                         <!-- Pending Review Bell -->
@@ -295,13 +310,13 @@
                             <span id="hitl-badge" class="clay-badge clay-badge-coral" style="display:none; position:absolute; top:-4px; right:-4px; padding:2px 6px; font-size:9px;">0</span>
                         </button>
 
-                        <!-- Desktop Mode Toggle -->
-                        <button class="clay-btn-soft-circle" onclick="AegisApp.toggleDesktopMode()" title="Toggle Desktop App Mode">
+                        <!-- Desktop Mode Toggle (Desktop only) -->
+                        <button class="clay-btn-soft-circle desktop-only-btn" onclick="AegisApp.toggleDesktopMode()" title="Toggle Desktop App Mode">
                             <span id="header-desktop-icon"></span>
                         </button>
 
-                        <!-- Store Assistant CTA Button (Coral Pill) -->
-                        <button class="clay-btn clay-btn-coral" style="padding:10px 22px; gap:8px;" onclick="Copilot.toggle()">
+                        <!-- Store Assistant CTA Button (Coral Pill - Desktop only) -->
+                        <button class="clay-btn clay-btn-coral header-copilot-cta" style="padding:10px 22px; gap:8px;" onclick="Copilot.toggle()">
                             <span id="header-copilot-icon"></span>
                             <span>Store Assistant</span>
                         </button>
@@ -384,21 +399,22 @@
     </div>
 
     <!-- 3. Frontend Application Scripts with Cache-Busters -->
-    <script src="/js/icons.js?v=14.0"></script>
-    <script src="/js/hitlManager.js?v=14.0"></script>
-    <script src="/js/memoryViewer.js?v=14.0"></script>
-    <script src="/js/copilot.js?v=14.0"></script>
-    <script src="/js/modules/crm.js?v=14.0"></script>
-    <script src="/js/modules/marketing.js?v=14.0"></script>
-    <script src="/js/modules/support.js?v=14.0"></script>
-    <script src="/js/modules/finance.js?v=14.0"></script>
-    <script src="/js/modules/hr.js?v=14.0"></script>
-    <script src="/js/modules/collab.js?v=14.0"></script>
-    <script src="/js/modules/projects.js?v=14.0"></script>
-    <script src="/js/modules/itsm.js?v=14.0"></script>
-    <script src="/js/modules/analytics.js?v=14.0"></script>
-    <script src="/js/modules/agentsView.js?v=14.0"></script>
-    <script src="/js/modules/developer.js?v=14.0"></script>
-    <script src="/js/app.js?v=14.0"></script>
+    <script src="/js/icons.js?v=17.0"></script>
+    <script src="/js/store.js?v=17.0"></script>
+    <script src="/js/hitlManager.js?v=17.0"></script>
+    <script src="/js/memoryViewer.js?v=17.0"></script>
+    <script src="/js/copilot.js?v=17.0"></script>
+    <script src="/js/modules/crm.js?v=17.0"></script>
+    <script src="/js/modules/marketing.js?v=17.0"></script>
+    <script src="/js/modules/support.js?v=17.0"></script>
+    <script src="/js/modules/finance.js?v=17.0"></script>
+    <script src="/js/modules/hr.js?v=17.0"></script>
+    <script src="/js/modules/collab.js?v=17.0"></script>
+    <script src="/js/modules/projects.js?v=17.0"></script>
+    <script src="/js/modules/itsm.js?v=17.0"></script>
+    <script src="/js/modules/analytics.js?v=17.0"></script>
+    <script src="/js/modules/agentsView.js?v=17.0"></script>
+    <script src="/js/modules/developer.js?v=17.0"></script>
+    <script src="/js/app.js?v=17.0"></script>
 </body>
 </html>

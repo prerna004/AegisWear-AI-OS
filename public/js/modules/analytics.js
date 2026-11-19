@@ -56,7 +56,7 @@ const AnalyticsModule = {
                         </button>
                     </div>
 
-                    <div id="nlsql-results" class="clay-card" style="background:#F8FAFC; padding:20px;">
+                    <div id="nlsql-results" class="clay-card" style="background:var(--clay-surface-recessed); border:1px solid var(--clay-nav-border); padding:20px;">
                         <div style="font-size:12px; color:var(--text-muted); font-weight:600;">
                             Click "Execute Query & Draw Chart" to test natural-language SQL generation.
                         </div>
@@ -167,7 +167,7 @@ const AnalyticsModule = {
                         ${Icons.get('x', 14, 'var(--text-primary)')}
                     </button>
                 </div>
-                <div class="clay-card" style="background:#F8FAFC; padding:28px; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;">
+                <div class="clay-card" style="background:var(--clay-surface-recessed); border:1px solid var(--clay-nav-border); padding:28px; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;">
                     <div class="clay-card" style="padding:16px 20px; text-align:center; min-width:140px; background:var(--clay-surface); border:2px solid var(--clay-coral);">
                         <span class="clay-badge clay-badge-coral">1. Deal Won</span>
                         <div style="font-size:12px; font-weight:800; margin-top:6px; color:var(--text-primary);">CRM Closed Won</div>

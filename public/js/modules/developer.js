@@ -222,7 +222,7 @@ print("Chart Data:", data["executionResult"]["data"])`;
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     event: 'deal.closed_won',
-                    payload: { dealId: 'deal-501', client: 'Apex BioSystems Ltd', amount: 240000 }
+                    payload: { dealId: 'deal-501', client: 'Nordic Streetwear Boutique', amount: 48000 }
                 })
             });
             const data = await res.json();
