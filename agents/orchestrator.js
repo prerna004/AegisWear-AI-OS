@@ -242,11 +242,37 @@ I have synthesized the live category summary table below:`;
                     break;
                 }
 
+                case 'agent-standup-digest': {
+                    toolsCalled = ['mcp::gather_async_updates', 'mcp::compile_standup_digest'];
+                    reasoningTrace = `Good day, Prerna! Here is your Store Executive To-Do List for Today (Summer Drop '26):
+
+1. Pending Sign-off (Urgent): Review & approve the 15% bulk discount request for Soho Fashion House ($65,000 order). Gross margin is locked at 36.2%.
+2. Design Studio: Approve lab dips and fabric color swatches for the French Terry Lilac & Mint batch from Milan Textile Mill.
+3. Boutique Route Dispatch: Check Rahul Sharma's GPS delivery route across Kala Ghoda, Bandra & Juhu boutiques (32.4 km corridor).
+4. Logistics & Exchanges: 1 size exchange pending (Sarah Jenkins - Medium to Large Clay Hoodie) with Delhivery doorstep pickup.
+5. Sales Performance: Summer drop is live at $1,45,000 revenue with 1,420 orders fulfilled.`;
+                    executionResult = {
+                        summary: reasoningTrace,
+                        tasksCount: 5,
+                        urgentItems: 1,
+                        status: 'Standup Digest Compiled'
+                    };
+                    break;
+                }
+
                 default: {
                     // Generic AI Agent reasoning simulator for remaining agents
                     toolsCalled = agent.tools.slice(0, 2);
                     const q = prompt.toLowerCase();
-                    if (q.includes('stock') || q.includes('inventory') || q.includes('puffy') || q.includes('runner') || q.includes('hoodie')) {
+                    if (q.includes('todo') || q.includes('to do') || q.includes('task') || q.includes('today') || q.includes('agenda') || q.includes('schedule')) {
+                        reasoningTrace = `Good day, Prerna! Here is your Store Executive To-Do List for Today:
+
+1. Pending Sign-off (Urgent): Review & approve the 15% bulk discount request for Soho Fashion House ($65,000 order). Gross margin is locked at 36.2%.
+2. Design Studio: Approve lab dips and fabric color swatches for French Terry Lilac and Mint batch.
+3. Boutique Route Dispatch: Check Rahul Sharma's GPS delivery route across Kala Ghoda, Bandra & Juhu boutiques.
+4. Logistics & Exchanges: 1 size exchange pending (Sarah Jenkins) via Delhivery doorstep pickup.
+5. Sales Performance: Summer drop is live at $1,45,000 revenue across 1,420 orders.`;
+                    } else if (q.includes('stock') || q.includes('inventory') || q.includes('puffy') || q.includes('runner') || q.includes('hoodie')) {
                         reasoningTrace = `Current Store Stock Summary:
 • Puffy Runner Sneakers: 18 left (Low Stock - Reorder needed)
 • Clay Hoodies: 140 left (Healthy)

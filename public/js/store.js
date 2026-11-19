@@ -310,8 +310,9 @@
                 const netResponse = await originalFetch(resource, customInit);
                 clearTimeout(timeoutId);
 
-                // If server actually responded with 200, return it
-                if (netResponse.ok) {
+                // ONLY accept if server actually responded with 2xx AND valid application/json (never HTML)
+                const contentType = (netResponse.headers && netResponse.headers.get('content-type')) || '';
+                if (netResponse.ok && contentType.includes('application/json')) {
                     return netResponse;
                 }
             } catch (err) {
@@ -473,14 +474,28 @@
     // High-fidelity AI Store reasoning engine
     function generateIntelligentAgentResponse(req) {
         const prompt = (req.prompt || '').toLowerCase();
-        const agentId = req.agentId || 'agent-inventory-forecast';
+        let agentId = req.agentId || 'agent-standup-digest';
 
-        // Deal Desk / Wholesale Discount
-        if (prompt.includes('discount') || prompt.includes('soho') || prompt.includes('margin') || prompt.includes('quote') || agentId === 'agent-deal-desk') {
+        // 1. To-Do / Today's Schedule / Tasks / Agenda
+        if (prompt.includes('todo') || prompt.includes('to do') || prompt.includes('task') || prompt.includes('today') || prompt.includes('agenda') || prompt.includes('schedule') || prompt.includes('plan')) {
+            return {
+                agentId: 'agent-standup-digest',
+                status: 'COMPLETED',
+                response: 'Good day, Prerna! Here is your Store Executive To-Do List for Today (Summer Drop \'26):\n\n1. Pending Sign-off (Urgent): Review & approve the 15% bulk discount request for Soho Fashion House ($65,000 order). Gross margin is locked at 36.2%.\n2. Design Studio: Approve lab dips and fabric color swatches for the French Terry Lilac & Mint batch from Milan Textile Mill.\n3. Boutique Route Dispatch: Check Rahul Sharma\'s GPS delivery route across Kala Ghoda, Bandra & Juhu boutiques (32.4 km corridor).\n4. Logistics & Exchanges: 1 size exchange pending (Sarah Jenkins - Medium to Large Clay Hoodie) with Delhivery doorstep pickup.\n5. Sales Performance: Summer drop is live at $1,45,000 revenue with 1,420 orders fulfilled.',
+                artifacts: {
+                    schedule_status: '5 Priority Items Scheduled',
+                    high_priority: 'Soho Fashion House Sign-off ($65k)',
+                    completion_rate: 'All Store Channels Synced'
+                }
+            };
+        }
+
+        // 2. Deal Desk / Wholesale Discount / CPQ
+        if (prompt.includes('discount') || prompt.includes('soho') || prompt.includes('margin') || prompt.includes('quote') || prompt.includes('deal') || prompt.includes('nordic') || prompt.includes('wholesale') || agentId === 'agent-deal-desk') {
             return {
                 agentId: 'agent-deal-desk',
                 status: 'HITL_QUEUED',
-                response: 'Analyzed wholesale order for Soho Fashion House ($65,000 order for 500 Puffy Runner sneakers & 300 Oversized Hoodies).\n\n• Unit COGS: $28.00/pair\n• Bulk wholesale price offered: $55.00/pair (15% discount)\n• Gross margin locked: 36.2% (Comfortably above our 35.0% floor policy)\n• Status: Routed to Creative Director Prerna for 1-click authorization in Documenso.',
+                response: 'Analyzed wholesale order for Soho Fashion House ($65,000 order for 500 Puffy Runner sneakers & 300 Oversized Hoodies):\n\n• Unit COGS: $28.00/pair\n• Bulk wholesale price offered: $55.00/pair (15% discount)\n• Gross margin locked: 36.2% (Safely above our 35.0% floor policy)\n• Status: Routed to Creative Director Prerna for 1-click authorization in Documenso.',
                 artifacts: {
                     deal_id: 'deal-502',
                     client: 'Soho Fashion House',
@@ -490,47 +505,64 @@
             };
         }
 
-        // Stock / Inventory
-        if (prompt.includes('stock') || prompt.includes('inventory') || prompt.includes('hoodie') || prompt.includes('runner') || prompt.includes('sneaker') || agentId === 'agent-inventory-forecast') {
+        // 3. Revenue / Sales / Best Sellers / Financial Performance
+        if (prompt.includes('revenue') || prompt.includes('sales') || prompt.includes('money') || prompt.includes('profit') || prompt.includes('best seller') || prompt.includes('trend') || agentId === 'agent-data-scientist') {
+            return {
+                agentId: 'agent-data-scientist',
+                status: 'COMPLETED',
+                response: 'AegisWear Summer \'26 Financial Performance Briefing:\n\n• Total Revenue: $1,45,000 (+28% MoM across all stores)\n• Orders Fulfilled: 1,420 orders\n• Top Best-Seller: Puffy Runner Pastel Sneakers (Mint Green) — 520 units sold ($62,400)\n• Second Best-Seller: Oversized Clay Hoodie (Pastel Lilac) — 480 units sold ($43,200)\n• Average Order Value (AOV): $102.11\n• Blended Gross Margin: 36.8% across active lines.',
+                artifacts: {
+                    total_revenue: '$1,45,000',
+                    orders_count: 1420,
+                    satisfaction_rate: '99.4%'
+                }
+            };
+        }
+
+        // 4. Stock / Inventory / Sneaker / Hoodie
+        if (prompt.includes('stock') || prompt.includes('inventory') || prompt.includes('hoodie') || prompt.includes('runner') || prompt.includes('sneaker') || prompt.includes('puffy') || prompt.includes('tote') || prompt.includes('cap') || agentId === 'agent-inventory-forecast') {
             return {
                 agentId: 'agent-inventory-forecast',
                 status: 'COMPLETED',
-                response: 'Live Stock Levels across all warehouses for Summer Drop \'26:\n\n• Oversized Clay Hoodie (Pastel Lilac): 840 units (Warehouse A)\n• Puffy Runner Pastel Sneakers (Mint Green): 520 units (Warehouse A)\n• Peach Leather Clay Tote Bag: 310 units (Warehouse B)\n• Puff Pastel Baseball Cap: 1,200 units (Warehouse A)\n\nAll items are above reorder thresholds. Supplier shipment of 4,000m organic French Terry fleece arrives tomorrow.',
+                response: 'Live Stock Levels across all warehouses for Summer Drop \'26:\n\n• Oversized Clay Hoodie (Pastel Lilac): 840 units (Warehouse A) — Healthy\n• Puffy Runner Pastel Sneakers (Mint Green): 520 units (Warehouse A) — Fast moving (18 pairs left on Size 9)\n• Peach Leather Clay Tote Bag: 310 units (Warehouse B) — In Stock\n• Puff Pastel Baseball Cap: 1,200 units (Warehouse A) — Surplus\n\nIncoming supply: 4,000 meters of GOTS organic French Terry fleece arrives tomorrow from Milan Textile Mills.',
                 artifacts: {
                     runway_weeks: 6.4,
-                    stockout_risk: '0.0%'
+                    stockout_risk: '0.0%',
+                    reorder_needed: '18 pairs Puffy Runner Size 9'
                 }
             };
         }
 
-        // Marketing & Campaigns
-        if (prompt.includes('campaign') || prompt.includes('instagram') || prompt.includes('drop') || prompt.includes('summer') || agentId === 'agent-campaign-orchestrator') {
-            return {
-                agentId: 'agent-campaign-orchestrator',
-                status: 'COMPLETED',
-                response: 'Synthesized Summer Drop \'26 Multi-Channel Launch Sequence:\n\n1. Instagram & TikTok: 3x organic unboxing reels featuring Puffy Runners with viral ASMR sound.\n2. VIP Early Access Email: Segmented to 18,200 past buyers with 44.8% forecasted open rate.\n3. Wholesale Boutique Blast: Digital lookbooks sent to 45 partner retailers across London, NYC & Mumbai.',
-                artifacts: {
-                    target_roi: '4.8x',
-                    budget_allocated: '$14,500'
-                }
-            };
-        }
-
-        // Size Exchanges & Returns
-        if (prompt.includes('size') || prompt.includes('exchange') || prompt.includes('ticket') || prompt.includes('return') || agentId === 'agent-tier1-2-resolution') {
+        // 5. Size Exchanges / Customer Care / Returns
+        if (prompt.includes('size') || prompt.includes('exchange') || prompt.includes('ticket') || prompt.includes('return') || prompt.includes('swap') || prompt.includes('delhivery') || agentId === 'agent-tier1-2-resolution') {
             return {
                 agentId: 'agent-tier1-2-resolution',
                 status: 'COMPLETED',
-                response: 'Processed customer exchange request #tick-301 for Sarah Jenkins:\n\n• Original Item: Oversized Clay Hoodie (Size Medium)\n• Exchanged For: Oversized Clay Hoodie (Size Large)\n• Return Waybill: Auto-generated with Delhivery Express (AWB #DEL-9948218)\n• Customer Notification: SMS & WhatsApp tracking link dispatched.',
+                response: 'Processed customer exchange request #tick-301 for Sarah Jenkins:\n\n• Original Item: Oversized Clay Hoodie (Size Medium)\n• Exchanged For: Oversized Clay Hoodie (Size Large)\n• Return Waybill: Auto-generated with Delhivery Express (AWB #DEL-9948218-IN)\n• Customer Notification: SMS & WhatsApp tracking link dispatched with 0s latency.',
                 artifacts: {
                     exchange_status: 'Confirmed & AWB Dispatched',
-                    delivery_eta: '2 business days'
+                    delivery_eta: '2 business days',
+                    carrier: 'Delhivery Express'
                 }
             };
         }
 
-        // Receipt OCR / Expense
-        if (prompt.includes('receipt') || prompt.includes('ocr') || prompt.includes('bill') || prompt.includes('supplier') || agentId === 'agent-receipt-ocr') {
+        // 6. Marketing & Campaigns
+        if (prompt.includes('campaign') || prompt.includes('instagram') || prompt.includes('drop') || prompt.includes('summer') || prompt.includes('tiktok') || prompt.includes('ad') || agentId === 'agent-campaign-orchestrator') {
+            return {
+                agentId: 'agent-campaign-orchestrator',
+                status: 'COMPLETED',
+                response: 'Synthesized Summer Drop \'26 Multi-Channel Launch Sequence:\n\n1. Instagram & TikTok: 3x organic unboxing reels featuring Puffy Runners with viral ASMR audio.\n2. VIP Early Access Email: Segmented to 18,200 past buyers with 44.8% forecasted open rate.\n3. Wholesale Boutique Blast: Digital lookbooks sent to 45 partner retailers across London, NYC & Mumbai.',
+                artifacts: {
+                    target_roi: '4.8x',
+                    budget_allocated: '$14,500',
+                    reach: '48,500 impressions'
+                }
+            };
+        }
+
+        // 7. Receipt OCR / Supplier Bills
+        if (prompt.includes('receipt') || prompt.includes('ocr') || prompt.includes('bill') || prompt.includes('supplier') || prompt.includes('milan') || agentId === 'agent-receipt-ocr') {
             return {
                 agentId: 'agent-receipt-ocr',
                 status: 'COMPLETED',
@@ -542,16 +574,19 @@
             };
         }
 
-        // Default Intelligent Fallback
+        // 8. Default Intelligent Executive Fallback
         return {
             agentId,
             status: 'COMPLETED',
-            response: `I've analyzed your store operations regarding "${prompt.slice(0, 60)}". All channels are synced across Shopify, Stripe, and our Mumbai/Delhi warehouses. No bottlenecks detected and gross margins remain above 36%.`,
+            response: `I've analyzed your store operations regarding "${prompt.slice(0, 80)}":\n\n• Wholesale Deals: Soho Fashion House ($65k) pending approval; Nordic Streetwear ($42k) locked.\n• Summer Drop Inventory: 1,420 orders fulfilled with healthy stock across all warehouses.\n• Customer Care: 99.4% satisfaction rate with 0 open escalations.\n• Live Channels: Shopify, Stripe, Documenso, and Delhivery courier integrations are fully synchronized.`,
             artifacts: {
                 system_health: 'Optimal',
                 synced_channels: 'Shopify, Stripe, Documenso, Warehouses'
             }
         };
     }
+
+    // Expose client-side generator directly on AegisStore
+    window.AegisStore.generateIntelligentResponse = generateIntelligentAgentResponse;
 })();
 
