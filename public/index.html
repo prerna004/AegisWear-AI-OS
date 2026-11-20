@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
     <title>AegisWear | AI-Native Fashion & E-Commerce Operating System</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="manifest" href="/manifest.json?v=18.0">
@@ -15,6 +16,7 @@
         try {
             const savedTheme = localStorage.getItem('aegis-theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
+            document.documentElement.style.colorScheme = savedTheme;
             const savedAccent = localStorage.getItem('aegis-accent') || 'fuchsia';
             document.documentElement.setAttribute('data-accent', savedAccent);
             if ('serviceWorker' in navigator) {
@@ -231,7 +233,7 @@
             </div>
 
             <!-- User Status Footer (Founder Profile Card - Click to Switch Persona or Login) -->
-            <div class="founder-card" style="cursor:pointer;" onclick="AegisApp.openLoginModal()" title="Myntra Login & Account Switcher">
+            <div class="founder-card" style="cursor:pointer;" onclick="AegisApp.openLoginModal()" title="AegisWear Account & Store Switcher">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div class="founder-avatar">
                         PC
@@ -297,12 +299,12 @@
                         </button>
 
                         <!-- Fuchsia Pink / Pastel Accent Toggle -->
-                        <button class="clay-btn-soft-circle" onclick="AegisApp.toggleAccentMode()" title="Toggle Myntra Fuchsia Pink / Pastel Palette">
+                        <button class="clay-btn-soft-circle palette-toggle-btn" onclick="AegisApp.toggleAccentMode()" title="Toggle Fuchsia Luxe / Pastel Palette">
                             <span id="palette-btn-icon"></span>
                         </button>
 
-                        <!-- User Profile / Myntra Login Button -->
-                        <button class="clay-btn-soft-circle" onclick="AegisApp.openLoginModal()" title="Myntra Login & Account Switcher" style="border:2px solid var(--clay-coral); font-weight:800; font-size:11px;">
+                        <!-- User Profile / Account Switcher Button -->
+                        <button class="clay-btn-soft-circle" onclick="AegisApp.openLoginModal()" title="AegisWear Account & Store Switcher" style="border:2px solid var(--clay-coral); font-weight:800; font-size:11px;">
                             <span id="header-user-avatar">PC</span>
                         </button>
 

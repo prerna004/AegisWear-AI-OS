@@ -282,3 +282,15 @@ CREATE TABLE IF NOT EXISTS agent_memory (
     embedding_vector TEXT, -- Mocked / JSON array for vector distance
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Seed Initial Projects & Tasks
+INSERT OR IGNORE INTO projects (id, name, type, progress_percent, status, budget, deadline) VALUES
+('proj-01', 'Summer 2026 Drop Launch', 'Fashion Drop', 85, 'In Progress', 45000, '2026-11-25'),
+('proj-02', 'Paris & Tokyo Fashion Week Capsule', 'Runway Capsule', 40, 'Planning', 85000, '2027-01-15'),
+('proj-03', 'Organic French Terry Collection', 'Eco-Wear Drop', 62, 'In Progress', 32000, '2026-12-10');
+
+INSERT OR IGNORE INTO tasks (id, project_id, title, status, priority, assignee, story_points, due_date) VALUES
+('tsk-01', 'proj-01', 'Approve Lab Dips for French Terry Lilac', 'done', 'High', 'Ananya Mehta', 3, '2026-11-22'),
+('tsk-02', 'proj-01', 'Review Soho Wholesale Digital Contract', 'review', 'Critical', 'Rahul Sharma', 5, '2026-11-24'),
+('tsk-03', 'proj-02', 'Finalize Paris Lookbook Studio Bookings', 'todo', 'Medium', 'Prerna Chotwani', 2, '2026-12-01'),
+('tsk-04', 'proj-01', 'Puffy Runner Prototype Cushioning Test', 'in_progress', 'High', 'Ananya Mehta', 4, '2026-11-23');

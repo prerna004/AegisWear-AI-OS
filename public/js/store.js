@@ -140,8 +140,9 @@
             { id: 'cand-02', name: 'Aditya Joshi', applied_role: 'Senior E-Commerce Growth & Merchandiser', email: 'aditya.j@outlook.com', match_score: 92, status: 'Offer Pending', resume_summary: 'Led D2C fashion revenue growth from $2M to $12M with high-converting lookbook experiences.' }
         ],
         projects: [
-            { id: 'proj-01', name: 'Summer 2026 Drop Launch', status: 'In Progress', progress: 85, lead: 'Prerna Chotwani', target_date: '2026-11-25' },
-            { id: 'proj-02', name: 'Paris & Tokyo Fashion Week Capsule', status: 'Planning', progress: 40, lead: 'Ananya Mehta', target_date: '2027-01-15' }
+            { id: 'proj-01', name: 'Summer 2026 Drop Launch', status: 'In Progress', progress: 85, progress_percent: 85, lead: 'Prerna Chotwani', target_date: 'Nov 25, 2026', deadline: 'Nov 25, 2026', budget: 45000, type: 'Fashion Drop' },
+            { id: 'proj-02', name: 'Paris & Tokyo Fashion Week Capsule', status: 'Planning', progress: 40, progress_percent: 40, lead: 'Ananya Mehta', target_date: 'Jan 15, 2027', deadline: 'Jan 15, 2027', budget: 85000, type: 'Runway Capsule' },
+            { id: 'proj-03', name: 'Organic French Terry Collection', status: 'In Progress', progress: 62, progress_percent: 62, lead: 'Rahul Sharma', target_date: 'Dec 10, 2026', deadline: 'Dec 10, 2026', budget: 32000, type: 'Eco-Wear' }
         ],
         itAssets: [
             { id: 'ast-01', name: 'Flagship POS Terminal #1', type: 'Point of Sale', status: 'Operational', location: 'Bandra Flagship' },
@@ -424,9 +425,9 @@
             responseData = state.projects;
         } else if (path === '/api/projects/tasks') {
             responseData = [
-                { id: 'tsk-01', title: 'Approve Lab Dips for French Terry Lilac', priority: 'High', status: 'Done' },
-                { id: 'tsk-02', title: 'Review Soho Wholesale Digital Contract', priority: 'Urgent', status: 'In Review' },
-                { id: 'tsk-03', title: 'Finalize Paris Lookbook Studio Bookings', priority: 'Medium', status: 'Todo' }
+                { id: 'tsk-01', title: 'Approve Lab Dips for French Terry Lilac', priority: 'High', status: 'done', assignee: 'Ananya Mehta', assignee_name: 'Ananya Mehta', story_points: 3 },
+                { id: 'tsk-02', title: 'Review Soho Wholesale Digital Contract', priority: 'Urgent', status: 'review', assignee: 'Rahul Sharma', assignee_name: 'Rahul Sharma', story_points: 5 },
+                { id: 'tsk-03', title: 'Finalize Paris Lookbook Studio Bookings', priority: 'Medium', status: 'todo', assignee: 'Prerna Chotwani', assignee_name: 'Prerna Chotwani', story_points: 2 }
             ];
         } else if (path === '/api/itsm/assets') {
             responseData = state.itAssets;

@@ -5,6 +5,7 @@
    ========================================================================== */
 
 :root {
+    color-scheme: light;
     /* Setproduct Clayshop Authentic Pastel Palette */
     --clay-bg: #EAEFF8;
     --clay-sidebar: #E8EDF7;
@@ -91,6 +92,7 @@
 
 /* Dark Theme Support (Midnight Luxury Clay Aesthetics) */
 [data-theme="dark"] {
+    color-scheme: dark;
     --clay-bg: #0C101D;
     --clay-sidebar: #12182B;
     --clay-surface: #182037;
@@ -1471,6 +1473,25 @@ body {
 }
 .header-copilot-cta {
     display: inline-flex;
+    flex-shrink: 0;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* When Store Assistant copilot drawer is already open on desktop, hide redundant top header button */
+body.copilot-open .header-copilot-cta {
+    display: none !important;
+}
+@media (max-width: 1380px) {
+    .store-ticker-pill {
+        display: none !important;
+    }
+}
+@media (max-width: 1200px) {
+    .header-copilot-cta span:last-child {
+        display: none !important;
+    }
+    .header-copilot-cta {
+        padding: 8px 12px !important;
+    }
 }
 .hero-overview-card {
     padding: 28px 32px;
@@ -1658,13 +1679,17 @@ body {
     .header-right-actions {
         display: flex !important;
         align-items: center !important;
-        gap: 6px !important;
+        gap: 5px !important;
         flex-shrink: 0 !important;
     }
 
+    .palette-toggle-btn {
+        display: none !important;
+    }
+
     .header-right-actions .clay-btn-soft-circle {
-        width: 36px !important;
-        height: 36px !important;
+        width: 34px !important;
+        height: 34px !important;
         flex-shrink: 0 !important;
         padding: 0 !important;
         display: flex !important;
@@ -1782,12 +1807,16 @@ body {
         font-size: 10px !important;
         font-weight: 800 !important;
         text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
+        letter-spacing: 0.04em !important;
         opacity: 0.85 !important;
-        white-space: nowrap !important;
+        white-space: normal !important;
+        line-height: 1.25 !important;
+        min-height: 25px !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
         overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        max-width: 105px !important;
+        max-width: 100% !important;
     }
 
     .stat-card-value {
@@ -1803,9 +1832,12 @@ body {
         margin-top: 2px !important;
         font-weight: 600 !important;
         opacity: 0.85 !important;
-        white-space: nowrap !important;
+        white-space: normal !important;
+        line-height: 1.2 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
         overflow: hidden !important;
-        text-overflow: ellipsis !important;
     }
 
     /* Store Departments & Operations on Mobile */

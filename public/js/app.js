@@ -303,6 +303,10 @@ const AegisApp = {
     toggleTheme() {
         this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', this.currentTheme);
+        document.documentElement.style.colorScheme = this.currentTheme;
+        try {
+            localStorage.setItem('aegis-theme', this.currentTheme);
+        } catch (e) {}
         const iconContainer = document.getElementById('theme-btn-icon');
         if (iconContainer && window.Icons) {
             iconContainer.innerHTML = Icons.get(this.currentTheme === 'light' ? 'sun' : 'moon', 18, 'var(--text-primary)');
@@ -648,7 +652,7 @@ const AegisApp = {
         try {
             localStorage.setItem('aegis-accent', this.accentMode);
         } catch (e) {}
-        HitlManager.showToast(this.accentMode === 'fuchsia' ? 'Switched to Myntra Fuchsia Pink Scheme' : 'Switched to Soft Pastel Coral Scheme', 'mint');
+        HitlManager.showToast(this.accentMode === 'fuchsia' ? 'Switched to Fuchsia Luxe Scheme' : 'Switched to Soft Pastel Coral Scheme', 'mint');
     },
 
     openLoginModal() {
@@ -774,7 +778,7 @@ const AegisApp = {
                         <div style="display:flex; gap:6px;">
                             <button class="clay-btn ${this.accentMode === 'fuchsia' ? 'clay-btn-coral' : 'clay-btn-white'}" style="font-size:10px; padding:4px 10px; display:inline-flex; align-items:center; gap:4px;" onclick="AegisApp.setAccent('fuchsia')">
                                 ${Icons.get('sparkles', 12, 'currentColor')}
-                                <span>Myntra Fuchsia Pink</span>
+                                <span>Fuchsia Luxe</span>
                             </button>
                             <button class="clay-btn ${this.accentMode === 'coral' ? 'clay-btn-coral' : 'clay-btn-white'}" style="font-size:10px; padding:4px 10px; display:inline-flex; align-items:center; gap:4px;" onclick="AegisApp.setAccent('coral')">
                                 ${Icons.get('palette', 12, 'currentColor')}
@@ -861,7 +865,7 @@ const AegisApp = {
             localStorage.setItem('aegis-accent', color);
         } catch (e) {}
         this.closeLoginModal();
-        HitlManager.showToast(`Color scheme set to ${color === 'fuchsia' ? 'Myntra Fuchsia Pink' : 'Pastel Coral'}!`, 'mint');
+        HitlManager.showToast(`Color scheme set to ${color === 'fuchsia' ? 'Fuchsia Luxe' : 'Pastel Coral'}!`, 'mint');
     },
 
     updateUserUi(user) {

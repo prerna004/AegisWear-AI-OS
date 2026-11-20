@@ -56,6 +56,7 @@ const Copilot = {
     init() {
         const isMobile = window.innerWidth <= 768;
         this.isOpen = !isMobile;
+        document.body.classList.toggle('copilot-open', this.isOpen);
         this.renderDrawer();
         this.bindEvents();
 
@@ -71,6 +72,7 @@ const Copilot = {
 
     toggle() {
         this.isOpen = !this.isOpen;
+        document.body.classList.toggle('copilot-open', this.isOpen);
         const drawer = document.getElementById('copilot-drawer');
         if (drawer) {
             drawer.style.transform = this.isOpen ? 'translateX(0)' : 'translateX(100%)';
