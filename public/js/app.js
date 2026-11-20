@@ -356,21 +356,21 @@ const AegisApp = {
                 <div class="clay-card clay-card-coral hero-overview-card">
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <div style="width:100%;">
-                            <div class="hero-badges-wrap" style="display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap;">
-                                <span class="clay-badge clay-badge-white" style="color:var(--clay-coral);">
-                                    ${Icons.get('sparkles', 14, 'var(--clay-coral)')}
+                            <div class="hero-badges-wrap" style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+                                <span class="clay-badge clay-badge-white" style="color:var(--clay-coral); font-weight:800;">
+                                    ${Icons.get('sparkles', 13, 'var(--clay-coral)')}
                                     <span>AegisWear Operations</span>
                                 </span>
-                                <span class="clay-badge clay-badge-mint">
-                                    ${Icons.get('check', 14, '#0E4337')}
-                                    <span>All Channels Live & Synced</span>
+                                <span class="clay-badge clay-badge-mint" style="font-weight:800;">
+                                    ${Icons.get('check', 13, '#0E4337')}
+                                    <span>All Channels Synced</span>
                                 </span>
                             </div>
-                            <h1 class="hero-overview-title" style="font-size:28px; font-weight:800; color:#FFFFFF; letter-spacing:-0.02em; line-height:1.2;">
-                                Welcome back, Prerna — ${greeting}! Your Summer Collection is Live
+                            <h1 class="hero-overview-title" style="font-size:26px; font-weight:800; color:#FFFFFF; letter-spacing:-0.02em; line-height:1.2;">
+                                Welcome back, Prerna — ${greeting}! Summer Drop is Live
                             </h1>
-                            <p class="hero-overview-desc" style="font-size:14px; color:rgba(255,255,255,0.92); margin-top:8px; max-width:740px; line-height:1.5;">
-                                Wholesale boutique orders, warehouse inventory, customer size exchanges, and marketing campaigns are managed smoothly and automatically in one place.
+                            <p class="hero-overview-desc" style="font-size:13px; color:rgba(255,255,255,0.92); margin-top:6px; max-width:740px; line-height:1.45;">
+                                Wholesale boutique orders, warehouse stock, size exchanges, and omnichannel campaigns synced in real time.
                             </p>
                             
                             <!-- Action Chips & Mint CTA Button (Matching Clayshop Translucent Chips) -->
@@ -409,40 +409,40 @@ const AegisApp = {
                     <div class="clay-card clay-card-mint stat-card-item">
                         <div class="stat-card-header">
                             <span class="stat-card-label">Total Revenue</span>
-                            <div class="stat-card-icon-badge">${Icons.get('dollar', 20, 'currentColor')}</div>
+                            <div class="stat-card-icon-badge">${Icons.get('dollar', 18, 'currentColor')}</div>
                         </div>
                         <div class="stat-card-value">$${revenue.toLocaleString()}</div>
-                        <div class="stat-card-sub">+28% this month across all stores</div>
+                        <div class="stat-card-sub"><span style="color:var(--clay-coral); font-weight:800;">+28%</span> this month</div>
                     </div>
 
                     <!-- Lilac Card -->
                     <div class="clay-card clay-card-lilac stat-card-item">
                         <div class="stat-card-header">
                             <span class="stat-card-label">Orders Fulfilled</span>
-                            <div class="stat-card-icon-badge">${Icons.get('check', 20, 'currentColor')}</div>
+                            <div class="stat-card-icon-badge">${Icons.get('check', 18, 'currentColor')}</div>
                         </div>
                         <div class="stat-card-value">1,420 Orders</div>
-                        <div class="stat-card-sub">Hoodies, sneakers & caps dispatched</div>
+                        <div class="stat-card-sub">Dispatched &amp; in transit</div>
                     </div>
 
                     <!-- Butter Yellow Card -->
                     <div class="clay-card clay-card-butter stat-card-item">
                         <div class="stat-card-header">
                             <span class="stat-card-label">Orders Needing Review</span>
-                            <div class="stat-card-icon-badge">${Icons.get('alertTriangle', 20, 'currentColor')}</div>
+                            <div class="stat-card-icon-badge">${Icons.get('alertTriangle', 18, 'currentColor')}</div>
                         </div>
                         <div class="stat-card-value">${pendingCount} Pending</div>
-                        <div class="stat-card-sub">Bulk discounts & high-value returns</div>
+                        <div class="stat-card-sub">Bulk discounts &amp; returns</div>
                     </div>
 
                     <!-- Sky Blue Card -->
                     <div class="clay-card clay-card-sky stat-card-item">
                         <div class="stat-card-header">
                             <span class="stat-card-label">Customer Satisfaction</span>
-                            <div class="stat-card-icon-badge">${Icons.get('activity', 20, 'currentColor')}</div>
+                            <div class="stat-card-icon-badge">${Icons.get('activity', 18, 'currentColor')}</div>
                         </div>
                         <div class="stat-card-value">99.4% Positive</div>
-                        <div class="stat-card-sub">Same-day size exchanges & delivery</div>
+                        <div class="stat-card-sub">Same-day exchanges</div>
                     </div>
                 </div>
 
