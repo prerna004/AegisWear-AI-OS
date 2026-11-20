@@ -267,6 +267,16 @@
             return t;
         },
 
+        deleteTicket(ticketId) {
+            const idx = state.tickets.findIndex(x => x.id === ticketId);
+            if (idx !== -1) {
+                const removed = state.tickets.splice(idx, 1)[0];
+                this.save();
+                return removed;
+            }
+            return null;
+        },
+
         addExpense(expense) {
             const newExp = {
                 id: 'exp-' + (700 + state.expenses.length + 1),
@@ -378,10 +388,13 @@
         }
 
         // 5. Support & Size Exchanges
-        else if (path === '/api/support/tickets') {
+        else if (path === '/api/support/tickets' || path.startsWith('/api/support/tickets/')) {
             if (method === 'POST') {
                 const newT = AegisStore.createTicket(body);
                 responseData = newT;
+            } else if (method === 'DELETE') {
+                const idToDelete = path.replace('/api/support/tickets/', '').replace('/api/support/tickets', '') || (body && body.id);
+                responseData = AegisStore.deleteTicket(idToDelete);
             } else {
                 responseData = state.tickets;
             }

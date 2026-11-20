@@ -14,11 +14,8 @@ const SupportModule = {
                 fetch('/api/support/kb').then(r => r.ok && r.headers.get('content-type')?.includes('application/json') ? r.json() : null).catch(() => null)
             ]);
             const storeTickets = (window.AegisStore && window.AegisStore.getTickets) ? window.AegisStore.getTickets() : [];
-            if (Array.isArray(ticketsRes) && ticketsRes.length > 0) {
-                // Merge any newly created store tickets that might not be in server response
-                const serverIds = new Set(ticketsRes.map(t => t.id));
-                const extraTickets = storeTickets.filter(t => !serverIds.has(t.id));
-                tickets = [...extraTickets, ...ticketsRes];
+            if (Array.isArray(ticketsRes)) {
+                tickets = ticketsRes;
             } else {
                 tickets = storeTickets;
             }
@@ -70,7 +67,7 @@ const SupportModule = {
                                 <h3 style="font-size:15px; font-weight:800; color:var(--text-primary);">Customer Ticket Queue</h3>
                                 <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Omnichannel requests from Email, WhatsApp, and Web</p>
                             </div>
-                            <span class="clay-badge clay-badge-lilac">${tickets.length} Tickets</span>
+                            <span id="support-ticket-count-badge" class="clay-badge clay-badge-lilac">${tickets.length} Tickets</span>
                         </div>
 
                         <div id="support-tickets-list" style="display:flex; flex-direction:column; gap:12px;">
@@ -83,7 +80,7 @@ const SupportModule = {
                                 const isResolved = t.status === 'Resolved';
 
                                 return `
-                                    <div class="clay-card" id="ticket-card-${t.id}" style="padding:16px; background:var(--clay-surface-recessed); border:1px solid var(--clay-nav-border); display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+                                    <div class="clay-card" id="ticket-card-${t.id}" style="padding:16px; background:var(--clay-surface-recessed); border:1px solid var(--clay-nav-border); display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; transition:all 0.25s ease;">
                                         <div style="flex:1; min-width:220px;">
                                             <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                                                 <span style="font-weight:800; font-size:13px; color:var(--text-primary);">${title}</span>
@@ -102,7 +99,12 @@ const SupportModule = {
                                             </p>
                                         </div>
                                         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
-                                            <span style="font-size:10px; color:var(--clay-coral); font-weight:800;">SLA: 60s Fast Exchange</span>
+                                            <div style="display:flex; align-items:center; gap:8px;">
+                                                <span style="font-size:10px; color:var(--clay-coral); font-weight:800;">SLA: 60s Fast Exchange</span>
+                                                <button class="clay-btn-soft-circle delete-ticket-btn" onclick="SupportModule.deleteTicket('${t.id}', event)" title="Delete Ticket" style="width:24px; height:24px; min-width:24px; border:1px solid rgba(239, 68, 68, 0.35); color:#EF4444; background:var(--clay-surface); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; padding:0; border-radius:50%; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: all 0.2s ease;" onmouseover="this.style.background='#FEE2E2'" onmouseout="this.style.background='var(--clay-surface)'">
+                                                    ${Icons.get('trash', 12, '#EF4444')}
+                                                </button>
+                                            </div>
                                             ${isResolved ? `
                                                 <span class="clay-badge clay-badge-mint" style="font-size:11px; padding:6px 12px;">✓ Resolved</span>
                                             ` : `
@@ -340,6 +342,38 @@ const SupportModule = {
 
         const container = document.getElementById('module-content-area');
         if (container) this.render(container);
+    },
+
+    async deleteTicket(ticketId, event) {
+        if (event) event.stopPropagation();
+
+        const card = document.getElementById(`ticket-card-${ticketId}`);
+        if (card) {
+            card.style.transition = 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95) translateY(-8px)';
+            setTimeout(() => {
+                if (card.parentNode) card.remove();
+                const list = document.getElementById('support-tickets-list');
+                const count = list ? list.children.length : 0;
+                const badge = document.getElementById('support-ticket-count-badge');
+                if (badge) badge.textContent = `${count} Tickets`;
+            }, 250);
+        }
+
+        if (window.AegisStore && window.AegisStore.deleteTicket) {
+            window.AegisStore.deleteTicket(ticketId);
+        }
+
+        try {
+            await fetch(`/api/support/tickets/${ticketId}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: ticketId })
+            }).catch(() => null);
+        } catch (e) {}
+
+        HitlManager.showToast('Ticket deleted from queue', 'mint');
     },
 
     openCourierTrackingModal() {

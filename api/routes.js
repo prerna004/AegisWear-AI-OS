@@ -191,6 +191,13 @@ function handleApiRequest(req, res, parsedUrl, body) {
             const newTicket = { id: ticketId, title, subject: title, customer_name, email, priority, status: 'Open', category };
             return json(newTicket, 201);
         }
+        if ((pathname.startsWith('/api/support/tickets') || pathname === '/api/support/tickets') && method === 'DELETE') {
+            const ticketId = pathname.replace('/api/support/tickets/', '').replace('/api/support/tickets', '') || body?.id;
+            if (ticketId) {
+                db.run('DELETE FROM tickets WHERE id = ?', [ticketId]);
+            }
+            return json({ success: true, deletedId: ticketId });
+        }
         if (pathname === '/api/support/kb' && method === 'GET') {
             return json(db.query('SELECT * FROM kb_articles ORDER BY views DESC'));
         }
