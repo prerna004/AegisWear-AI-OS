@@ -144,6 +144,7 @@ const AegisApp = {
         setIcon('mobile-search-icon', 'search', 17, 'var(--text-primary)');
         setIcon('theme-btn-icon', 'sun', 18, 'var(--text-primary)');
         setIcon('palette-btn-icon', 'palette', 18, 'var(--clay-coral)');
+        setIcon('header-user-avatar', 'user', 18, 'var(--clay-coral)');
         setIcon('header-bell-icon', 'bell', 18, 'var(--text-primary)');
         setIcon('header-desktop-icon', 'desktop', 18, 'var(--text-primary)');
         setIcon('header-copilot-icon', 'sparkles', 18, '#FFFFFF');
@@ -882,9 +883,9 @@ const AegisApp = {
         const roleEl = document.querySelector('.founder-card div div:last-child span:last-child');
         if (roleEl) roleEl.textContent = currentUser.role;
 
-        // Update header user badge if present
+        // Update header user icon if present (clean vector user icon, never raw initials)
         const headerAvatar = document.getElementById('header-user-avatar');
-        if (headerAvatar) headerAvatar.textContent = currentUser.avatar || 'PC';
+        if (headerAvatar && window.Icons) headerAvatar.innerHTML = Icons.get('user', 18, 'var(--clay-coral)');
     }
 };
 
