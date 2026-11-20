@@ -49,8 +49,46 @@ const AgentsViewModule = {
         let swarm = [];
         let stats = { totalActions: 1842, policyPassRate: 100, verifiedCryptographic: true };
         let logs = [
-            { id: 'aud-01', agent: 'agent-deal-desk', action: 'Gross margin calculated at 36.2% for Soho Fashion House quote', timestamp: '10:15 AM' },
-            { id: 'aud-02', agent: 'agent-tier1-2-resolution', action: 'Doorstep size exchange label generated for Sarah Jenkins (#AW-9481)', timestamp: '10:30 AM' }
+            {
+                id: 'aud-01',
+                timestamp: '2026-11-20T10:15:00.000Z',
+                agent_id: 'agent-deal-desk',
+                agent_name: 'Wholesale Deal & Margin Guardian',
+                trigger_event: 'Quote Margin Approval',
+                risk_level: 3,
+                reasoning_trace: 'Gross margin calculated at 36.2% for Soho Fashion House quote ($65,000 bulk order).',
+                approval_status: 'Approved'
+            },
+            {
+                id: 'aud-02',
+                timestamp: '2026-11-20T10:30:00.000Z',
+                agent_id: 'agent-tier1-2-resolution',
+                agent_name: 'Size Exchange Specialist',
+                trigger_event: 'Customer Size Swap',
+                risk_level: 2,
+                reasoning_trace: 'Prepaid BlueDart return QR exchange label generated for Sarah Jenkins (Order #AW-9481).',
+                approval_status: 'Approved'
+            },
+            {
+                id: 'aud-03',
+                timestamp: '2026-11-20T11:05:00.000Z',
+                agent_id: 'agent-campaign-orchestrator',
+                agent_name: 'Summer Drop Campaign Director',
+                trigger_event: 'Omnichannel Launch Sequence',
+                risk_level: 2,
+                reasoning_trace: 'Dispatched 3-part Instagram and WhatsApp VIP teaser for Pastel Clay Hoodies.',
+                approval_status: 'Approved'
+            },
+            {
+                id: 'aud-04',
+                timestamp: '2026-11-20T11:45:00.000Z',
+                agent_id: 'agent-inventory-forecast',
+                agent_name: 'Sneaker & Stock Demand Forecaster',
+                trigger_event: 'Depletion Velocity Audit',
+                risk_level: 1,
+                reasoning_trace: 'Puffy Runner stock depletion rate analyzed across Mumbai & Bangalore hubs. Restock buffer active.',
+                approval_status: 'Autonomous'
+            }
         ];
 
         try {
@@ -182,21 +220,28 @@ const AgentsViewModule = {
                             </thead>
                             <tbody>
                                 ${logs.map(l => {
-                                    const title = FASHION_AGENT_TITLES[l.agent_id]?.role || l.agent_name;
+                                    const rawTime = (l.timestamp || '10:15:00').toString();
+                                    const timeDisplay = rawTime.includes('T') ? rawTime.substring(11, 19) : rawTime;
+                                    const agentId = l.agent_id || l.agent || 'agent-deal-desk';
+                                    const title = (FASHION_AGENT_TITLES[agentId]?.role) || l.agent_name || 'Wholesale Margin Specialist';
+                                    const event = l.trigger_event || l.event || l.action || 'Store Workflow Action';
+                                    const risk = Number(l.risk_level || (agentId.includes('deal-desk') ? 3 : 1));
+                                    const summary = l.reasoning_trace || l.action || 'Autonomous retail workflow completed.';
+                                    const status = l.approval_status || (risk === 3 ? 'Pending Review' : 'Approved');
                                     return `
                                         <tr style="border-bottom:1px solid rgba(0,0,0,0.05);">
-                                            <td style="padding:10px; font-family:var(--font-mono); color:var(--text-muted); font-size:11px;">${l.timestamp.substring(11, 19)}</td>
+                                            <td style="padding:10px; font-family:var(--font-mono); color:var(--text-muted); font-size:11px;">${timeDisplay}</td>
                                             <td style="padding:10px; font-weight:700; color:var(--text-primary);">${title}</td>
-                                            <td style="padding:10px; color:var(--text-secondary);">${l.trigger_event}</td>
+                                            <td style="padding:10px; color:var(--text-secondary);">${event}</td>
                                             <td style="padding:10px;">
-                                                <span class="clay-badge ${l.risk_level === 3 ? 'clay-badge-coral' : (l.risk_level === 2 ? 'clay-badge-butter' : 'clay-badge-mint')}" style="font-size:9px;">
-                                                    ${l.risk_level === 3 ? 'Boss Approval' : (l.risk_level === 2 ? 'Undoable' : 'Autonomous')}
+                                                <span class="clay-badge ${risk === 3 ? 'clay-badge-coral' : (risk === 2 ? 'clay-badge-butter' : 'clay-badge-mint')}" style="font-size:9px;">
+                                                    ${risk === 3 ? 'Boss Approval' : (risk === 2 ? 'Undoable' : 'Autonomous')}
                                                 </span>
                                             </td>
-                                            <td style="padding:10px; color:var(--text-muted); font-size:11px; max-width:320px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${l.reasoning_trace}</td>
+                                            <td style="padding:10px; color:var(--text-muted); font-size:11px; max-width:320px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${summary}</td>
                                             <td style="padding:10px;">
-                                                <span class="clay-badge ${l.approval_status === 'Approved' ? 'clay-badge-mint' : (l.approval_status === 'Pending_HITL' ? 'clay-badge-coral' : 'clay-badge-sky')}" style="font-size:9px;">
-                                                    ${l.approval_status === 'Pending_HITL' ? 'Pending Review' : l.approval_status}
+                                                <span class="clay-badge ${status === 'Approved' ? 'clay-badge-mint' : (status === 'Pending_HITL' || status === 'Pending Review' ? 'clay-badge-coral' : 'clay-badge-sky')}" style="font-size:9px;">
+                                                    ${status === 'Pending_HITL' ? 'Pending Review' : status}
                                                 </span>
                                             </td>
                                         </tr>

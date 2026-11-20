@@ -294,3 +294,29 @@ INSERT OR IGNORE INTO tasks (id, project_id, title, status, priority, assignee, 
 ('tsk-02', 'proj-01', 'Review Soho Wholesale Digital Contract', 'review', 'Critical', 'Rahul Sharma', 5, '2026-11-24'),
 ('tsk-03', 'proj-02', 'Finalize Paris Lookbook Studio Bookings', 'todo', 'Medium', 'Prerna Chotwani', 2, '2026-12-01'),
 ('tsk-04', 'proj-01', 'Puffy Runner Prototype Cushioning Test', 'in_progress', 'High', 'Ananya Mehta', 4, '2026-11-23');
+
+-- Seed Initial Employees & Candidates
+INSERT OR IGNORE INTO employees (id, name, title, department, email, phone, pto_balance, status) VALUES
+('emp-01', 'Prerna Chotwani', 'Creative Director & Founder', 'Design', 'prerna@aegiswear.com', '+91 98201 55678', 18, 'Active'),
+('emp-02', 'Rahul Sharma', 'Head of Wholesale & Retail Accounts', 'Sales', 'rahul.s@aegiswear.com', '+91 98332 10982', 14, 'Active'),
+('emp-03', 'Ananya Mehta', 'Lead Apparel & Textile Designer', 'Design', 'ananya.m@aegiswear.com', '+91 98114 87652', 21, 'Active'),
+('emp-04', 'Vikram Joshi', 'Warehouse & Fulfillment Lead', 'Logistics', 'vikram.j@aegiswear.com', '+91 97654 32109', 16, 'Active');
+
+INSERT OR IGNORE INTO candidates (id, name, applied_role, email, match_score, status, resume_summary) VALUES
+('cand-01', 'Tanvi Parekh', 'Sustainable Textile & Eco-Dye Specialist', 'tanvi.p@gmail.com', 96, 'Interview', 'Expert in GOTS certified organic cotton, recycled canvas, and zero-chemical clay dyes with 6 years experience.'),
+('cand-02', 'Aditya Joshi', 'Senior E-Commerce Growth & Merchandiser', 'aditya.j@outlook.com', 92, 'Offer Pending', 'Led D2C fashion revenue growth from $2M to $12M with high-converting lookbook experiences.');
+
+-- Seed Initial IT Assets & Incidents
+INSERT OR IGNORE INTO it_assets (id, hostname, user_email, os, health_status, agent_version, security_compliance) VALUES
+('ast-01', 'store-pos-ipad-01', 'prerna@aegiswear.com', 'iPadOS 18.2', 'Healthy', '2.4.1', 99),
+('ast-02', 'warehouse-scanner-04', 'vikram.j@aegiswear.com', 'Android 14 (Zebra)', 'Healthy', '2.4.1', 98),
+('ast-03', 'design-macbook-pro', 'ananya.m@aegiswear.com', 'macOS Sequoia 15.1', 'Warning', '2.4.1', 95);
+
+INSERT OR IGNORE INTO it_incidents (id, asset_id, title, urgency, status, assigned_to, diagnostic_output) VALUES
+('inc-01', 'design-macbook-pro', 'High disk pressure on design-macbook-pro (Photoshoot RAW files)', 'Medium', 'Open', 'agent-it-helpdesk', '94% disk capacity utilized. 84GB recoverable from photoshoot RAW cache.'),
+('inc-02', 'store-pos-ipad-01', 'Shopify Webhook sync latency verified (38ms)', 'Low', 'Resolved', 'agent-workflow-builder', 'Zero dropped event webhooks across Shopify and Stripe in last 24h.');
+
+-- Seed Initial Support Tickets
+INSERT OR IGNORE INTO tickets (id, subject, customer_name, email, priority, status, department) VALUES
+('tick-01', 'Need size swap: Puffy Runner Sneakers (Size 38 to 39)', 'Riya Sen', 'riya@gmail.com', 'High', 'open', 'Size Exchange'),
+('tick-02', 'Tracking update for wholesale summer sample set', 'Markus Berg (Copenhagen)', 'markus@nordicwear.dk', 'Medium', 'open', 'Delivery Tracking');

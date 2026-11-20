@@ -34,7 +34,16 @@ const HrModule = {
                 fetch('/api/hr/employees').then(r => r.json()).catch(() => null),
                 fetch('/api/hr/candidates').then(r => r.json()).catch(() => null)
             ]);
-            if (Array.isArray(empRes) && empRes.length > 0) employees = empRes;
+            if (Array.isArray(empRes) && empRes.length > 0) {
+                employees = empRes.map(e => ({
+                    id: e.id || 'emp-01',
+                    name: e.name || 'Staff Member',
+                    title: e.title || e.role || 'Design Specialist',
+                    department: e.department || 'Operations',
+                    pto_balance: e.pto_balance !== undefined ? e.pto_balance : 16,
+                    email: e.email || `${(e.name || 'staff').toLowerCase().replace(/\s+/g, '.')}@aegiswear.com`
+                }));
+            }
             if (Array.isArray(candRes) && candRes.length > 0) candidates = candRes;
         } catch (e) {
             console.warn('HrModule fetch failed, using fallback:', e);
@@ -48,9 +57,9 @@ const HrModule = {
                         ${Icons.get('users', 24, 'var(--text-on-butter)')}
                     </div>
                     <div>
-                        <div style="font-size:15px; font-weight:800; color:var(--text-primary);">Room E: Designers, Models & Store Staff</div>
+                        <div style="font-size:15px; font-weight:800; color:var(--text-primary);">Room E: Designers, Models &amp; Store Staff</div>
                         <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">
-                            Autonomous AI agents answer store staff leave requests, screen fashion design & model portfolios, and provision retail accounts.
+                            Autonomous AI agents answer store staff leave requests, screen fashion design &amp; model portfolios, and provision retail accounts.
                         </div>
                     </div>
                 </div>
@@ -74,29 +83,37 @@ const HrModule = {
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                             <div>
                                 <h3 style="font-size:15px; font-weight:800; color:var(--text-primary);">Company Directory</h3>
-                                <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Active staff profiles & accrued PTO balances</p>
+                                <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Active staff profiles &amp; accrued PTO balances</p>
                             </div>
                             <span class="clay-badge clay-badge-butter">${employees.length} Staff</span>
                         </div>
 
                         <div style="display:flex; flex-direction:column; gap:12px;">
-                            ${employees.map(e => `
-                                <div class="clay-card" style="padding:14px; background:var(--clay-surface); display:flex; justify-content:space-between; align-items:center;">
-                                    <div style="display:flex; align-items:center; gap:12px;">
-                                        <div style="width:38px; height:38px; border-radius:12px; background:var(--clay-butter); color:var(--text-on-butter); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; box-shadow:var(--clay-shadow-sm);">
-                                            ${e.name.split(' ').map(n=>n[0]).join('')}
+                            ${employees.map(e => {
+                                const name = e.name || 'Team Member';
+                                const initials = name.split(' ').map(n => n[0]).join('') || 'AW';
+                                const title = e.title || e.role || 'Design Specialist';
+                                const dept = e.department || 'Operations';
+                                const pto = e.pto_balance !== undefined ? e.pto_balance : 16;
+                                const email = e.email || `${name.toLowerCase().replace(/\s+/g, '.')}@aegiswear.com`;
+                                return `
+                                    <div class="clay-card" style="padding:14px; background:var(--clay-surface); display:flex; justify-content:space-between; align-items:center;">
+                                        <div style="display:flex; align-items:center; gap:12px;">
+                                            <div style="width:38px; height:38px; border-radius:12px; background:var(--clay-butter); color:var(--text-on-butter); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; box-shadow:var(--clay-shadow-sm);">
+                                                ${initials}
+                                            </div>
+                                            <div>
+                                                <div style="font-weight:800; font-size:13px; color:var(--text-primary);">${name}</div>
+                                                <div style="font-size:11px; color:var(--text-muted);">${title} • ${dept}</div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div style="font-weight:800; font-size:13px; color:var(--text-primary);">${e.name}</div>
-                                            <div style="font-size:11px; color:var(--text-muted);">${e.title} • ${e.department}</div>
+                                        <div style="text-align:right;">
+                                            <span class="clay-badge clay-badge-mint">${pto} days PTO</span>
+                                            <div style="font-size:10px; color:var(--text-muted); margin-top:2px; font-family:var(--font-mono);">${email}</div>
                                         </div>
                                     </div>
-                                    <div style="text-align:right;">
-                                        <span class="clay-badge clay-badge-mint">${e.pto_balance} days PTO</span>
-                                        <div style="font-size:10px; color:var(--text-muted); margin-top:2px; font-family:var(--font-mono);">${e.email}</div>
-                                    </div>
-                                </div>
-                            `).join('')}
+                                `;
+                            }).join('')}
                         </div>
                     </div>
 

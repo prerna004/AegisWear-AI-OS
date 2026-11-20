@@ -130,10 +130,10 @@
             }
         ],
         employees: [
-            { id: 'emp-01', name: 'Prerna Chotwani', role: 'Creative Director & Founder', department: 'Design', status: 'Active', shifts: 'Mon - Fri' },
-            { id: 'emp-02', name: 'Rahul Sharma', role: 'Head of Wholesale & Retail Accounts', department: 'Sales', status: 'Active', shifts: 'Field Sales' },
-            { id: 'emp-03', name: 'Ananya Mehta', role: 'Lead Apparel & Textile Designer', department: 'Design', status: 'Active', shifts: 'Studio' },
-            { id: 'emp-04', name: 'Vikram Joshi', role: 'Warehouse & Fulfillment Lead', department: 'Logistics', status: 'Active', shifts: 'Warehouse A' }
+            { id: 'emp-01', name: 'Prerna Chotwani', role: 'Creative Director & Founder', title: 'Creative Director & Founder', department: 'Design', status: 'Active', shifts: 'Mon - Fri', pto_balance: 18, email: 'prerna@aegiswear.com', phone: '+91 98201 55678' },
+            { id: 'emp-02', name: 'Rahul Sharma', role: 'Head of Wholesale & Retail Accounts', title: 'Head of Wholesale & Retail Accounts', department: 'Sales', status: 'Active', shifts: 'Field Sales', pto_balance: 14, email: 'rahul.s@aegiswear.com', phone: '+91 98332 10982' },
+            { id: 'emp-03', name: 'Ananya Mehta', role: 'Lead Apparel & Textile Designer', title: 'Lead Apparel & Textile Designer', department: 'Design', status: 'Active', shifts: 'Studio', pto_balance: 21, email: 'ananya.m@aegiswear.com', phone: '+91 98114 87652' },
+            { id: 'emp-04', name: 'Vikram Joshi', role: 'Warehouse & Fulfillment Lead', title: 'Warehouse & Fulfillment Lead', department: 'Logistics', status: 'Active', shifts: 'Warehouse A', pto_balance: 16, email: 'vikram.j@aegiswear.com', phone: '+91 97654 32109' }
         ],
         candidates: [
             { id: 'cand-01', name: 'Tanvi Parekh', applied_role: 'Sustainable Textile & Eco-Dye Specialist', email: 'tanvi.p@gmail.com', match_score: 96, status: 'Interview', resume_summary: 'Expert in GOTS certified organic cotton, recycled canvas, and zero-chemical clay dyes with 6 years experience.' },
@@ -142,16 +142,16 @@
         projects: [
             { id: 'proj-01', name: 'Summer 2026 Drop Launch', status: 'In Progress', progress: 85, progress_percent: 85, lead: 'Prerna Chotwani', target_date: 'Nov 25, 2026', deadline: 'Nov 25, 2026', budget: 45000, type: 'Fashion Drop' },
             { id: 'proj-02', name: 'Paris & Tokyo Fashion Week Capsule', status: 'Planning', progress: 40, progress_percent: 40, lead: 'Ananya Mehta', target_date: 'Jan 15, 2027', deadline: 'Jan 15, 2027', budget: 85000, type: 'Runway Capsule' },
-            { id: 'proj-03', name: 'Organic French Terry Collection', status: 'In Progress', progress: 62, progress_percent: 62, lead: 'Rahul Sharma', target_date: 'Dec 10, 2026', deadline: 'Dec 10, 2026', budget: 32000, type: 'Eco-Wear' }
+            { id: 'proj-03', name: 'Organic French Terry Collection', status: 'In Progress', progress: 62, progress_percent: 62, lead: 'Rahul Sharma', target_date: 'Dec 10, 2026', deadline: 'Dec 10, 2026', budget: 32000, type: 'Eco-Wear Drop' }
         ],
         itAssets: [
-            { id: 'ast-01', name: 'Flagship POS Terminal #1', type: 'Point of Sale', status: 'Operational', location: 'Bandra Flagship' },
-            { id: 'ast-02', name: 'Warehouse Zebra Barcode Scanner #4', type: 'Scanner', status: 'Operational', location: 'Warehouse A' },
-            { id: 'ast-03', name: 'Zebra Thermal Return Label Printer', type: 'Printer', status: 'Operational', location: 'Returns Hub' }
+            { id: 'ast-01', name: 'Flagship POS Terminal #1', hostname: 'store-pos-ipad-01', ip_address: '192.168.10.42', os: 'iPadOS 18.2', health_status: 'Healthy', status: 'Operational', location: 'Bandra Flagship', security_compliance: 99, user_email: 'prerna@aegiswear.com', agent_version: '2.4.1', disk_usage_percent: 42, ram_usage_percent: 38 },
+            { id: 'ast-02', name: 'Warehouse Zebra Barcode Scanner #4', hostname: 'warehouse-scanner-04', ip_address: '192.168.20.15', os: 'Android 14 (Zebra)', health_status: 'Healthy', status: 'Operational', location: 'Warehouse A', security_compliance: 98, user_email: 'vikram.j@aegiswear.com', agent_version: '2.4.1', disk_usage_percent: 28, ram_usage_percent: 45 },
+            { id: 'ast-03', name: 'Design Studio MacBook Pro', hostname: 'design-macbook-pro', ip_address: '192.168.10.88', os: 'macOS Sequoia 15.1', health_status: 'Warning', status: 'Warning', location: 'Design Studio', security_compliance: 95, user_email: 'ananya.m@aegiswear.com', agent_version: '2.4.1', disk_usage_percent: 94, ram_usage_percent: 82 }
         ],
         itIncidents: [
-            { id: 'inc-01', title: 'Thermal label roll low at Returns Hub', severity: 'Low', status: 'Resolved' },
-            { id: 'inc-02', title: 'Shopify Webhook sync latency verified (38ms)', severity: 'Info', status: 'Monitoring' }
+            { id: 'inc-01', title: 'High disk pressure on design-macbook-pro (Photoshoot RAW files)', urgency: 'P2 - High', severity: 'Medium', status: 'Open', assigned_to: 'Autonomous IT Agent', assigned_agent: 'agent-it-helpdesk', diagnostic_output: '94% disk capacity utilized. 84GB recoverable from photoshoot RAW cache.', asset_id: 'design-macbook-pro' },
+            { id: 'inc-02', title: 'Shopify Webhook sync latency verified (38ms)', urgency: 'P4 - Info', severity: 'Info', status: 'Monitoring', assigned_to: 'Store Flow Automator', assigned_agent: 'agent-workflow-builder', diagnostic_output: 'Zero dropped event webhooks across Shopify and Stripe in last 24h.', asset_id: 'store-pos-ipad-01' }
         ]
     };
 

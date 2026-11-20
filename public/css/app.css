@@ -2046,24 +2046,24 @@ body.copilot-open .header-copilot-cta {
         inset -4px -4px 10px rgba(120, 0, 50, 0.35) !important;
 }
 
-[data-accent="fuchsia"] .hero-assistant-btn {
+[data-theme="light"][data-accent="fuchsia"] .hero-assistant-btn {
     background: #FFFFFF !important;
     color: #FF3F6C !important;
     font-weight: 800 !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
 }
-[data-accent="fuchsia"] .hero-assistant-btn svg {
+[data-theme="light"][data-accent="fuchsia"] .hero-assistant-btn svg {
     stroke: #FF3F6C !important;
 }
 
-/* 2. Four Quick Stat Cards: Harmonized Luxury White with Hot Pink Highlights */
-[data-accent="fuchsia"] .clay-card-mint,
-[data-accent="fuchsia"] .clay-card-lilac,
-[data-accent="fuchsia"] .clay-card-butter,
-[data-accent="fuchsia"] .clay-card-sky,
-[data-accent="fuchsia"] .clay-card-peach,
-[data-accent="fuchsia"] .clay-card-periwinkle,
-[data-accent="fuchsia"] .clay-card-rose {
+/* 2. Four Quick Stat Cards: Harmonized Luxury White with Hot Pink Highlights in Light Theme */
+[data-theme="light"][data-accent="fuchsia"] .clay-card-mint,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-lilac,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-butter,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-sky,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-peach,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-periwinkle,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-rose {
     background: #FFFFFF !important;
     color: #1E293B !important;
     border: 1.5px solid rgba(255, 63, 108, 0.16) !important;
@@ -2073,38 +2073,38 @@ body.copilot-open .header-copilot-cta {
         inset -3px -3px 6px rgba(255, 63, 108, 0.04) !important;
 }
 
-[data-accent="fuchsia"] .stat-card-label {
+[data-theme="light"][data-accent="fuchsia"] .stat-card-label {
     color: #64748B !important;
     font-weight: 800 !important;
 }
 
-[data-accent="fuchsia"] .stat-card-value {
+[data-theme="light"][data-accent="fuchsia"] .stat-card-value {
     color: #0F172A !important;
     font-weight: 800 !important;
 }
 
-[data-accent="fuchsia"] .stat-card-sub {
+[data-theme="light"][data-accent="fuchsia"] .stat-card-sub {
     color: #FF3F6C !important;
     font-weight: 700 !important;
 }
 
-[data-accent="fuchsia"] .stat-card-icon-badge {
+[data-theme="light"][data-accent="fuchsia"] .stat-card-icon-badge {
     background: #FFF0F4 !important;
     color: #FF3F6C !important;
     border: 1px solid rgba(255, 63, 108, 0.22) !important;
 }
-[data-accent="fuchsia"] .stat-card-icon-badge svg {
+[data-theme="light"][data-accent="fuchsia"] .stat-card-icon-badge svg {
     stroke: #FF3F6C !important;
 }
 
-/* 3. Department Cards: Luxury White with Fuchsia Glow & Borders */
-[data-accent="fuchsia"] .clay-card-tint-peach,
-[data-accent="fuchsia"] .clay-card-tint-butter,
-[data-accent="fuchsia"] .clay-card-tint-lilac,
-[data-accent="fuchsia"] .clay-card-tint-mint,
-[data-accent="fuchsia"] .clay-card-tint-sky,
-[data-accent="fuchsia"] .clay-card-tint-rose,
-[data-accent="fuchsia"] .clay-card-tint-periwinkle {
+/* 3. Department Cards: Luxury White with Fuchsia Glow in Light Theme */
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-peach,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-butter,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-lilac,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-mint,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-sky,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-rose,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-periwinkle {
     background: #FFFFFF !important;
     color: #1E293B !important;
     border: 1.5px solid rgba(255, 63, 108, 0.14) !important;
@@ -2114,13 +2114,13 @@ body.copilot-open .header-copilot-cta {
         inset -2px -2px 5px rgba(255, 63, 108, 0.03) !important;
 }
 
-[data-accent="fuchsia"] .clay-card-tint-peach:hover,
-[data-accent="fuchsia"] .clay-card-tint-butter:hover,
-[data-accent="fuchsia"] .clay-card-tint-lilac:hover,
-[data-accent="fuchsia"] .clay-card-tint-mint:hover,
-[data-accent="fuchsia"] .clay-card-tint-sky:hover,
-[data-accent="fuchsia"] .clay-card-tint-rose:hover,
-[data-accent="fuchsia"] .clay-card-tint-periwinkle:hover {
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-peach:hover,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-butter:hover,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-lilac:hover,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-mint:hover,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-sky:hover,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-rose:hover,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-periwinkle:hover {
     border-color: #FF3F6C !important;
     box-shadow: 
         12px 22px 36px rgba(255, 63, 108, 0.18),
@@ -2128,109 +2128,215 @@ body.copilot-open .header-copilot-cta {
     transform: translateY(-2px);
 }
 
-[data-accent="fuchsia"] .clay-card-tint-peach p,
-[data-accent="fuchsia"] .clay-card-tint-butter p,
-[data-accent="fuchsia"] .clay-card-tint-lilac p,
-[data-accent="fuchsia"] .clay-card-tint-mint p,
-[data-accent="fuchsia"] .clay-card-tint-sky p,
-[data-accent="fuchsia"] .clay-card-tint-rose p,
-[data-accent="fuchsia"] .clay-card-tint-periwinkle p {
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-peach p,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-butter p,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-lilac p,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-mint p,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-sky p,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-rose p,
+[data-theme="light"][data-accent="fuchsia"] .clay-card-tint-periwinkle p {
     color: #64748B !important;
 }
 
-/* 4. All Badges in Fuchsia Theme */
-[data-accent="fuchsia"] .clay-badge-mint,
-[data-accent="fuchsia"] .clay-badge-butter,
-[data-accent="fuchsia"] .clay-badge-lilac,
-[data-accent="fuchsia"] .clay-badge-sky,
-[data-accent="fuchsia"] .clay-badge-peach,
-[data-accent="fuchsia"] .clay-badge-periwinkle,
-[data-accent="fuchsia"] .clay-badge-rose,
-[data-accent="fuchsia"] .clay-badge-coral {
+/* 4. Badges in Light Theme */
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-mint,
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-butter,
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-lilac,
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-sky,
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-peach,
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-periwinkle,
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-rose,
+[data-theme="light"][data-accent="fuchsia"] .clay-badge-coral {
     background: #FFF0F4 !important;
     color: #FF3F6C !important;
     border: 1px solid rgba(255, 63, 108, 0.25) !important;
     font-weight: 800 !important;
 }
 
-/* 5. Left Sidebar Navigation in Fuchsia Theme */
-[data-accent="fuchsia"] .nav-chip {
+/* 5. Left Sidebar Navigation in Light Theme */
+[data-theme="light"][data-accent="fuchsia"] .nav-chip {
     background: #FFF0F4 !important;
     color: #D80064 !important;
     border: 1px solid rgba(255, 63, 108, 0.25) !important;
     font-weight: 800 !important;
 }
 
-[data-accent="fuchsia"] .nav-icon-badge {
+[data-theme="light"][data-accent="fuchsia"] .nav-icon-badge {
     background: #FFF0F4 !important;
     color: #FF3F6C !important;
 }
 
-[data-accent="fuchsia"] .clay-nav-btn.active {
-    background: linear-gradient(135deg, #FF3F6C 0%, #D80064 100%) !important;
-    color: #FFFFFF !important;
-    box-shadow: 
-        6px 12px 22px rgba(255, 63, 108, 0.45),
-        inset 3px 3px 6px rgba(255, 255, 255, 0.6),
-        inset -3px -3px 6px rgba(140, 0, 50, 0.35) !important;
-}
-[data-accent="fuchsia"] .clay-nav-btn.active .nav-icon-badge {
-    background: rgba(255, 255, 255, 0.25) !important;
-    color: #FFFFFF !important;
-}
-[data-accent="fuchsia"] .clay-nav-btn.active .nav-chip {
-    background: rgba(255, 255, 255, 0.25) !important;
-    color: #FFFFFF !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-}
-
-[data-accent="fuchsia"] .clay-nav-btn:hover:not(.active) {
+[data-theme="light"][data-accent="fuchsia"] .clay-nav-btn:hover:not(.active) {
     background: #FFF0F4 !important;
     color: #FF3F6C !important;
 }
 
-/* 6. Action Buttons in Fuchsia Theme */
-[data-accent="fuchsia"] .clay-btn-coral {
-    background: linear-gradient(135deg, #FF3F6C, #D80064) !important;
-    color: #FFFFFF !important;
-    box-shadow: 
-        5px 8px 20px rgba(255, 63, 108, 0.42),
-        inset 2px 2px 4px rgba(255, 255, 255, 0.6),
-        inset -2px -2px 4px rgba(150, 0, 50, 0.35) !important;
-}
-
-[data-accent="fuchsia"] .clay-btn-coral:hover {
-    box-shadow: 
-        6px 12px 26px rgba(255, 63, 108, 0.55),
-        inset 2px 2px 4px rgba(255, 255, 255, 0.7) !important;
-}
-
-[data-accent="fuchsia"] .dock-icon-coral {
-    background: linear-gradient(135deg, #FF3F6C, #D80064) !important;
-    box-shadow: 2px 4px 10px rgba(255, 63, 108, 0.4) !important;
-}
-
-/* 7. Copilot Assistant Suggestions in Fuchsia Theme */
-[data-accent="fuchsia"] .copilot-suggestion-item {
+/* 6. Copilot Assistant Suggestions in Light Theme */
+[data-theme="light"][data-accent="fuchsia"] .copilot-suggestion-item {
     border-left: 4px solid #FF3F6C !important;
     background: #FFFFFF !important;
 }
-[data-accent="fuchsia"] .copilot-suggestion-item:hover {
+[data-theme="light"][data-accent="fuchsia"] .copilot-suggestion-item:hover {
     background: #FFF0F4 !important;
     border-color: #FF3F6C !important;
 }
 
-/* 8. Simple Guide Banners in Modules */
-[data-accent="fuchsia"] .simple-guide-banner {
+/* 7. Simple Guide Banners in Light Theme */
+[data-theme="light"][data-accent="fuchsia"] .simple-guide-banner {
     background: #FFFFFF !important;
     border: 1.5px solid rgba(255, 63, 108, 0.16) !important;
 }
-[data-accent="fuchsia"] .simple-guide-icon {
-    background: linear-gradient(135deg, #FF3F6C, #D80064) !important;
+
+/* ==========================================================================
+   Dark Theme Overhauls (Velvet Midnight Luxury - Sleek, Glowing & High-Contrast)
+   ========================================================================== */
+[data-theme="dark"] .stat-card-item,
+[data-theme="dark"] .clay-card-mint,
+[data-theme="dark"] .clay-card-lilac,
+[data-theme="dark"] .clay-card-butter,
+[data-theme="dark"] .clay-card-sky,
+[data-theme="dark"] .clay-card-peach,
+[data-theme="dark"] .clay-card-periwinkle,
+[data-theme="dark"] .clay-card-rose {
+    background: #141B2D !important;
+    color: #F8FAFC !important;
+    border: 1.5px solid rgba(255, 63, 108, 0.28) !important;
+    box-shadow: 
+        8px 16px 32px rgba(0, 0, 0, 0.55),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.08),
+        inset -1px -1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .stat-card-label {
+    color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .stat-card-value {
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .stat-card-sub {
+    color: #FF7C98 !important;
+}
+
+[data-theme="dark"] .stat-card-icon-badge {
+    background: rgba(255, 63, 108, 0.18) !important;
+    color: #FF7C98 !important;
+    border: 1px solid rgba(255, 63, 108, 0.3) !important;
+}
+[data-theme="dark"] .stat-card-icon-badge svg {
+    stroke: #FF7C98 !important;
+}
+
+[data-theme="dark"] .department-container-card {
+    background: #0E1322 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .department-rooms-grid .clay-card,
+[data-theme="dark"] .clay-card-tint-peach,
+[data-theme="dark"] .clay-card-tint-butter,
+[data-theme="dark"] .clay-card-tint-lilac,
+[data-theme="dark"] .clay-card-tint-mint,
+[data-theme="dark"] .clay-card-tint-sky,
+[data-theme="dark"] .clay-card-tint-rose,
+[data-theme="dark"] .clay-card-tint-periwinkle {
+    background: #161D31 !important;
+    color: #F8FAFC !important;
+    border: 1.5px solid rgba(255, 63, 108, 0.22) !important;
+    box-shadow: 
+        6px 12px 24px rgba(0, 0, 0, 0.5),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="dark"] .department-rooms-grid .clay-card:hover,
+[data-theme="dark"] .clay-card-tint-peach:hover,
+[data-theme="dark"] .clay-card-tint-butter:hover,
+[data-theme="dark"] .clay-card-tint-lilac:hover,
+[data-theme="dark"] .clay-card-tint-mint:hover,
+[data-theme="dark"] .clay-card-tint-sky:hover,
+[data-theme="dark"] .clay-card-tint-rose:hover,
+[data-theme="dark"] .clay-card-tint-periwinkle:hover {
+    background: #1B243D !important;
+    border-color: #FF3F6C !important;
+    box-shadow: 
+        8px 18px 30px rgba(255, 63, 108, 0.22),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .department-rooms-grid .clay-card h4,
+[data-theme="dark"] .clay-card-tint-peach h4,
+[data-theme="dark"] .clay-card-tint-butter h4,
+[data-theme="dark"] .clay-card-tint-lilac h4,
+[data-theme="dark"] .clay-card-tint-mint h4,
+[data-theme="dark"] .clay-card-tint-sky h4,
+[data-theme="dark"] .clay-card-tint-rose h4,
+[data-theme="dark"] .clay-card-tint-periwinkle h4 {
     color: #FFFFFF !important;
 }
-[data-accent="fuchsia"] .simple-guide-icon svg {
-    stroke: #FFFFFF !important;
+
+[data-theme="dark"] .department-rooms-grid .clay-card p,
+[data-theme="dark"] .clay-card-tint-peach p,
+[data-theme="dark"] .clay-card-tint-butter p,
+[data-theme="dark"] .clay-card-tint-lilac p,
+[data-theme="dark"] .clay-card-tint-mint p,
+[data-theme="dark"] .clay-card-tint-sky p,
+[data-theme="dark"] .clay-card-tint-rose p,
+[data-theme="dark"] .clay-card-tint-periwinkle p {
+    color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .clay-badge-mint,
+[data-theme="dark"] .clay-badge-butter,
+[data-theme="dark"] .clay-badge-lilac,
+[data-theme="dark"] .clay-badge-sky,
+[data-theme="dark"] .clay-badge-peach,
+[data-theme="dark"] .clay-badge-periwinkle,
+[data-theme="dark"] .clay-badge-rose,
+[data-theme="dark"] .clay-badge-coral {
+    background: rgba(255, 63, 108, 0.16) !important;
+    color: #FF7C98 !important;
+    border: 1px solid rgba(255, 63, 108, 0.3) !important;
+}
+
+[data-theme="dark"] .nav-chip {
+    background: rgba(255, 63, 108, 0.18) !important;
+    color: #FF7C98 !important;
+    border: 1px solid rgba(255, 63, 108, 0.3) !important;
+}
+
+[data-theme="dark"] .nav-icon-badge {
+    background: rgba(255, 63, 108, 0.18) !important;
+    color: #FF7C98 !important;
+}
+
+[data-theme="dark"] .clay-nav-btn:hover:not(.active) {
+    background: rgba(255, 63, 108, 0.14) !important;
+    color: #FF7C98 !important;
+}
+
+[data-theme="dark"] .copilot-suggestion-item {
+    background: #141B2D !important;
+    color: #F8FAFC !important;
+    border-left: 4px solid #FF3F6C !important;
+    border-color: rgba(255, 63, 108, 0.3) !important;
+}
+[data-theme="dark"] .copilot-suggestion-item:hover {
+    background: #1B243D !important;
+}
+
+[data-theme="dark"] .simple-guide-banner {
+    background: #141B2D !important;
+    border: 1px solid rgba(255, 63, 108, 0.25) !important;
+}
+
+[data-theme="dark"] .hero-assistant-btn {
+    background: #161D31 !important;
+    color: #FF7C98 !important;
+    border: 1px solid rgba(255, 63, 108, 0.35) !important;
+}
+[data-theme="dark"] .hero-assistant-btn svg {
+    stroke: #FF7C98 !important;
 }
 
 /* Myntra Login Modal Styles */

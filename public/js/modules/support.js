@@ -10,14 +10,22 @@ const SupportModule = {
 
         try {
             const [ticketsRes, kbRes] = await Promise.all([
-                fetch('/api/support/tickets').then(r => r.json()).catch(() => null),
-                fetch('/api/support/kb').then(r => r.json()).catch(() => null)
+                fetch('/api/support/tickets').then(r => r.ok && r.headers.get('content-type')?.includes('application/json') ? r.json() : null).catch(() => null),
+                fetch('/api/support/kb').then(r => r.ok && r.headers.get('content-type')?.includes('application/json') ? r.json() : null).catch(() => null)
             ]);
-            tickets = ticketsRes || (window.AegisStore ? window.AegisStore.getTickets() : []);
-            kb = kbRes || (window.AegisStore ? window.AegisStore.getKb() : []);
+            const storeTickets = (window.AegisStore && window.AegisStore.getTickets) ? window.AegisStore.getTickets() : [];
+            if (Array.isArray(ticketsRes) && ticketsRes.length > 0) {
+                // Merge any newly created store tickets that might not be in server response
+                const serverIds = new Set(ticketsRes.map(t => t.id));
+                const extraTickets = storeTickets.filter(t => !serverIds.has(t.id));
+                tickets = [...extraTickets, ...ticketsRes];
+            } else {
+                tickets = storeTickets;
+            }
+            kb = kbRes || (window.AegisStore && window.AegisStore.getKb ? window.AegisStore.getKb() : []);
         } catch (e) {
-            tickets = window.AegisStore ? window.AegisStore.getTickets() : [];
-            kb = window.AegisStore ? window.AegisStore.getKb() : [];
+            tickets = (window.AegisStore && window.AegisStore.getTickets) ? window.AegisStore.getTickets() : [];
+            kb = (window.AegisStore && window.AegisStore.getKb) ? window.AegisStore.getKb() : [];
         }
 
         container.innerHTML = `
@@ -295,10 +303,10 @@ const SupportModule = {
         document.body.appendChild(modal);
     },
 
-    submitNewTicket(btn) {
-        const customer_name = document.getElementById('ticket-customer-name').value.trim();
-        const email = document.getElementById('ticket-customer-email').value.trim();
-        const category = document.getElementById('ticket-category').value;
+    async submitNewTicket(btn) {
+        const customer_name = document.getElementById('ticket-customer-name').value.trim() || 'Fashion Customer';
+        const email = document.getElementById('ticket-customer-email').value.trim() || 'customer@gmail.com';
+        const category = document.getElementById('ticket-category').value || 'Size Exchange';
         const title = document.getElementById('ticket-subject').value.trim();
 
         if (!title) {
@@ -306,15 +314,26 @@ const SupportModule = {
             return;
         }
 
-        if (window.AegisStore) {
-            window.AegisStore.createTicket({
-                customer_name,
-                email,
-                category,
-                title,
-                priority: 'High'
-            });
+        const newTicketData = {
+            customer_name,
+            email,
+            category,
+            title,
+            subject: title,
+            priority: 'High'
+        };
+
+        if (window.AegisStore && window.AegisStore.createTicket) {
+            window.AegisStore.createTicket(newTicketData);
         }
+
+        try {
+            await fetch('/api/support/tickets', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newTicketData)
+            }).catch(() => null);
+        } catch (e) {}
 
         closeModal(btn);
         HitlManager.showToast(`Ticket for ${customer_name} created successfully!`, 'mint');

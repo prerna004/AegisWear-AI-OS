@@ -179,6 +179,18 @@ function handleApiRequest(req, res, parsedUrl, body) {
         if (pathname === '/api/support/tickets' && method === 'GET') {
             return json(db.query('SELECT * FROM tickets ORDER BY created_at DESC'));
         }
+        if (pathname === '/api/support/tickets' && method === 'POST') {
+            const ticketId = 'tick-' + Math.floor(Math.random() * 900 + 100);
+            const title = body?.title || body?.subject || 'Size Exchange Request';
+            const customer_name = body?.customer_name || 'Fashion Customer';
+            const email = body?.email || 'customer@gmail.com';
+            const priority = body?.priority || 'High';
+            const category = body?.category || 'Size Exchange';
+            db.run('INSERT INTO tickets (id, subject, customer_name, email, priority, status, department) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                [ticketId, title, customer_name, email, priority, 'open', category]);
+            const newTicket = { id: ticketId, title, subject: title, customer_name, email, priority, status: 'Open', category };
+            return json(newTicket, 201);
+        }
         if (pathname === '/api/support/kb' && method === 'GET') {
             return json(db.query('SELECT * FROM kb_articles ORDER BY views DESC'));
         }
